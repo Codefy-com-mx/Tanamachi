@@ -50,19 +50,23 @@
     {% set section_title = settings.sale_products_title %}
 {% endif %}
 
-<div class="js-products-{{ section_id }}-container container">
-    <div class="row">
+<div class="js-products-{{ section_id }}-container container-fluid px-0">
+    <div class="row no-gutters">
+        {% if section_title %}
+        <div class="col-12 px-3">
+            <h2 class="js-products-{{ section_id }}-title section-title h3 mb-4 pb-2 text-center">{{ section_title }}</h2>
+        </div>
+        {% endif %}
         <div class="col-12">
-            <h2 class="js-products-{{ section_id }}-title section-title h3 mt-3 mb-4 pb-2 text-center" {% if not section_title %} style="display:none;"{% endif %}>{{ section_title }}</h2>
             {% if use_slider %}
                 <div class="js-swiper-{{ section_id }} swiper-container">
             {% endif %}
-                    <div class="js-products-{{ section_id }}-grid {% if use_slider %} swiper-wrapper{% else %}row row-grid{% endif %}" data-desktop-columns="{{ section_columns_desktop }}" data-mobile-columns="{{ section_columns_mobile }}" data-format="{{ section_format }}">
+                    <div class="js-products-{{ section_id }}-grid {% if use_slider %} swiper-wrapper{% else %}row row-grid no-gutters{% endif %}" data-desktop-columns="{{ section_columns_desktop }}" data-mobile-columns="{{ section_columns_mobile }}" data-format="{{ section_format }}">
                         {% for product in sections_products %}
                             {% if use_slider %}
-                                {% include 'snipplets/grid/item.tpl' with {'slide_item': true, 'section_name': section_name, 'section_columns_desktop': section_columns_desktop, 'section_columns_mobile': section_columns_mobile } %}
+                                {% include 'snipplets/grid/item.tpl' with {'slide_item': true, 'section_name': section_name, 'section_columns_desktop': section_columns_desktop, 'section_columns_mobile': section_columns_mobile, 'item_overlay': true } %}
                             {% else %}
-                                {% include 'snipplets/grid/item.tpl' %}
+                                {% include 'snipplets/grid/item.tpl' with {'item_overlay': true} %}
                             {% endif %}
                         {% endfor %}
                     </div>
