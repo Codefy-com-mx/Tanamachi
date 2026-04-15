@@ -2,10 +2,7 @@
 
     {# Product name and breadcrumbs for product page #}
 
-    {% if home_main_product %}
-        {# Product name #}
-        <h2 class="h4 h2-md mb-2 text-center text-md-left">{{ product.name }}</h2>
-    {% else %}
+    {% if not home_main_product %}
         {% embed "snipplets/page-header.tpl" with {container: false, padding: false, page_header_class: 'text-md-left', page_header_title_class: 'js-product-name h4 h2-md mb-2'} %}
             {% block page_header_text %}{{ product.name }}{% endblock page_header_text %}
         {% endembed %}

@@ -4698,7 +4698,7 @@ p {
   height: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-evenly;
   align-items: center;
   padding: 30px 20px;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
@@ -4714,25 +4714,33 @@ p {
 }
 
 .section-featured-home .item-overlay-price {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 15px;
+  font-size: 4rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin-bottom: -50px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  align-self: flex-start;
+  text-align: left;
+  width: 100%;
+  line-height: 1;
+}
+
+.section-featured-home .item-overlay-bottom form,
+.section-featured-home .item-overlay-bottom .item-submit-container {
+  width: 100%;
 }
 
 .section-featured-home .btn-overlay-buy {
   background: transparent;
-  border: 2px solid #fff;
+  border: 1px solid #fff;
   color: #fff !important;
-  padding: 12px 30px;
-  font-size: 1rem;
-  font-weight: bold;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  padding: 35px 30px;
+  font-size: 2.5rem;
+  font-weight: 811;
   cursor: pointer;
   transition: all 0.3s ease;
   width: 100%;
-  max-width: 200px;
+  margin-bottom: -200px;
 }
 
 .section-featured-home .btn-overlay-buy:hover {
@@ -4747,6 +4755,78 @@ p {
   width: 100%;
   height: 50%;
   z-index: 1;
+}
+
+/* Forzar que las imagenes de los productos destaquen ocupando todo el contenedor */
+.section-featured-home .item-product img {
+  object-fit: cover !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Ocultar elementos sobrantes en Desktop para mantener grupos exactos de 3 */
+@media (min-width: 768px) {
+
+  .section-featured-home .col-grid:nth-child(3n + 1):last-child,
+  .section-featured-home .col-grid:nth-child(3n + 1):nth-last-child(2),
+  .section-featured-home .col-grid:nth-child(3n + 2):last-child {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+
+  /* Ocultar el elemento sobrante en Móvil para mantener grupos pares exactos de 2 */
+  .section-featured-home .col-grid:nth-child(odd):last-child {
+    display: none !important;
+  }
+
+  .section-featured-home .item-overlay {
+    padding: 10px;
+  }
+
+  .section-featured-home .item-overlay-name {
+    font-size: 1.1rem;
+  }
+
+  .section-featured-home .js-item-product:hover .item-overlay-name {
+    transform: scale(1.05);
+    /* Escala menor en movil */
+  }
+
+  .section-featured-home .item-overlay-bottom {
+    padding: 15px 10px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-featured-home .item-overlay-price {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+  }
+
+  .section-featured-home .btn-overlay-buy {
+    padding: 10px 15px;
+    font-size: 1rem;
+    margin-bottom: 0px;
+  }
+}
+
+.section-featured-home .btn-view-more {
+  display: inline-block;
+  font-size: 1.2rem;
+  color: #000;
+  text-decoration: none;
+  border-bottom: 2px solid #000;
+  padding-bottom: 2px;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.section-featured-home .btn-view-more:hover {
+  opacity: 0.6;
+  color: #000;
+  text-decoration: none;
 }
 
 
@@ -4874,7 +4954,130 @@ p {
 /* // Section main product */
 
 .section-main-product-home {
-  padding: 40px 0;
+  padding: 10px 0;
+  overflow-x: hidden;
+}
+
+.section-main-product-home .product-thumbs-container {
+  display: none !important;
+}
+
+.section-main-product-home .section-main-product-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  color: #111;
+}
+
+.section-main-product-home .product-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-weight: 600;
+  color: #111;
+}
+
+.section-main-product-home .js-price-display {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: #111;
+}
+
+/* Reducción de altura para el contenedor de imagen */
+.section-main-product-home .js-main-product-image-col .product-detail-slider {
+  max-height: 500px;
+}
+
+@media (min-width: 768px) {
+  .section-main-product-home .js-main-product-image-col .product-detail-slider {
+    max-height: 600px;
+  }
+}
+
+.section-main-product-home .main-product-info-wrapper {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+/* Ajuste de imagen al nuevo tamaño del contenedor */
+.section-main-product-home .js-product-slide {
+  width: 50% !important;
+  margin-right: 0 !important;
+}
+
+.section-main-product-home .js-product-slide-img {
+  object-fit: cover !important;
+  height: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  transform: none !important;
+  margin: auto !important;
+}
+
+.section-main-product-home .js-product-slide-link {
+  padding-bottom: 0 !important;
+  height: 500px;
+  position: relative;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .section-main-product-home .js-product-slide-link {
+    height: 718px;
+  }
+}
+
+/* Forzar que las columnas tengan el mismo alto y la info esté centrada verticalmente */
+.section-main-product-home .row {
+  align-items: stretch !important;
+}
+
+.section-main-product-home .main-product-info-wrapper {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-main-product-home .swiper-container {
+  overflow: hidden !important;
+}
+
+.section-main-product-home .col-lg-4 {
+  z-index: 10;
+  position: relative;
+}
+
+.section-main-product-home .swiper-button-prev,
+.section-main-product-home .swiper-button-next {
+  color: #000;
+  background: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  top: auto;
+  bottom: 0;
+  position: relative;
+  z-index: 20;
+  margin: 20px 10px;
+}
+
+.section-main-product-home .swiper-button-small svg {
+  width: 25px;
+  height: 25px;
 }
 
 /*============================================================================
@@ -5648,7 +5851,16 @@ p {
   /* //// Section main product */
 
   .section-main-product-home {
-    padding: 60px 0;
+    padding: 20px 0;
+  }
+
+  .section-main-product-home .section-main-product-title {
+    font-size: 3.5rem;
+    letter-spacing: -2px;
+  }
+
+  .section-main-product-home .js-price-display {
+    font-size: 3rem;
   }
 
   /* //// Product grid */

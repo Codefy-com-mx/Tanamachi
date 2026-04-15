@@ -625,6 +625,12 @@ Página de inicio
 	i18n_input
 		name = featured_products_title
 		description = Título
+	i18n_input
+		name = featured_products_button_text
+		description = Texto del botón
+	i18n_input
+		name = featured_products_button_link
+		description = Link del botón
 	dropdown
 		name = featured_products_format
 		description = Mostrar los productos como:
@@ -652,6 +658,12 @@ Página de inicio
 	i18n_input
 		name = new_products_title
 		description = Título
+	i18n_input
+		name = new_products_button_text
+		description = Texto del botón
+	i18n_input
+		name = new_products_button_link
+		description = Link del botón
 	dropdown
 		name = new_products_format
 		description = Mostrar los productos como:
@@ -679,6 +691,12 @@ Página de inicio
 	i18n_input
 		name = sale_products_title
 		description = Título
+	i18n_input
+		name = sale_products_button_text
+		description = Texto del botón
+	i18n_input
+		name = sale_products_button_link
+		description = Link del botón
 	dropdown
 		name = sale_products_format
 		description = Mostrar los productos como:

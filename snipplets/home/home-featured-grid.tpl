@@ -22,32 +22,38 @@
 {% if featured_products %}
     {% set sections_products = sections.primary.products %}
     {% set section_name = 'primary' %}
-    {% set section_columns_desktop = settings.featured_products_desktop %}
-    {% set section_columns_mobile = settings.featured_products_mobile %}
+    {% set section_columns_desktop = 3 %}
+    {% set section_columns_mobile = 2 %}
     {% set section_slider = settings.featured_products_format == 'slider' %}
     {% set section_format = settings.featured_products_format %}
     {% set section_id = 'featured' %}
     {% set section_title = settings.featured_products_title %}
+    {% set section_button_text = settings.featured_products_button_text %}
+    {% set section_button_link = settings.featured_products_button_link %}
 {% endif %}
 {% if new_products %}
     {% set sections_products = sections.new.products %}
     {% set section_name = 'new' %}
-    {% set section_columns_desktop = settings.new_products_desktop %}
-    {% set section_columns_mobile = settings.new_products_mobile %}
+    {% set section_columns_desktop = 3 %}
+    {% set section_columns_mobile = 2 %}
     {% set section_slider = settings.new_products_format == 'slider' %}
     {% set section_format = settings.new_products_format %}
     {% set section_id = 'new' %}
     {% set section_title = settings.new_products_title %}
+    {% set section_button_text = settings.new_products_button_text %}
+    {% set section_button_link = settings.new_products_button_link %}
 {% endif %}
 {% if sale_products %}
     {% set sections_products = sections.sale.products %}
     {% set section_name = 'sale' %}
-    {% set section_columns_desktop = settings.sale_products_desktop %}
-    {% set section_columns_mobile = settings.sale_products_mobile %}
+    {% set section_columns_desktop = 3 %}
+    {% set section_columns_mobile = 2 %}
     {% set section_slider = settings.sale_products_format == 'slider' %}
     {% set section_format = settings.sale_products_format %}
     {% set section_id = 'sale' %}
     {% set section_title = settings.sale_products_title %}
+    {% set section_button_text = settings.sale_products_button_text %}
+    {% set section_button_link = settings.sale_products_button_link %}
 {% endif %}
 
 <div class="js-products-{{ section_id }}-container container-fluid px-0">
@@ -83,5 +89,10 @@
                 </div>
             {% endif %}
         </div>
+        {% if section_button_text and section_button_link %}
+            <div class="col-12 mt-5 text-center">
+                <a href="{{ section_button_link }}" class="btn-view-more">{{ section_button_text }}</a>
+            </div>
+        {% endif %}
     </div>
 </div>

@@ -5,7 +5,7 @@
 {% endif %}
 
 <div class="row" data-store="product-image-{{ product.id }}"> 
-	{% if has_multiple_slides %}
+	{% if has_multiple_slides and not home_main_product %}
 		<div class="col-md-auto d-none d-md-block pr-0">
 			<div class="product-thumbs-container position-relative">
 				<div class="js-swiper-product-thumbs swiper-product-thumb"> 
@@ -80,7 +80,7 @@
 				</div>
 			</div>
 			{% if has_multiple_slides %}
-				<div class="row no-gutters my-1 text-center align-items-center d-md-none">
+				<div class="row no-gutters my-3 text-center align-items-center {% if not home_main_product %}d-md-none{% endif %}">
 					<div class="js-swiper-product-prev col-auto swiper-button-small swiper-button-prev svg-icon-text mt-0">
 						<svg class="icon-inline icon-lg icon-flip-horizontal"><use xlink:href="#arrow-long"/></svg>
 					</div>
