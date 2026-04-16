@@ -96,6 +96,10 @@
 
         {{ component('structured-data-organization') }}
         {{ component('structured-data') }}
+        
+        {# GSAP Animation Library & Plugins #}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
     </head>
     <body class="{% if customer %}customer-logged-in{% endif %} template-{{ template | replace('.', '-') }}">

@@ -1063,6 +1063,24 @@ Página de inicio
 	subtitle
 		subtitle = Para mostrar tus publicaciones necesitás generar un token, <a target='_blank' href='https://ayuda.tiendanube.com/es_ES/123224-redes-sociales/como-mostrar-mis-publicaciones-de-instagram-en-mi-tiendanube'>¿cómo configurarlo?</a>
 	collapse
+		title = Banner animado (Scrollytelling)
+		backto = home_order_position
+	checkbox
+		name = scrolly_banner_show
+		description = Mostrar el banner animado en la página principal
+	color
+		name = scrolly_banner_background_color
+		description = Color de fondo final (ej. #FFFFFF)
+	subtitle
+		subtitle = Galería de imágenes (Secuencia flipbook)
+	gallery
+		name = scrolly_banner_images
+		gallery_image = Agregar imagen a la secuencia
+		gallery_link = [Opcional] Página destino al hacer clic
+		gallery_width = 1920
+		gallery_height = 1080
+		gallery_more_info = true
+	collapse
 		title = Pop-up promocional
 		backto = home_order_position
 	checkbox
@@ -1115,6 +1133,7 @@ Página de inicio
 			main_product = Producto principal
 			instafeed = Publicaciones de Instagram
 			testimonials = Testimonios
+			scrolly_banner = Banner animado (Scrollytelling)
 	link
 		text = Pop-up promocional
 		linkto = home_promotional_popup
