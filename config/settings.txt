@@ -1071,11 +1071,49 @@ Página de inicio
 	color
 		name = scrolly_banner_background_color
 		description = Color de fondo final (ej. #FFFFFF)
+	i18n_input
+		name = scrolly_banner_text
+		description = Texto central (en negrita)
+	color
+		name = scrolly_banner_text_color
+		description = Color del texto central
+	i18n_input
+		name = scrolly_banner_button_text
+		description = Texto del botón
+	i18n_input
+		name = scrolly_banner_button_link
+		description = Link del botón
+	color
+		name = scrolly_banner_btn_text_color
+		description = Color del botón (texto y contorno)
+	dropdown
+		name = scrolly_banner_overlay_opacity
+		description = Oscurecimiento de imagen
+		values
+			0 = Sin oscurecimiento
+			0.1 = 10% de oscurecimiento
+			0.2 = 20% de oscurecimiento
+			0.3 = 30% de oscurecimiento
+			0.4 = 40% de oscurecimiento
+			0.5 = 50% de oscurecimiento
+			0.6 = 60% de oscurecimiento
+			0.7 = 70% de oscurecimiento
+			0.8 = 80% de oscurecimiento
+			0.9 = 90% de oscurecimiento
 	subtitle
-		subtitle = Galería de imágenes (Secuencia flipbook)
+		subtitle = Imágenes de fondo
 	gallery
-		name = scrolly_banner_images
-		gallery_image = Agregar imagen a la secuencia
+		name = scrolly_banner_bg_images
+		gallery_image = Agregar imagen de fondo a la secuencia
+		gallery_link = [Opcional] Página destino al hacer clic
+		gallery_width = 1920
+		gallery_height = 1080
+		gallery_more_info = true
+	subtitle
+		subtitle = Imágenes superpuestas
+	gallery
+		name = scrolly_banner_fg_images
+		gallery_image = Agregar imagen superpuesta a la secuencia
 		gallery_link = [Opcional] Página destino al hacer clic
 		gallery_width = 1920
 		gallery_height = 1080
