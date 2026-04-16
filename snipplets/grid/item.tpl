@@ -9,6 +9,7 @@
 #}
 
 {% set slide_item = slide_item | default(false) %}
+{% set item_overlay = item_overlay | default(false) %}
 
 {% if template == 'home'%}
     {% set columns_desktop = section_columns_desktop %}
@@ -123,6 +124,26 @@
                 })
             }}
 
+            {% if item_overlay %}
+                <div class="item-overlay">
+                    <div class="item-overlay-top">
+                         <div class="item-overlay-name">{{ product.name }}</div>
+                    </div>
+                    <div class="item-overlay-bottom">
+                         <div class="item-overlay-price">{{ product.price | money }}</div>
+                         {% if product.available and product.display_price %}
+                            <form class="js-product-form" method="post" action="{{ store.cart_url }}">
+                                <input type="hidden" name="add_to_cart" value="{{product.id}}" />
+                                <div class="js-item-submit-container item-submit-container position-relative">
+                                    <input type="submit" class="js-addtocart js-prod-submit-form btn-overlay-buy" value="{{ 'Add to cart' | translate }}" data-component="product-list-item.add-to-cart" data-component-value="{{ product.id }}"/>
+                                </div>
+                            </form>
+                         {% endif %}
+                    </div>
+                    <a href="{{ product.url }}" class="item-overlay-link" title="{{ product.name }}" aria-label="{{ product.name }}"></a>
+                </div>
+            {% endif %}
+
             {% if 
                 ((settings.quick_shop and not product.isSubscribable()) or settings.product_color_variants)
                 and product.available 
@@ -166,7 +187,7 @@
 
             {% endif %}
             {% set show_labels = not product.has_stock or product.compare_at_price or product.hasVisiblePromotionLabel %}
-            <div class="item-description text-center" data-store="product-item-info-{{ product.id }}">
+            <div class="item-description text-center {% if item_overlay %}hidden{% endif %}" data-store="product-item-info-{{ product.id }}">
                 <a href="{{ product_url_with_selected_variant }}" title="{{ product.name }}" aria-label="{{ product.name }}" class="item-link">
                     <div class="js-item-name item-name mb-2 font-small opacity-80" data-store="product-item-name-{{ product.id }}">{{ product.name }}</div>
                     {% if product.display_price %}
