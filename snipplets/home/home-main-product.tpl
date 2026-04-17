@@ -17,10 +17,10 @@
 							{% if product.description is not empty %}
 								<div class="mb-4">
 									{# Product description #}
-									<div class="js-product-description product-description user-content text-center text-md-left font-small">
+									<div class="js-product-description product-description user-content text-justify text-md-left font-small">
 										{{ product.description }}
 									</div>
-									<div class="js-view-description" style="display: none;">
+									<div class="js-view-description d-none" style="display: none;">
 										<div class="btn-link font-small mt-1">
 											{% if settings.positive_color_background %}
 												{% set view_description_icon_class = 'icon-inline icon-lg svg-icon-invert ml-1' %}

@@ -1,7 +1,7 @@
 {% set description_content = product.description is not empty or settings.show_product_fb_comment_box %}
 
 {% if description_content %}
-    <div class="mt-2 pb-md-4 text-center {% if settings.full_width_description %}mt-md-5 text-md-center{% else %}mt-md-3 text-md-left{% endif %}" data-store="product-description-{{ product.id }}">
+    <div class="mt-2 pb-md-4 text-justify {% if settings.full_width_description %}mt-md-5 text-md-center{% else %}mt-md-3 text-md-left{% endif %}" data-store="product-description-{{ product.id }}">
         {# Product description #}
 
         {% if product.description is not empty %}

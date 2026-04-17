@@ -25,8 +25,9 @@
         {% if not is_subscription_only_product %}
             {# Standard prices for normal products #}
             <div class="js-price-container mb-4 mb-md-3">
-                <span class="d-inline-block">
+                <span class="d-inline-block d-flex justify-content-center justify-content-md-start align-items-baseline">
                     <div class="js-price-display" id="price_display" {% if not product.display_price %}style="display:none;"{% endif %} data-product-price="{{ product.price }}">{% if product.display_price %}{{ product.price | money }}{% endif %}</div>
+                    <div class="price-mxn ml-2" {% if not product.display_price %}style="display:none;"{% endif %}>MXN</div>
                 </span>
                 <span class="d-inline-block">
                    <div id="compare_price_display" class="js-compare-price-display price-compare" {% if not product.compare_at_price or not product.display_price %}style="display:none;"{% else %} style="display:block;"{% endif %}>{% if product.compare_at_price and product.display_price %}{{ product.compare_at_price | money }}{% endif %}</div>
@@ -83,7 +84,7 @@
                 </div>
             </div>
         {% if not home_main_product and (show_payments_info or hasDiscount) %}
-                <a id="btn-installments" class="btn-link no-underline font-small" {% if not (product.get_max_installments and product.get_max_installments(false)) %}style="display: none;"{% endif %}>
+                <a id="btn-installments" class="btn-link no-underline font-small d-none" {% if not (product.get_max_installments and product.get_max_installments(false)) %}style="display: none;"{% endif %}>
                   {% if not hasDiscount and not settings.product_detail_installments %}
                     {{ "Ver medios de pago" | translate }}
                   {% else %}
@@ -154,7 +155,9 @@
 
         <div class="row {% if settings.product_stock %}mb-3{% else %}mb-4{% endif %}">
             {% if show_product_quantity %}
-                {% include "snipplets/product/product-quantity.tpl" %}
+                <div class="d-none">
+                    {% include "snipplets/product/product-quantity.tpl" %}
+                </div>
             {% endif %}
 
             {{ component('subscriptions/subscription-selector', {
@@ -208,7 +211,7 @@
             {% set state = store.is_catalog ? 'catalog' : (product.available ? product.display_price ? 'cart' : 'contact' : 'nostock') %}
             {% set texts = {'cart': "Agregar al carrito", 'contact': "Consultar precio", 'nostock': "Sin stock", 'catalog': "Consultar"} %}
 
-            {% set btn_container_classes = show_product_quantity and not product.isSubscribable() ? 'col-8 pl-md-0' : 'col-12' %}
+            {% set btn_container_classes = 'col-12' %}
 
             <div class="js-buy-button-container {{ btn_container_classes }} {% if product.isSubscribable() %}mt-1{% endif %}">
 
