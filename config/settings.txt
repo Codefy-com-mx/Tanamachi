@@ -729,6 +729,9 @@ Página de inicio
 		values
 			first = El primero de la lista
 			random = En forma aleatoria
+	color
+		name = main_product_title_color
+		description = Color del título
 	subtitle
 		subtitle = <a target='_blank' href='/admin/themes/settings/product_order/'>Elegí cuál vas a destacar</a>
 	collapse
@@ -794,6 +797,9 @@ Página de inicio
 	i18n_input
 		name = banner_promotional_title
 		description = Título para los banners promocionales
+	color
+		name = banner_promotional_title_color
+		description = Color de los títulos
 	checkbox
 		name = banner_promotional_text_outside
 		description = Mostrar texto fuera de la imagen

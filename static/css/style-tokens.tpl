@@ -73,6 +73,9 @@
   --services-background: {{ banner_services_background }};
   --services-foreground: {{ banner_services_foreground }};
 
+  --banner-promotional-title-color: {{ settings.banner_promotional_title_color }};
+  --main-product-title-color: {{ settings.main_product_title_color }};
+
   {# Color shades #}
 
   {# Opacity hex levels #}

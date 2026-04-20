@@ -4954,14 +4954,14 @@ p {
 /* // Section main product */
 
 .section-main-product-home {
-  padding: 10px 0 40px 0;
+  padding: 0 !important;
   overflow-x: hidden;
   font-family: 'Public Sans', sans-serif !important;
 }
 
 @media (min-width: 768px) {
   .section-main-product-home {
-    padding: 80px 0;
+    padding: 0 !important;
   }
 }
 
@@ -4974,13 +4974,19 @@ p {
 }
 
 .section-main-product-home .section-main-product-title {
-  font-size: 2.2rem;
+  font-size: 3rem;
   font-weight: 800;
-  letter-spacing: -1px;
-  line-height: 1.1;
-  color: #111;
+  letter-spacing: -2px;
+  line-height: 1;
+  color: var(--main-product-title-color) !important;
   font-family: 'Public Sans', sans-serif;
-  margin-bottom: 10px !important;
+  margin-bottom: 15px !important;
+}
+
+@media (min-width: 768px) {
+  .section-main-product-home .section-main-product-title {
+    font-size: 4.5rem;
+  }
 }
 
 .section-main-product-home .product-description {
@@ -5131,6 +5137,28 @@ p {
   height: 25px;
 }
 
+/* Color y tipografía para títulos de Banners Promocionales */
+.js-banners-promotional .js-banner-title,
+.js-banners-promotional-mobile .js-banner-title,
+.js-banners-promotional-title,
+.js-banners-promotional-mobile-title {
+  color: var(--banner-promotional-title-color) !important;
+  font-size: 5rem !important;
+  font-weight: 800 !important;
+  line-height: 0.9 !important;
+  letter-spacing: -3px !important;
+  white-space: nowrap !important;
+  font-family: 'Public Sans', sans-serif !important;
+}
+
+@media (min-width: 768px) {
+
+  .js-banners-promotional .js-banner-title,
+  .js-banners-promotional-title {
+    font-size: 8rem !important;
+  }
+}
+
 /*============================================================================
   #Banners
 ==============================================================================*/
@@ -5139,7 +5167,7 @@ p {
 
 .section-banners-home,
 .section-modules-home {
-  padding: 20px 0;
+  padding: 0 !important;
 }
 
 .section-banners-home+.section-banners-home {
@@ -5165,7 +5193,22 @@ p {
 
 .textbanner-image {
   position: relative;
-  padding-top: 50%;
+  padding-top: 60%;
+
+  @media (min-width: 768px) {
+    padding-top: 0;
+    height: 700px;
+  }
+}
+
+.js-banners-promotional {
+
+  .textbanner-title,
+  .textbanner-paragraph,
+  .btn-link {
+    font-family: 'Public Sans', sans-serif !important;
+    color: #ff0000 !important;
+  }
 }
 
 .textbanner-title {
@@ -5445,6 +5488,8 @@ p {
   font-size: var(--font-smallest);
   line-height: 14px;
   letter-spacing: 1px;
+  font-family: 'Public Sans', sans-serif !important;
+  color: #ff0000 !important;
 }
 
 /*============================================================================
