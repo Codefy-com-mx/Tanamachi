@@ -36,7 +36,7 @@
 				{% endembed %}
 			{% endif %}
 			{% if is_button_variant %}
-				<label class="form-label text-center text-md-left">{{ variation.name }}: <span class="js-insta-variation-label">{{ product.default_options[variation.id] }}</span></label>
+				<label class="form-label text-center text-md-left d-none">{{ variation.name }}: <span class="js-insta-variation-label">{{ product.default_options[variation.id] }}</span></label>
 				{% for option in variation.options %}
 					<a data-option="{{ option.id }}" class="js-insta-variant btn btn-variant{% if product.default_options[variation.id] is same as(option.id) %} selected{% endif %}{% if variation.name in ['Color', 'Cor'] %} {% if option.custom_data or settings.image_color_variants %}btn-variant-color{% endif %} p-0{% endif %}" title="{{ option.name }}" data-option="{{ option.id }}" data-variation-id="{{ variation.id }}">
 						<span class="btn-variant-content{% if settings.image_color_variants and variation.name in ['Color', 'Cor'] %} btn-variant-content-square{% endif %}"{% if option.custom_data and variation.name in ['Color', 'Cor'] and (settings.bullet_variants and not settings.image_color_variants) %} style="background: {{ option.custom_data }}; border: 1px solid #eee"{% endif %} data-name="{{ option.name }}">

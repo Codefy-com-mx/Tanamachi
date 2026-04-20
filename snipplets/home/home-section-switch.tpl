@@ -175,4 +175,13 @@
 		{% include 'snipplets/home/home-testimonials.tpl' %}
 	{% endif %}
 
+{% elseif section_select == 'scrolly_banner' %}
+
+	{#  **** Scrollytelling Banner ****  #}
+	{% if show_help or (show_component_help and not settings.scrolly_banner_show) %}
+		{% snipplet 'defaults/home/scrolly_banner_help.tpl' %}
+	{% elseif settings.scrolly_banner_show %}
+		{% include 'snipplets/home/home-scrolly-banner.tpl' %}
+	{% endif %}
+
 {% endif %}

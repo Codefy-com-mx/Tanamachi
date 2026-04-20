@@ -18,7 +18,7 @@
         {% set italic_font = params.preview or (not params.preview and template == 'home' and welcome_italic_font or institutional_italic_font or testimonial_italic_font) %}
         {% set google_fonts_weights = italic_font ? '400,400italic,700' : '400,700' %}
         
-        <link rel="preload" as="style" href="{{ [settings.font_headings, settings.font_rest] | google_fonts_url(google_fonts_weights) }}" />
+        <link rel="preload" as="style" href="{{ [settings.font_headings, settings.font_rest, 'Public Sans'] | google_fonts_url(google_fonts_weights) }}" />
         <link rel="preload" href="{{ 'css/style-critical.scss' | static_url }}" as="style" />
         <link rel="preload" href="{{ 'css/style-colors.scss' | static_url }}" as="style" />
 
@@ -96,7 +96,12 @@
 
         {{ component('structured-data-organization') }}
         {{ component('structured-data') }}
+        
+        {# GSAP Animation Library & Plugins #}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
+        <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&display=swap" rel="stylesheet">
     </head>
     <body class="{% if customer %}customer-logged-in{% endif %} template-{{ template | replace('.', '-') }}">
 
