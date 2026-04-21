@@ -132,12 +132,18 @@
                     <div class="item-overlay-bottom">
                          <div class="item-overlay-price">{{ product.price | money }}</div>
                          {% if product.available and product.display_price %}
-                            <form class="js-product-form" method="post" action="{{ store.cart_url }}">
-                                <input type="hidden" name="add_to_cart" value="{{product.id}}" />
-                                <div class="js-item-submit-container item-submit-container position-relative">
-                                    <input type="submit" class="js-addtocart js-prod-submit-form btn-overlay-buy" value="{{ 'Add to cart' | translate }}" data-component="product-list-item.add-to-cart" data-component-value="{{ product.id }}"/>
-                                </div>
-                            </form>
+                            <div class="js-item-submit-container item-submit-container position-relative">
+                                {% if product.variations and settings.quick_shop %}
+                                    <div data-toggle="#quickshop-modal" data-modal-url="modal-fullscreen-quickshop" class="js-quickshop-modal-open js-fullscreen-modal-open js-modal-open btn-overlay-buy text-center pointer" title="{{ 'Compra rápida de' | translate }} {{ product.name }}" aria-label="{{ 'Compra rápida de' | translate }} {{ product.name }}" data-component="product-list-item.add-to-cart" data-component-value="{{product.id}}">
+                                        {{ 'Add to cart' | translate }}
+                                    </div>
+                                {% else %}
+                                    <form class="js-product-form" method="post" action="{{ store.cart_url }}">
+                                        <input type="hidden" name="add_to_cart" value="{{product.id}}" />
+                                        <input type="submit" class="js-addtocart js-prod-submit-form btn-overlay-buy" value="{{ 'Add to cart' | translate }}" data-component="product-list-item.add-to-cart" data-component-value="{{ product.id }}"/>
+                                    </form>
+                                {% endif %}
+                            </div>
                          {% endif %}
                     </div>
                     <a href="{{ product.url }}" class="item-overlay-link" title="{{ product.name }}" aria-label="{{ product.name }}"></a>

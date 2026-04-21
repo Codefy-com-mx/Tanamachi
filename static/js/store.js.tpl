@@ -2581,6 +2581,7 @@ DOMContentLoaded.addEventOrExecute(() => {
                 });
             }
             initAllVideos();
+            initAllVideos();
             function pauseAllVideos(){
                 if (stream_videos.length === 0) {
                     return;
@@ -3009,9 +3010,14 @@ DOMContentLoaded.addEventOrExecute(() => {
 
             {# Comentamos el hide para evitar que el botón desaparezca #}
             {# $productButton.hide(); #}
-            $quickshopBagIcon.hide();
-            if (isQuickShop) {
+            {# Forzamos visibilidad absoluta para evitar ocultamientos automáticos del tema #}
+            $productButton.attr('style', 'display: block !important; opacity: 1 !important; visibility: visible !important;');
+            {# $quickshopBagIcon.hide(); #}
+            {# if (isQuickShop) {
                 $productButtonContainer.hide();
+            } #}
+            if (isQuickShop) {
+                $productButtonContainer.attr('style', 'display: block !important; opacity: 1 !important; visibility: visible !important;');
             }
             $productButtonPlaceholder.css('display' , 'block');
             $productButtonText.fadeOut();

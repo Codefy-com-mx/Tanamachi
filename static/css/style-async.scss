@@ -3092,4 +3092,41 @@ body:not(.is-using-mouse) .fancybox__container :focus {
       display: none !important;
     }
   }
+
+}
+
+/* Escudo de Visibilidad Absoluta para el Botón de Compra */
+.js-buy-button-container,
+.js-item-submit-container {
+  position: relative !important;
+  display: block !important;
+  overflow: visible !important;
+}
+
+.js-addtocart,
+.btn-add-to-cart,
+.js-prod-submit-form {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 5 !important;
+}
+
+.js-addtocart-placeholder {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: none;
+  z-index: 10 !important;
+  pointer-events: none !important;
+}
+
+.js-addtocart-placeholder.active {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  backdrop-filter: blur(1px);
 }
