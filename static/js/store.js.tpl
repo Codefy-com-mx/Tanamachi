@@ -2657,27 +2657,29 @@ DOMContentLoaded.addEventOrExecute(() => {
                             nextTpl: '<svg class="icon-inline icon-2x-half svg-icon-invert"><use xlink:href="#arrow-long"/></svg>',
                         },
                     },
-                    Thumbs: { autoStart: false },
                     on: {
-                        shouldClose: (fancybox, slide) => {
-                            {# Update position of the slider #}
-                            productSwiper.slideTo( fancybox.getSlide().index, 0 );
-                        },
                         {% if native_videos_enabled %}
                             "Carousel.change": (fancybox) => {
                                 pauseAllVideos();
                             },
                         {% endif %}
                     },
+                    keyboard: {
+                        Escape: "close",
+                        Delete: "close",
+                        Backspace: "close",
+                    },
+                    closeButton: "outside",
+                    dragToClose: true,
+                    Click: {
+                        outside: "close",
+                    },
                 });
             {% endblock %}
         {% endif %}
 
         function productSliderNav(){
-
             var width = window.innerWidth;
-
-            var productSwiper = null;
             createSwiper(
                 '.js-swiper-product', {
                     lazy: true,
@@ -2738,6 +2740,11 @@ DOMContentLoaded.addEventOrExecute(() => {
                     productSwiper.slideTo(slideToGo);
                     jQueryNuvem(".js-product-slide-img").removeClass("js-active-variant");
                     liImage.find(".js-product-slide-img").addClass("js-active-variant");
+                    
+                    {# Update variant ID in form #}
+                    if (variant && variant.id) {
+                        jQueryNuvem('input[name="add_to_cart"]').val(variant.id);
+                    }
                 });
 
                 jQueryNuvem(".js-product-thumb").on("click", function(e){
@@ -2776,7 +2783,111 @@ DOMContentLoaded.addEventOrExecute(() => {
             },
         });
 
-        productSliderNav()
+        var productSwiper = null;
+
+        function luxurySliderNav(){
+            if (jQueryNuvem('.js-luxury-gallery').length === 0) return;
+
+            var luxuryThumbsSwiper = new Swiper('.js-luxury-thumbs', {
+                direction: 'vertical',
+                slidesPerView: 'auto',
+                spaceBetween: 10,
+                watchSlidesProgress: true,
+                threshold: 5,
+            });
+
+            var luxuryMainSwiper = new Swiper('.js-luxury-main-slider', {
+                slidesPerView: 1,
+                spaceBetween: 0,
+                threshold: 5,
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                },
+                pagination: {
+                    el: '.js-luxury-pagination',
+                    type: 'bullets',
+                    clickable: true
+                },
+                thumbs: {
+                    swiper: luxuryThumbsSwiper,
+                },
+            });
+
+            {# Sync thumbnails on click or scroll #}
+            jQueryNuvem('.js-luxury-thumb').on('click', function(e) {
+                e.preventDefault();
+                var index = jQueryNuvem(this).data('imagePosition');
+                
+                if (window.innerWidth >= 768) {
+                    var target = document.getElementById('luxury-image-' + index);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                } else {
+                    luxuryMainSwiper.slideTo(index);
+                }
+
+                jQueryNuvem('.luxury-thumb-img').removeClass('active');
+                jQueryNuvem(this).find('.luxury-thumb-img').addClass('active');
+            });
+
+            {# Highlighting thumbnails on scroll (Desktop) #}
+            if (window.innerWidth >= 768 && 'IntersectionObserver' in window) {
+                var observerOptions = {
+                    root: null,
+                    rootMargin: '-20% 0px -70% 0px',
+                    threshold: 0
+                };
+
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            var index = jQueryNuvem(entry.target).data('imagePosition');
+                            jQueryNuvem('.luxury-thumb-img').removeClass('active');
+                            jQueryNuvem('.js-luxury-thumb[data-image-position="' + index + '"] .luxury-thumb-img').addClass('active');
+                        }
+                    });
+                }, observerOptions);
+
+                document.querySelectorAll('.js-product-slide').forEach(function(slide) {
+                    observer.observe(slide);
+                });
+            }
+
+            {# Sync variant change #}
+            LS.registerOnChangeVariant(function(variant){
+                var liImage = jQueryNuvem('.js-product-slide[data-image="'+variant.image+'"]');
+                var selectedPosition = liImage.data('imagePosition');
+                
+                if (selectedPosition !== undefined) {
+                    if (window.innerWidth >= 768) {
+                        var target = document.getElementById('luxury-image-' + selectedPosition);
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    } else if (luxuryMainSwiper && luxuryMainSwiper.slideTo) {
+                        luxuryMainSwiper.slideTo(parseInt(selectedPosition));
+                    }
+                }
+
+                {# Update variant ID in form #}
+                if (variant && variant.id) {
+                    jQueryNuvem('input[name="add_to_cart"]').val(variant.id);
+                }
+
+                {# Sync active variant class for cart notification #}
+                jQueryNuvem(".js-product-slide-img").removeClass("js-active-variant");
+                if (liImage.length) {
+                    liImage.find(".js-product-slide-img").addClass("js-active-variant");
+                }
+            });
+
+            productSwiper = luxuryMainSwiper;
+        }
+
+        productSliderNav();
+        luxurySliderNav();
 
         {# /* // Pinterest sharing */ #}
 
@@ -2896,7 +3007,8 @@ DOMContentLoaded.addEventOrExecute(() => {
 
             {# Hide real button and show button placeholder during event #}
 
-            $productButton.hide();
+            {# Comentamos el hide para evitar que el botón desaparezca #}
+            {# $productButton.hide(); #}
             $quickshopBagIcon.hide();
             if (isQuickShop) {
                 $productButtonContainer.hide();

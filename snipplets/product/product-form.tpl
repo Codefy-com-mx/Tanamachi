@@ -116,6 +116,20 @@
                 {% endif %}
             </div>
         {% endif %}
+        
+        {# Product description #}
+        {% if not settings.full_width_description and not settings.luxury_gallery %}
+            <div class="product-description mb-4">
+                {% include 'snipplets/product/product-description.tpl' %}
+            </div>
+        {% endif %}
+
+        {# Product description for luxury mode #}
+        {% if settings.luxury_gallery %}
+            <div class="luxury-description mb-4">
+                {% include 'snipplets/product/product-description.tpl' %}
+            </div>
+        {% endif %}
     </div>
 
     {{ component('promotions-details', {

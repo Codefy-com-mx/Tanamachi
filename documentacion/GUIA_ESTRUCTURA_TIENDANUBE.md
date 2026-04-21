@@ -114,7 +114,7 @@ collapse
 	name = mi_seccion_cfg
 	description = Configuración de mi sección
 	backto = home_order_position  # Link de retorno
-	
+
 	# Aquí van los campos de esta sección
 	checkbox
 		name = mostrar_seccion
@@ -128,22 +128,22 @@ collapse
 	name = featured_products_cfg
 	description = Productos destacados
 	backto = home_order_position
-	
+
 	checkbox
 		name = featured_products_show
 		description = Mostrar productos destacados
-	
+
 	i18n_input
 		name = featured_products_title
 		description = Título de la sección
-	
+
 	dropdown
 		name = featured_products_format
 		description = Formato de visualización
 		values
 			grid = Grilla
 			slider = Carrusel
-	
+
 	dropdown
 		name = featured_products_mobile
 		description = Columnas en móvil
@@ -151,7 +151,7 @@ collapse
 			1 = 1 columna
 			2 = 2 columnas
 			3 = 3 columnas
-	
+
 	dropdown
 		name = featured_products_desktop
 		description = Columnas en desktop
@@ -197,6 +197,7 @@ font_rest = "Open Sans", sans-serif
 ```
 
 **⚠️ IMPORTANTE:**
+
 - Si un campo no tiene valor por defecto, puede causar errores
 - Los nombres deben coincidir EXACTAMENTE con `settings.txt`
 - Para `i18n_input`, agrega el sufijo del idioma: `_es`, `_en`, `_pt`
@@ -241,6 +242,7 @@ pt:
 ```
 
 **Uso en templates:**
+
 ```twig
 {{ 'mi_texto_personalizado' | translate }}
 ```
@@ -259,34 +261,34 @@ Este archivo es el **layout maestro** que envuelve todas las páginas.
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     {# Tiendanube inyecta automáticamente meta tags, CSS base, etc. #}
     {{ head_content }}
-    
+
     {# Tus CSS personalizados #}
     {{ 'style.css' | static_url | css_tag }}
-    
+
     {# Scripts específicos por template #}
     {% if template == 'home' %}
         {{ 'https://unpkg.com/embla-carousel/embla-carousel.umd.js' | script_tag(true) }}
     {% endif %}
 </head>
 <body class="{{ template }}-template">
-    
+
     {# Header #}
     {% include 'snipplets/header/header.tpl' %}
-    
+
     {# Contenido principal - cada template se inyecta aquí #}
     <main>
         {{ page_content }}
     </main>
-    
+
     {# Footer #}
     {% include 'snipplets/footer/footer.tpl' %}
-    
+
     {# Tiendanube inyecta scripts necesarios (jQuery, etc.) #}
     {{ body_content }}
-    
+
     {# Tus scripts personalizados #}
     {{ 'scripts.js' | static_url | script_tag }}
 </body>
@@ -294,6 +296,7 @@ Este archivo es el **layout maestro** que envuelve todas las páginas.
 ```
 
 **Variables importantes:**
+
 - `{{ head_content }}` - Meta tags, CSS base de Tiendanube
 - `{{ page_content }}` - Contenido del template actual
 - `{{ body_content }}` - Scripts base de Tiendanube
@@ -335,7 +338,7 @@ templates/
 <div class="container">
     {# Selector de orden de secciones #}
     {% set show_help = not has_products %}
-    
+
     {% for section_select in settings.home_order_position %}
         {% include 'snipplets/home/home-section-switch.tpl' %}
     {% endfor %}
@@ -343,6 +346,7 @@ templates/
 ```
 
 **⚠️ IMPORTANTE:**
+
 - Los templates se **inyectan** en `{{ page_content }}` del layout
 - NO incluyas `<html>`, `<head>`, `<body>` aquí
 - Usa `{% include %}` para componentes reutilizables
@@ -431,18 +435,20 @@ Este archivo controla **qué sección se muestra y en qué orden**.
 ### Flujo de trabajo para agregar una sección:
 
 1. **Define la sección en `settings.txt`:**
+
 ```txt
 collapse
 	name = mi_seccion_cfg
 	description = Mi Sección
 	backto = home_order_position
-	
+
 	checkbox
 		name = mi_seccion_show
 		description = Mostrar sección
 ```
 
 2. **Agrega la sección al selector de orden:**
+
 ```txt
 dropdown
 	name = home_order_position
@@ -454,11 +460,13 @@ dropdown
 ```
 
 3. **Agrega valores por defecto en `defaults.txt`:**
+
 ```txt
 mi_seccion_show = 1
 ```
 
 4. **Agrega el case en `home-section-switch.tpl`:**
+
 ```twig
 {% elseif section_select == 'mi_seccion' %}
     {% if settings.mi_seccion_show %}
@@ -468,6 +476,7 @@ mi_seccion_show = 1
 ```
 
 5. **Crea el snippet `snipplets/home/home-mi-seccion.tpl`:**
+
 ```twig
 <section class="section-mi-seccion">
     <div class="container">
@@ -636,6 +645,7 @@ Tiendanube usa **Twig** como motor de templates.
 ### Tipos de campos de imagen:
 
 #### 1. **IMAGE** - Una sola imagen
+
 ```txt
 image
 	original = mi_banner.jpg    # ⚠️ OBLIGATORIO para campos image
@@ -648,15 +658,16 @@ image
 **⚠️ IMPORTANTE:** Los campos `image` DEBEN tener la línea `original = nombre_campo.jpg`
 
 **Uso correcto:**
+
 ```twig
 {# Verificar si la imagen existe #}
 {% set banner_image = 'mi_banner.jpg' | has_custom_image %}
 
 {# Mostrar imagen solo si existe #}
 {% if banner_image %}
-    <img 
-        src="{{ 'images/empty-placeholder.png' | static_url }}" 
-        data-src="{{ 'mi_banner.jpg' | static_url | settings_image_url('large') }}" 
+    <img
+        src="{{ 'images/empty-placeholder.png' | static_url }}"
+        data-src="{{ 'mi_banner.jpg' | static_url | settings_image_url('large') }}"
         alt="Banner"
         class="lazyload img-fluid"
     >
@@ -667,6 +678,7 @@ image
 ```
 
 **❌ INCORRECTO:**
+
 ```twig
 {# NO funciona - settings.mi_banner no contiene la URL #}
 <img src="{{ settings.mi_banner | static_url }}" alt="Banner">
@@ -675,6 +687,7 @@ image
 #### 2. **GALLERY** - Múltiples imágenes
 
 **Opción A: Solo imágenes (básico)**
+
 ```txt
 gallery
 	name = mi_galeria
@@ -684,6 +697,7 @@ gallery
 ```
 
 **Uso:**
+
 ```twig
 {% for imagen in settings.mi_galeria %}
     <img src="{{ imagen | static_url | settings_image_url('large') }}" alt="">
@@ -691,6 +705,7 @@ gallery
 ```
 
 **Opción B: Con campos adicionales (avanzado)**
+
 ```txt
 gallery
 	name = mi_slider
@@ -702,28 +717,29 @@ gallery
 ```
 
 **Uso:**
+
 ```twig
 {% for slide in settings.mi_slider %}
     <div class="slide">
         {% if slide.link %}
             <a href="{{ slide.link | setting_url }}">
         {% endif %}
-        
-        <img 
-            src="{{ 'images/placeholder.png' | static_url }}" 
-            data-src="{{ slide.image | static_url | settings_image_url('large') }}" 
+
+        <img
+            src="{{ 'images/placeholder.png' | static_url }}"
+            data-src="{{ slide.image | static_url | settings_image_url('large') }}"
             alt="{{ slide.title }}"
             class="lazyload"
         >
-        
+
         {% if slide.link %}
             </a>
         {% endif %}
-        
+
         {% if slide.title %}
             <h3>{{ slide.title | translate }}</h3>
         {% endif %}
-        
+
         {% if slide.description %}
             <p>{{ slide.description | translate }}</p>
         {% endif %}
@@ -747,6 +763,7 @@ Cuando usas `gallery_more_info = true`, cada item tiene esta estructura:
 ```
 
 **Acceso correcto:**
+
 ```twig
 {{ slide.image }}       ✅ Correcto
 {{ slide.title }}       ✅ Correcto
@@ -759,18 +776,21 @@ Cuando usas `gallery_more_info = true`, cada item tiene esta estructura:
 ### ⚠️ DIFERENCIAS CRÍTICAS: IMAGE vs GALLERY
 
 **CAMPOS `image` (una sola imagen):**
+
 - **Configuración:** `original = nombre_campo.jpg` (OBLIGATORIO)
 - **Verificación:** `'nombre_campo.jpg' | has_custom_image`
 - **Carga:** `'nombre_campo.jpg' | static_url | settings_image_url('tamaño')`
 - **Uso:** Para banners, logos, imágenes individuales
 
 **CAMPOS `gallery` (múltiples imágenes):**
+
 - **Configuración:** Sin `original`, usa `gallery_width/height`
 - **Verificación:** `settings.nombre_campo and settings.nombre_campo is not empty`
 - **Carga:** `slide.image | static_url | settings_image_url('tamaño')`
 - **Uso:** Para sliders, galerías, listas de imágenes
 
 **Ejemplo práctico:**
+
 ```twig
 {# IMAGE - Banner individual #}
 {% set banner_exists = 'mi_banner.jpg' | has_custom_image %}
@@ -806,9 +826,9 @@ Cuando usas `gallery_more_info = true`, cada item tiene esta estructura:
 ### Lazy Loading (recomendado):
 
 ```twig
-<img 
-    src="{{ 'images/empty-placeholder.png' | static_url }}" 
-    data-src="{{ product.image | product_image_url('large') }}" 
+<img
+    src="{{ 'images/empty-placeholder.png' | static_url }}"
+    data-src="{{ product.image | product_image_url('large') }}"
     alt="{{ product.name }}"
     class="lazyload img-fluid"
 >
@@ -825,29 +845,29 @@ Tiendanube carga automáticamente la librería de lazy loading.
 ```css
 /* Mobile First (por defecto) */
 .container {
-    padding: 0 15px;
+  padding: 0 15px;
 }
 
 /* Tablet: 768px+ */
 @media (min-width: 768px) {
-    .container {
-        max-width: 960px;
-        margin: 0 auto;
-    }
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+  }
 }
 
 /* Desktop: 1024px+ */
 @media (min-width: 1024px) {
-    .container {
-        max-width: 1140px;
-    }
+  .container {
+    max-width: 1140px;
+  }
 }
 
 /* Large Desktop: 1200px+ */
 @media (min-width: 1200px) {
-    .container {
-        max-width: 1320px;
-    }
+  .container {
+    max-width: 1320px;
+  }
 }
 ```
 
@@ -875,27 +895,28 @@ Tiendanube genera automáticamente variables CSS basadas en `settings.txt`:
 
 ```css
 :root {
-    --main-background: #FFFFFF;
-    --main-foreground: #333333;
-    --accent-color: #80AA8D;
-    --font-base: 14px;
-    --font-small: 12px;
-    --font-large: 18px;
-    --font-xlarge: 24px;
+  --main-background: #ffffff;
+  --main-foreground: #333333;
+  --accent-color: #80aa8d;
+  --font-base: 14px;
+  --font-small: 12px;
+  --font-large: 18px;
+  --font-xlarge: 24px;
 }
 ```
 
 **Uso:**
+
 ```css
 .mi-elemento {
-    background: var(--main-background);
-    color: var(--main-foreground);
-    font-size: var(--font-base);
+  background: var(--main-background);
+  color: var(--main-foreground);
+  font-size: var(--font-base);
 }
 
 .boton {
-    background: var(--accent-color);
-    color: var(--main-background);
+  background: var(--accent-color);
+  color: var(--main-background);
 }
 ```
 
@@ -955,9 +976,9 @@ console.log('Debug:', {{ variable | json_encode | raw }});
 ### 2. Lazy loading de imágenes:
 
 ```twig
-<img 
-    src="{{ 'images/placeholder.png' | static_url }}" 
-    data-src="{{ product.image | product_image_url('large') }}" 
+<img
+    src="{{ 'images/placeholder.png' | static_url }}"
+    data-src="{{ product.image | product_image_url('large') }}"
     class="lazyload"
 >
 ```
@@ -996,16 +1017,19 @@ Usa herramientas de build (Webpack, Gulp, etc.) antes de subir.
 ## 🚀 Workflow de Desarrollo
 
 ### 1. Planificación:
+
 - Define qué settings necesitas
 - Diseña la estructura HTML
 - Piensa en la responsividad
 
 ### 2. Configuración (`settings.txt` + `defaults.txt`):
+
 - Agrega todos los campos necesarios
 - Define valores por defecto
 - Si es una sección del home, agrégala a `home_order_position`
 
 ### 3. Template/Snipplet:
+
 - Crea el archivo `.tpl`
 - Define variables Twig desde `settings`
 - Estructura HTML
@@ -1013,10 +1037,12 @@ Usa herramientas de build (Webpack, Gulp, etc.) antes de subir.
 - JavaScript si es necesario
 
 ### 4. Integración:
+
 - Si es sección del home: actualiza `home-section-switch.tpl`
 - Si necesita librerías: agrégalas en `layout.tpl`
 
 ### 5. Testing:
+
 - Sube los archivos por SFTP
 - Verifica en el panel de Tiendanube
 - Prueba en diferentes dispositivos
@@ -1027,10 +1053,12 @@ Usa herramientas de build (Webpack, Gulp, etc.) antes de subir.
 ## 🐛 Errores Comunes
 
 ### ❌ Error: "Setting no definido"
+
 **Causa:** Falta el valor en `defaults.txt`
 **Solución:** Agrega el valor por defecto
 
 ### ❌ Error: "Variable no existe"
+
 **Causa:** Nombre incorrecto o variable no definida
 **Solución:** Verifica el nombre exacto en `settings.txt`
 
@@ -1046,6 +1074,7 @@ Usa herramientas de build (Webpack, Gulp, etc.) antes de subir.
 **Solución:** Usa `'nombre_campo.jpg' | static_url | settings_image_url('tamaño')`
 
 **Ejemplo correcto para campos `image`:**
+
 ```txt
 # En settings.txt
 image
@@ -1062,10 +1091,12 @@ image
 ```
 
 ### ❌ Error: "Sección no aparece en el admin"
+
 **Causa:** No agregaste la sección a `home_order_position`
 **Solución:** Agrega el nombre de la sección al dropdown
 
 ### ❌ Error: "CSS no se aplica"
+
 **Causa:** CSS inline mal cerrado o sintaxis Twig incorrecta
 **Solución:** Verifica que todos los `{% %}` estén bien cerrados
 
@@ -1081,36 +1112,36 @@ Usa `title` (sin `name`) para crear secciones visuales en el admin:
 collapse
 	title = Banner Custom (Codefy)
 	backto = home_order_position
-	
+
 	checkbox
 		name = side_banner_show
 		description = Mostrar sección
-	
+
 	title = Configuración general
-	
+
 	image
 		original = side_banner_image.jpg
 		name = side_banner_image
 		description = Imagen de fondo
-	
+
 	color
 		name = side_banner_background_color
 		description = Color de fondo (si no hay imagen)
-	
+
 	title = Configuración Desktop
-	
+
 	dropdown
 		name = side_banner_desktop_layout
 		description = Distribución en desktop
-	
+
 	range_number
 		name = side_banner_desktop_title_size
 		description = Tamaño del título en desktop
 		min = 20
 		max = 80
-	
+
 	title = Configuración Móvil
-	
+
 	range_number
 		name = side_banner_mobile_title_size
 		description = Tamaño del título en móvil
@@ -1119,6 +1150,7 @@ collapse
 ```
 
 **✅ Ventajas:**
+
 - Agrupa settings relacionados visualmente
 - Mejora la UX del administrador
 - No requiere `name` (solo decorativo)
@@ -1127,6 +1159,7 @@ collapse
 ### 2. 🎯 Usar `range_number` en lugar de `range`
 
 **❌ INCORRECTO:**
+
 ```txt
 range
 	name = mi_numero
@@ -1138,6 +1171,7 @@ range
 ```
 
 **✅ CORRECTO:**
+
 ```txt
 range_number
 	name = mi_numero
@@ -1153,6 +1187,7 @@ range_number
 Cuando necesites tamaños o colores personalizables, úsalos directamente en el CSS:
 
 **❌ MALO: JavaScript innecesario**
+
 ```twig
 <h1 data-desktop-size="42" data-mobile-size="28">Título</h1>
 <script>
@@ -1161,6 +1196,7 @@ Cuando necesites tamaños o colores personalizables, úsalos directamente en el 
 ```
 
 **✅ BUENO: CSS directo**
+
 ```twig
 <style>
 .mi-titulo {
@@ -1176,12 +1212,33 @@ Cuando necesites tamaños o colores personalizables, úsalos directamente en el 
 ```
 
 **✅ Ventajas:**
+
 - Más rápido (sin JavaScript)
 - Más simple de mantener
 - No requiere event listeners
 - Funciona sin esperar al DOM
 
-### 4. 📐 Mobile-First para Responsive
+### 4. 🚫 Nomenclatura de variables Gallery (¡CRÍTICO!)
+
+Cuando crees un campo de tipo `gallery` en `settings.txt`, **jamas utilices guiones bajos (`_`), guiones medios (`-`) ni espacios en su nombre**. En Tiendanube, al momento de subir una imagen, el backend genera un archivo de referencia estática concatenando `gallery_[nombre]_[indice].jpg`. Si el nombre interno ya contiene un guion bajo (por ejemplo, `home_carrusel_slider`), el sistema procesa erróneamente el nombre dividiéndolo, truncando la extensión de la imagen y devolviendo un enlace roto (algo similar a `...static/gallery_home_carrusel_slider_1-480-0.`).
+
+**❌ MALO:**
+
+```txt
+gallery
+	name = carrusel_principal_home
+```
+
+**✅ BUENO:**
+
+```txt
+gallery
+	name = carruselhome
+```
+
+_Siempre usa una sola palabra contigua para evitar que las imágenes de dicha galería fallen y se visualicen rotas al extraerlas con `static_url | settings_image_url`._
+
+### 5. 📐 Mobile-First para Responsive
 
 Siempre define los estilos móviles primero, luego sobrescribe para desktop:
 
@@ -1200,6 +1257,7 @@ Siempre define los estilos móviles primero, luego sobrescribe para desktop:
 ```
 
 **✅ Ventajas:**
+
 - Carga más ligera en móviles
 - Progresive enhancement
 - Más fácil de mantener
@@ -1209,8 +1267,8 @@ Siempre define los estilos móviles primero, luego sobrescribe para desktop:
 Para hover states de botones con colores personalizables:
 
 ```twig
-<a href="{{ button_link | setting_url }}" 
-   class="btn side-banner-button" 
+<a href="{{ button_link | setting_url }}"
+   class="btn side-banner-button"
    style="background-color: {{ button_bg_color }}; color: {{ button_text_color }};"
    onmouseover="this.style.backgroundColor='{{ button_hover_bg_color }}'; this.style.color='{{ button_hover_text_color }}';"
    onmouseout="this.style.backgroundColor='{{ button_bg_color }}'; this.style.color='{{ button_text_color }}';">
@@ -1219,6 +1277,7 @@ Para hover states de botones con colores personalizables:
 ```
 
 **✅ Ventajas:**
+
 - Sin JavaScript adicional
 - Colores totalmente personalizables
 - Sin clases CSS adicionales
@@ -1231,22 +1290,22 @@ Para cambiar el orden visual sin mover HTML:
 ```css
 /* Desktop: contenido derecha */
 .side-banner-row[data-desktop-layout="content-right"] .side-banner-content-col {
-    order: 2;
+  order: 2;
 }
 
 .side-banner-row[data-desktop-layout="content-right"] .side-banner-image-col {
-    order: 1;
+  order: 1;
 }
 
 /* Mobile: necesita !important para sobrescribir */
 @media (max-width: 767px) {
-    .side-banner-row[data-mobile-layout="content-top"] .side-banner-content-col {
-        order: 1 !important;
-    }
-    
-    .side-banner-row[data-mobile-layout="content-top"] .side-banner-image-col {
-        order: 2 !important;
-    }
+  .side-banner-row[data-mobile-layout="content-top"] .side-banner-content-col {
+    order: 1 !important;
+  }
+
+  .side-banner-row[data-mobile-layout="content-top"] .side-banner-image-col {
+    order: 2 !important;
+  }
 }
 ```
 
@@ -1258,21 +1317,22 @@ Usa clases de Bootstrap para mostrar/ocultar imágenes:
 
 ```twig
 {# Imagen para desktop #}
-<img 
-    src="{{ 'side_banner_content_image.jpg' | static_url | settings_image_url('original') }}" 
+<img
+    src="{{ 'side_banner_content_image.jpg' | static_url | settings_image_url('original') }}"
     alt="Banner"
     class="d-none d-md-block"
 >
 
 {# Imagen para móvil #}
-<img 
-    src="{{ 'side_banner_mobile_content_image.jpg' | static_url | settings_image_url('large') }}" 
+<img
+    src="{{ 'side_banner_mobile_content_image.jpg' | static_url | settings_image_url('large') }}"
     alt="Banner"
     class="d-block d-md-none"
 >
 ```
 
 **✅ Ventajas:**
+
 - Optimización por dispositivo
 - Mayor control del diseño
 - Mejor performance (solo carga la necesaria)
@@ -1290,6 +1350,7 @@ Siempre ofrece un fallback para imágenes de fondo:
 ```
 
 **✅ Ventajas:**
+
 - Siempre muestra algo (imagen o color)
 - Mejor UX
 - Evita secciones en blanco
@@ -1300,26 +1361,28 @@ Para efectos visuales profesionales sin JavaScript:
 
 ```css
 .side-banner-image-animation-float {
-    animation: side-banner-float 6s ease-in-out infinite;
+  animation: side-banner-float 6s ease-in-out infinite;
 }
 
 @keyframes side-banner-float {
-    0%, 100% { 
-        transform: translateY(0px) rotate(0deg); 
-    }
-    25% { 
-        transform: translateY(-8px) rotate(0.5deg); 
-    }
-    50% { 
-        transform: translateY(-12px) rotate(0deg); 
-    }
-    75% { 
-        transform: translateY(-8px) rotate(-0.5deg); 
-    }
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(0.5deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-8px) rotate(-0.5deg);
+  }
 }
 ```
 
 **✅ Consejos:**
+
 - Movimientos sutiles (8-12px máximo)
 - Rotaciones mínimas (0.5-1deg)
 - Duraciones largas (4-6s) para suavidad
@@ -1331,20 +1394,39 @@ Para layouts configurables sin cálculos complejos:
 
 ```css
 /* Desktop: Proporciones */
-.side-banner-content-50 { flex: 0 0 50%; max-width: 50%; }
-.side-banner-image-50 { flex: 0 0 50%; max-width: 50%; }
+.side-banner-content-50 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+.side-banner-image-50 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
 
-.side-banner-content-60 { flex: 0 0 60%; max-width: 60%; }
-.side-banner-image-40 { flex: 0 0 40%; max-width: 40%; }
+.side-banner-content-60 {
+  flex: 0 0 60%;
+  max-width: 60%;
+}
+.side-banner-image-40 {
+  flex: 0 0 40%;
+  max-width: 40%;
+}
 
 /* Mobile: Alturas fijas para imagen, auto para contenido */
 @media (max-width: 767px) {
-    .side-banner-mobile-content-50 { width: 100%; height: auto; }
-    .side-banner-mobile-image-50 { width: 100%; height: 300px; }
+  .side-banner-mobile-content-50 {
+    width: 100%;
+    height: auto;
+  }
+  .side-banner-mobile-image-50 {
+    width: 100%;
+    height: 300px;
+  }
 }
 ```
 
 **✅ Ventajas:**
+
 - Altamente flexible
 - Fácil de mantener
 - Sin JavaScript
@@ -1356,9 +1438,9 @@ Para evitar scroll interno en secciones:
 
 ```css
 @media (max-width: 767px) {
-    .section-side-banner {
-        overflow: hidden; /* Bloquea horizontal Y vertical */
-    }
+  .section-side-banner {
+    overflow: hidden; /* Bloquea horizontal Y vertical */
+  }
 }
 ```
 
@@ -1378,6 +1460,7 @@ dropdown
 ```
 
 **✅ Ventajas:**
+
 - Fácil identificación en el admin
 - Profesionalismo
 - Evita confusiones con componentes del tema base
@@ -1389,20 +1472,33 @@ Permite al administrador elegir la alineación:
 ```css
 /* Desktop */
 @media (min-width: 768px) {
-    .side-banner-desktop-content-left { text-align: left; }
-    .side-banner-desktop-content-center { text-align: center; }
-    .side-banner-desktop-content-right { text-align: right; }
+  .side-banner-desktop-content-left {
+    text-align: left;
+  }
+  .side-banner-desktop-content-center {
+    text-align: center;
+  }
+  .side-banner-desktop-content-right {
+    text-align: right;
+  }
 }
 
 /* Mobile */
 @media (max-width: 767px) {
-    .side-banner-mobile-content-left { text-align: left; }
-    .side-banner-mobile-content-center { text-align: center; }
-    .side-banner-mobile-content-right { text-align: right; }
+  .side-banner-mobile-content-left {
+    text-align: left;
+  }
+  .side-banner-mobile-content-center {
+    text-align: center;
+  }
+  .side-banner-mobile-content-right {
+    text-align: right;
+  }
 }
 ```
 
 **✅ Ventajas:**
+
 - Máxima flexibilidad para el cliente
 - Sin JavaScript
 - Funciona con todo el contenido (texto, botones, imágenes)
@@ -1414,58 +1510,60 @@ Permite layouts que rompan el container o lo respeten:
 ```css
 /* Móvil: Configuración independiente */
 @media (max-width: 767px) {
-    /* Container normal (con márgenes) */
-    .carrusel-container-wrapper-mobile-normal {
-        max-width: 100%;
-        padding: 0 15px;
-    }
-    
-    /* Full width (sin márgenes) */
-    .carrusel-container-wrapper-mobile-full {
-        max-width: 100vw;
-        padding: 0;
-        margin-left: 0;
-        margin-right: 0;
-    }
-    
-    /* Margen izquierdo, sin margen derecho */
-    .carrusel-container-wrapper-mobile-left {
-        max-width: 100vw;
-        padding-left: 15px;
-        padding-right: 0;
-        margin-right: 0;
-    }
+  /* Container normal (con márgenes) */
+  .carrusel-container-wrapper-mobile-normal {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+
+  /* Full width (sin márgenes) */
+  .carrusel-container-wrapper-mobile-full {
+    max-width: 100vw;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* Margen izquierdo, sin margen derecho */
+  .carrusel-container-wrapper-mobile-left {
+    max-width: 100vw;
+    padding-left: 15px;
+    padding-right: 0;
+    margin-right: 0;
+  }
 }
 
 /* Desktop: Configuración independiente */
 @media (min-width: 768px) {
-    .carrusel-container-wrapper-desktop-normal {
-        max-width: 1170px;
-        margin: 0 auto;
-        padding: 0 15px;
-    }
-    
-    .carrusel-container-wrapper-desktop-full {
-        max-width: 100vw;
-        padding: 0;
-    }
-    
-    .carrusel-container-wrapper-desktop-left {
-        max-width: 100vw;
-        padding-left: 15px;
-        padding-right: 0;
-    }
+  .carrusel-container-wrapper-desktop-normal {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  .carrusel-container-wrapper-desktop-full {
+    max-width: 100vw;
+    padding: 0;
+  }
+
+  .carrusel-container-wrapper-desktop-left {
+    max-width: 100vw;
+    padding-left: 15px;
+    padding-right: 0;
+  }
 }
 ```
 
 **Uso en Twig:**
+
 ```twig
-<div class="carrusel-container-wrapper 
-     carrusel-container-wrapper-mobile-{{ mobile_container }} 
+<div class="carrusel-container-wrapper
+     carrusel-container-wrapper-mobile-{{ mobile_container }}
      carrusel-container-wrapper-desktop-{{ desktop_container }}">
 ```
 
 **✅ Ventajas:**
+
 - Configuración independiente mobile/desktop
 - Layouts más versátiles
 - Mejor control visual para carruseles y banners
@@ -1481,18 +1579,19 @@ Para mostrar parcialmente el siguiente elemento (efecto "peek"):
 
 ```css
 .embla__slide {
-    flex: 0 0 calc(100% / {{ mobile_items }});
-    min-width: 0;
+  flex: 0 0 calc(100% / {{mobile_items}});
+  min-width: 0;
 }
 
 @media (min-width: 768px) {
-    .embla__slide {
-        flex: 0 0 calc(100% / {{ desktop_items }});
-    }
+  .embla__slide {
+    flex: 0 0 calc(100% / {{desktop_items}});
+  }
 }
 ```
 
 **Settings:**
+
 ```txt
 dropdown
 	name = carrusel_mobile_items
@@ -1512,6 +1611,7 @@ dropdown
 ```
 
 **✅ Ventajas:**
+
 - Mejor UX (se ve que hay más contenido)
 - Invita a hacer scroll
 - Más moderno y profesional
@@ -1541,21 +1641,39 @@ dropdown
 ```
 
 **CSS:**
+
 ```css
 /* Aspect Ratios */
-.image-original { aspect-ratio: unset; }
-.image-landscape { aspect-ratio: 16 / 9; }
-.image-square { aspect-ratio: 1 / 1; }
-.image-portrait { aspect-ratio: 4 / 5; }
+.image-original {
+  aspect-ratio: unset;
+}
+.image-landscape {
+  aspect-ratio: 16 / 9;
+}
+.image-square {
+  aspect-ratio: 1 / 1;
+}
+.image-portrait {
+  aspect-ratio: 4 / 5;
+}
 
 /* Object Fit */
-.image-cover { object-fit: cover; }
-.image-contain { object-fit: contain; }
-.image-fill { object-fit: fill; }
-.image-scale-down { object-fit: scale-down; }
+.image-cover {
+  object-fit: cover;
+}
+.image-contain {
+  object-fit: contain;
+}
+.image-fill {
+  object-fit: fill;
+}
+.image-scale-down {
+  object-fit: scale-down;
+}
 ```
 
 **✅ Ventajas:**
+
 - Imágenes consistentes sin edición
 - Control total desde el admin
 - Evita distorsiones
@@ -1565,6 +1683,7 @@ dropdown
 Para carruseles modernos y performantes:
 
 **1. Cargar la librería en `layout.tpl`:**
+
 ```twig
 {% if template == 'home' %}
     {{ 'https://unpkg.com/embla-carousel/embla-carousel.umd.js' | script_tag(true) }}
@@ -1573,6 +1692,7 @@ Para carruseles modernos y performantes:
 ```
 
 **2. Estructura HTML:**
+
 ```twig
 <div class="embla">
     <div class="embla__container">
@@ -1586,6 +1706,7 @@ Para carruseles modernos y performantes:
 ```
 
 **3. Inicialización:**
+
 ```javascript
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -1597,18 +1718,18 @@ document.addEventListener('DOMContentLoaded', function() {
             skipSnaps: false,
             dragFree: false
         };
-        
+
         {% if autoplay %}
         const autoplay = EmblaCarouselAutoplay({ delay: {{ autoplay_delay }} });
         const embla = EmblaCarousel(emblaNode, options, [autoplay]);
         {% else %}
         const embla = EmblaCarousel(emblaNode, options);
         {% endif %}
-        
+
         // Navegación
         const prevBtn = document.querySelector('.embla__prev');
         const nextBtn = document.querySelector('.embla__next');
-        
+
         if (prevBtn && nextBtn) {
             prevBtn.addEventListener('click', () => embla.scrollPrev());
             nextBtn.addEventListener('click', () => embla.scrollNext());
@@ -1619,6 +1740,7 @@ document.addEventListener('DOMContentLoaded', function() {
 ```
 
 **✅ Ventajas:**
+
 - Librería ligera y moderna
 - Touch/swipe nativo
 - Excelente performance
@@ -1631,64 +1753,66 @@ Indicadores que se generan automáticamente:
 ```javascript
 // Generar dots
 function setupDots(embla, dotsContainer) {
-    const scrollSnaps = embla.scrollSnapList();
-    dotsContainer.innerHTML = scrollSnaps
-        .map(() => '<button class="embla__dot" type="button"></button>')
-        .join('');
-    
-    const dots = Array.from(dotsContainer.querySelectorAll('.embla__dot'));
-    
-    // Click en dots
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => embla.scrollTo(index));
+  const scrollSnaps = embla.scrollSnapList();
+  dotsContainer.innerHTML = scrollSnaps
+    .map(() => '<button class="embla__dot" type="button"></button>')
+    .join("");
+
+  const dots = Array.from(dotsContainer.querySelectorAll(".embla__dot"));
+
+  // Click en dots
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => embla.scrollTo(index));
+  });
+
+  // Actualizar activo
+  const updateDots = () => {
+    const selected = embla.selectedScrollSnap();
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("embla__dot--selected", i === selected);
     });
-    
-    // Actualizar activo
-    const updateDots = () => {
-        const selected = embla.selectedScrollSnap();
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('embla__dot--selected', i === selected);
-        });
-    };
-    
-    embla.on('select', updateDots);
-    updateDots();
+  };
+
+  embla.on("select", updateDots);
+  updateDots();
 }
 
 // Uso
-const dotsContainer = document.querySelector('.embla__dots');
+const dotsContainer = document.querySelector(".embla__dots");
 if (dotsContainer) {
-    setupDots(embla, dotsContainer);
+  setupDots(embla, dotsContainer);
 }
 ```
 
 **CSS:**
+
 ```css
 .embla__dots {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    padding: 20px 0;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 20px 0;
 }
 
 .embla__dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.2);
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .embla__dot--selected {
-    background: var(--accent-color);
-    width: 24px;
-    border-radius: 4px;
+  background: var(--accent-color);
+  width: 24px;
+  border-radius: 4px;
 }
 ```
 
 **✅ Ventajas:**
+
 - Se generan automáticamente
 - Responsive
 - Fácil de estilizar
@@ -1710,14 +1834,16 @@ dropdown
 ```
 
 **Uso en Twig:**
+
 ```twig
 {% set autoplay_delay = settings.carousel_autoplay != 'none' ? settings.carousel_autoplay : false %}
 ```
 
 **JavaScript:**
+
 ```javascript
 {% if autoplay_delay %}
-const autoplay = EmblaCarouselAutoplay({ 
+const autoplay = EmblaCarouselAutoplay({
     delay: {{ autoplay_delay }},
     stopOnInteraction: true  // Detener al interactuar
 });
@@ -1728,6 +1854,7 @@ const embla = EmblaCarousel(emblaNode, options);
 ```
 
 **✅ Ventajas:**
+
 - Control total desde el admin
 - UX mejorada (se detiene al interactuar)
 - Opción de desactivar
@@ -1751,6 +1878,7 @@ range_number
 ```
 
 **CSS:**
+
 ```css
 .embla__container {
     display: flex;
@@ -1765,6 +1893,7 @@ range_number
 ```
 
 **✅ Ventajas:**
+
 - Layouts más limpios
 - Control preciso del diseño
 - Independiente mobile/desktop
@@ -1780,4 +1909,3 @@ range_number
 ---
 
 **🎉 ¡Ahora tienes todo el conocimiento para crear themes increíbles en Tiendanube!**
-

@@ -32,8 +32,8 @@ El objetivo es "secuestrar" el comportamiento predeterminado de la página está
     <div class="landing-sections-namespace">
         {% set newArrayNamespace = [] %}
 
-        {# 2. Tiendanube requiere iteración numérica forzada, iteramos hasta 10 o 15 posiciones #}
-        {% for i in 1..10 %}
+        {# 2. Tiendanube requiere iteración numérica forzada #}
+        {% for i in 1..15 %}
 
             {# 3. Construimos el nombre de la variable dinámica declarada en settings.txt #}
             {% set section_name = 'landing_namespace_order_position_' ~ i %}
@@ -54,6 +54,24 @@ El objetivo es "secuestrar" el comportamiento predeterminado de la página está
     <section class="user-content pb-5"> ... </section>
 {% endif %}
 ```
+
+> ### 🚨🚨🚨 ERROR CRÍTICO: "EL PERSONALIZADOR OCULTA LA ÚLTIMA SECCIÓN" 🚨🚨🚨
+>
+> **Problema Real Detectado:** El rango del loop (`1..N`) DEBE ser SIEMPRE mayor que el número de secciones registradas. Si tienes 10 secciones y el loop va hasta `1..10`, el personalizador de Tiendanube al reordenar puede empujar la última sección a la posición 11, y el loop NUNCA la alcanzará. La sección simplemente desaparece sin dejar rastro.
+>
+> **Regla de Oro:** El rango del loop = **Número de secciones + 5 slots de respaldo**.
+>
+> **Además**, en `defaults.txt` debes declarar las posiciones sobrantes como `empty`:
+> ```txt
+> landing_namespace_order_position_10 = landing_namespace_ultima_seccion
+> landing_namespace_order_position_11 = empty
+> landing_namespace_order_position_12 = empty
+> landing_namespace_order_position_13 = empty
+> landing_namespace_order_position_14 = empty
+> landing_namespace_order_position_15 = empty
+> ```
+>
+> **Referencia:** El Home original usa 12 secciones reales + 6 slots `empty` (posiciones 13-18).
 
 ---
 
@@ -160,10 +178,43 @@ Por último, generamos la subcarpeta de aislamiento y el archivo visual purament
 
 ---
 
+> ### 🚨🚨🚨 ERROR CRÍTICO: "DOS CARRUSELES NO PUEDEN CONVIVIR (Race Condition)" 🚨🚨🚨
+>
+> **Problema Real Detectado:** Si dos secciones de carrusel (ej. una con Embla y otra con Swiper) usan `setTimeout` para esperar a que sus librerías carguen, generan una **condición de carrera** en el Event Loop. Los timeouts se acumulan y se bloquean mutuamente: una sección se "come" a la otra.
+>
+> **Causa Raíz:** En `layout.tpl`, los scripts inline de la landing se ejecutan ANTES de que Swiper y EmblaCarousel estén definidos (líneas 155 vs 189-206). Cuando hay 2+ secciones haciendo polling simultáneo con `setTimeout`, compiten por el Event Loop.
+>
+> **NUNCA hagas esto en una landing:**
+> ```javascript
+> // ❌ INCORRECTO: Polling con setTimeout (causa Race Condition)
+> function init() {
+>     if (typeof EmblaCarousel !== 'undefined') {
+>         // inicializar...
+>     } else {
+>         setTimeout(init, 300); // Bucle infinito que bloquea otras secciones
+>     }
+> }
+> ```
+>
+> **SIEMPRE usa este patrón:**
+> ```javascript
+> // ✅ CORRECTO: Espera a que TODO esté cargado
+> window.addEventListener('load', function() {
+>     (function() {
+>         // Aquí Swiper, EmblaCarousel y createSwiper ya están disponibles
+>         var embla = EmblaCarousel(viewportNode, options);
+>     })();
+> });
+> ```
+>
+> **Nota:** Encapsula SIEMPRE en una IIFE `(function(){ ... })()` para evitar colisiones de variables globales entre secciones.
+
+---
+
 ## 🚀 Resumen Final: Puesta en Producción
 
 1. Crear el esquema en `settings.txt` y validarlo en `defaults.txt`.
-2. Crear la sub-carpeta aislada y los archivos individuales (`.tpl`) por sección (Botones, Galerías, Formularios, etc.).
+2. Crear la sub-carpeta aislada y los archivos individuales (`.tpl`) por sección.
 3. Ensamblarlos en un archivo con estructura Switch (_If - ElseIf_).
-4. Interceptar correctamente en `page.tpl` iterando el arreglo forzado (`in 1..10`).
+4. Interceptar correctamente en `page.tpl` iterando el arreglo forzado (`in 1..15` — siempre con margen extra).
 5. En el área de administración de Tiendanube, crear una _"Página"_ vacía. La URL que sea autogenerada o dictada (ej. `midominio.com/p/nombre-campana/`) será la que detone la renderización de la Landing Page entera.

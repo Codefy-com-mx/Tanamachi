@@ -2,7 +2,7 @@
 
 ## 📋 Copia este prompt al iniciar una sesión de Cursor
 
-```
+````
 Estoy trabajando en el desarrollo de un tema para Tiendanube (también conocida como Nuvemshop).
 
 CONTEXTO DEL PROYECTO:
@@ -70,7 +70,7 @@ PROBLEMAS RESUELTOS Y SOLUCIONES:
 
 2. PROBLEMA: Loop infinito del carrusel no funcionaba (se revertía al llegar al final)
    CAUSA: Conflictos entre align: 'start', containScroll: 'trimSnaps' y transiciones CSS manuales
-   SOLUCIÓN: 
+   SOLUCIÓN:
    - Eliminar containScroll y align (o usar con cuidado)
    - Agregar skipSnaps: false y dragFree: false
    - Eliminar transition: transform de .embla__container
@@ -88,8 +88,9 @@ PROBLEMAS RESUELTOS Y SOLUCIONES:
        <button class="prev">...</button>    <!-- FUERA del overflow hidden -->
        <button class="next">...</button>
    </div>
-   ```
-   APRENDIZAJE: Elementos que sobresalen deben estar fuera de contenedores con overflow: hidden
+````
+
+APRENDIZAJE: Elementos que sobresalen deben estar fuera de contenedores con overflow: hidden
 
 4. PROBLEMA: Títulos de imágenes no aparecían en el admin
    CAUSA: Usando gallery_caption en lugar del campo title por defecto
@@ -104,19 +105,21 @@ PROBLEMAS RESUELTOS Y SOLUCIONES:
 6. PROBLEMA: Autoplay del carrusel no funcionaba
    CAUSA: Plugin no inicializado correctamente
    SOLUCIÓN:
+
    ```javascript
    const plugins = [];
    if (autoplayDelay) {
-       plugins.push(
-           EmblaCarouselAutoplay({ 
-               delay: autoplayDelay,
-               stopOnInteraction: false,
-               stopOnMouseEnter: true
-           })
-       );
+     plugins.push(
+       EmblaCarouselAutoplay({
+         delay: autoplayDelay,
+         stopOnInteraction: false,
+         stopOnMouseEnter: true,
+       }),
+     );
    }
    const emblaApi = EmblaCarousel(emblaNode, options, plugins);
    ```
+
    APRENDIZAJE: Los plugins de Embla se pasan como tercer parámetro en un array
 
 7. PROBLEMA: Dots navegaban de 2 en 2 en lugar de 1 en 1
@@ -132,20 +135,27 @@ PROBLEMAS RESUELTOS Y SOLUCIONES:
    - minimal: Márgenes mínimos
    - normal: Container estándar
    - wide: Container amplio
-   APRENDIZAJE: Carruseles móviles se ven más naturales cuando llegan hasta el borde de la pantalla
+     APRENDIZAJE: Carruseles móviles se ven más naturales cuando llegan hasta el borde de la pantalla
+
+9. PROBLEMA: Tiendanube rompe la imagen cargada y el enlace devuelve la ruta de static truncada (ej. `...gallery_1-480-0.`)
+   CAUSA: Usar nombres internos de variables con guiones bajos, guiones o espacios para los campos `gallery` de Tiendanube (ej. `home_triple_carousel_gallery`). El parseo y generación automática de la URL sobre `settings_image_url` colapsa con la concatenación de los guiones bajos internos del backend.
+   SOLUCIÓN: Usar un único string de palabra (una sola palabra, todo pegado) para el campo `name` del `gallery` en el `settings.txt`. Ejemplo: `imgtriple` en lugar de `home_triple_gallery`.
+   APRENDIZAJE: ¡REGLA CRÍTICA! En Tiendanube, jamás utilices espacios, guiones o guiones bajos al nombrar un componente o campo de tipo `gallery` en el `settings.txt`. Usa una nomenclatura sólida y concatenada (ej. `carouselprod`, `imgtriple`).
 
 MEJORES PRÁCTICAS:
 
 1. Siempre usa lazy loading para imágenes:
+
    ```twig
-   <img 
-       src="{{ 'images/empty-placeholder.png' | static_url }}" 
-       data-src="{{ slide.image | static_url | settings_image_url('large') }}" 
+   <img
+       src="{{ 'images/empty-placeholder.png' | static_url }}"
+       data-src="{{ slide.image | static_url | settings_image_url('large') }}"
        class="lazyload"
    >
    ```
 
 2. Carga librerías solo cuando sean necesarias:
+
    ```twig
    {% if template == 'home' %}
        {{ 'library.js' | script_tag(true) }}
@@ -153,12 +163,14 @@ MEJORES PRÁCTICAS:
    ```
 
 3. Usa variables CSS del tema para mantener consistencia:
+
    ```css
    color: var(--main-foreground);
    background: var(--main-background);
    ```
 
 4. Verifica que existan datos antes de renderizar:
+
    ```twig
    {% set has_items = settings.mi_seccion_items and settings.mi_seccion_items is not empty %}
    {% if has_items %}
@@ -167,6 +179,7 @@ MEJORES PRÁCTICAS:
    ```
 
 5. Usa | translate para todos los textos:
+
    ```twig
    {{ 'Mi texto' | translate }}
    {{ settings.mi_titulo | translate }}
@@ -199,34 +212,35 @@ CARRUSEL EMBLA - CONFIGURACIÓN RECOMENDADA:
 
 ```javascript
 const options = {
-    loop: true,              // o false
-    align: 'start',          // o 'center'
-    slidesToScroll: 1,       // cuántos slides mover
-    skipSnaps: false,        // no saltar snaps
-    dragFree: false          // no drag libre
+  loop: true, // o false
+  align: "start", // o 'center'
+  slidesToScroll: 1, // cuántos slides mover
+  skipSnaps: false, // no saltar snaps
+  dragFree: false, // no drag libre
 };
 
 const plugins = [];
 if (autoplayDelay) {
-    plugins.push(
-        EmblaCarouselAutoplay({ 
-            delay: autoplayDelay,
-            stopOnInteraction: false,
-            stopOnMouseEnter: true
-        })
-    );
+  plugins.push(
+    EmblaCarouselAutoplay({
+      delay: autoplayDelay,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    }),
+  );
 }
 
 const emblaApi = EmblaCarousel(emblaNode, options, plugins);
 ```
 
 CSS IMPORTANTE:
+
 ```css
 .embla__container {
-    display: flex;
-    backface-visibility: hidden;
-    touch-action: pan-y;
-    /* NO agregar: transition */
+  display: flex;
+  backface-visibility: hidden;
+  touch-action: pan-y;
+  /* NO agregar: transition */
 }
 ```
 
@@ -267,6 +281,7 @@ FILTROS COMUNES:
 - | json_encode : convertir a JSON (debug)
 
 Con este contexto, estoy listo para continuar desarrollando el tema.
+
 ```
 
 ---
@@ -297,23 +312,29 @@ Cada vez que descubras algo nuevo o resuelvas un problema:
 
 ### Ejemplo 1: Crear una nueva sección
 ```
+
 [Pega el prompt de contexto]
 
 Ahora necesito crear una nueva sección para el home que muestre testimonios de clientes con nombre, foto, texto y calificación de estrellas. Debe ser responsive y tener opciones para cambiar el número de columnas en mobile y desktop.
+
 ```
 
 ### Ejemplo 2: Solucionar un problema
 ```
+
 [Pega el prompt de contexto]
 
 Tengo un problema: estoy intentando acceder a las imágenes de un gallery pero no se muestran. Estoy usando {{ item | static_url }}. ¿Cuál es la sintaxis correcta según el contexto del proyecto?
+
 ```
 
 ### Ejemplo 3: Agregar funcionalidad
 ```
+
 [Pega el prompt de contexto]
 
 Necesito agregar un carousel de marcas (logos) en el home. Debe usar Swiper.js y ser configurable desde el admin. ¿Qué archivos debo modificar y en qué orden?
+
 ```
 
 ---
@@ -330,3 +351,4 @@ Necesito agregar un carousel de marcas (logos) en el home. Debe usar Swiper.js y
 
 **🚀 ¡Tu conocimiento ahora es reutilizable y transferible a todo tu equipo!**
 
+```

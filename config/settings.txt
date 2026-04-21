@@ -1331,6 +1331,11 @@ Detalle de producto
 	i18n_input
 		description = Título para los productos complementarios
 		name = products_complementary_title
+	title
+		title = Estilo de galería
+	checkbox
+		name = luxury_gallery
+		description = Activar diseño editorial de lujo (Split screen 50/50)
 
 Carrito de compras
 	meta
