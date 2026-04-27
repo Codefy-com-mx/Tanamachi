@@ -5,6 +5,8 @@
 		</a>
 	</span>
 {% elseif use_account %}
+	{# LOGIN BUTTON REMOVED AS REQUESTED #}
+	{# 
 	<span class="utilities-container {% if header_desktop %}d-none d-md-inline-block mr-4{% endif %}">
 		{% if icon_only %}
 			<a href="{% if not customer %}{{ store.customer_login_url }}{% else %}{{ store.customer_home_url }}{% endif %}" class="btn btn-utility">
@@ -32,6 +34,7 @@
 			</div>
 		{% endif %}
 	</span>
+	#}
 {% elseif use_languages %}
 	<span class="utilities-container nav-dropdown btn-utility position-relative py-0">
 		<svg class="icon-inline utilities-icon"><use xlink:href="#globe"/></svg>

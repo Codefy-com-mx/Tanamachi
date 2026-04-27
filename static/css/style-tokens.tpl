@@ -138,6 +138,16 @@
 
   --heading-font: {{ settings.font_headings | raw }};
   --body-font: {{ settings.font_rest | raw }};
+  --footer-font-col1: {{ settings.font_footer_col1 | raw }};
+  --footer-font-col2: {{ settings.font_footer_col2 | raw }};
+  --footer-font-col3: {{ settings.font_footer_col3 | raw }};
+  --footer-font-col4: {{ settings.font_footer_col4 | raw }};
+  --footer-font-col5: {{ settings.font_footer_col5 | raw }};
+  --footer-size-col1: {{ settings.font_size_footer_col1 }}px;
+  --footer-size-col2: {{ settings.font_size_footer_col2 }}px;
+  --footer-size-col3: {{ settings.font_size_footer_col3 }}px;
+  --footer-size-col4: {{ settings.font_size_footer_col4 }}px;
+  --footer-size-col5: {{ settings.font_size_footer_col5 }}px;
 
   {# Font sizes #}
 

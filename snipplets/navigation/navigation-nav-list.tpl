@@ -8,7 +8,7 @@
 			{% if megamenu %}
 			<div class="nav-item-container">
 			{% endif %}
-				<a class="{% if hamburger %}js-toggle-menu-panel align-items-center{% endif %} nav-list-link position-relative {{ item.current ? 'selected' : '' }}" href="{% if megamenu and item.url %}{{ item.url }}{% else %}#{% endif %}">{{ item.name }}
+				<a class="{% if hamburger %}js-toggle-menu-panel align-items-center{% endif %} nav-list-link position-relative {{ item.current ? 'selected' : '' }} {% if item.current and not subitem %}btn-active-pill{% endif %}" href="{% if megamenu and item.url %}{{ item.url }}{% else %}#{% endif %}">{{ item.name }}
 					{% if hamburger %}
 						<span class="nav-list-arrow ml-1">
 							<svg class="icon-inline icon-lg svg-icon-text"><use xlink:href="#arrow-long"/></svg>
@@ -69,7 +69,7 @@
 		</li>
 	{% else %}
 		<li class="js-desktop-nav-item {% if megamenu %}{% if not subitem %}js-nav-main-item nav-main-item{% endif %} nav-item-desktop{% endif %} nav-item" data-component="menu.item">
-			<a class="nav-list-link {{ item.current ? 'selected' : '' }}" href="{% if item.url %}{{ item.url | setting_url }}{% else %}#{% endif %}">{{ item.name }}</a>
+			<a class="nav-list-link {{ item.current ? 'selected' : '' }} {% if item.current and not subitem %}btn-active-pill{% endif %}" href="{% if item.url %}{{ item.url | setting_url }}{% else %}#{% endif %}">{{ item.name }}</a>
 		</li>
 	{% endif %}
 {% endfor %}

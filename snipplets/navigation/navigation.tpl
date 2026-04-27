@@ -1,6 +1,6 @@
 {% set header_left_with_big_search = settings.logo_position_desktop == 'left' and settings.search_big_desktop %}
 <div class="nav-desktop {% if header_left_with_big_search %}nav-desktop-left{% endif %}">
-    <ul class="js-nav-desktop-list nav-desktop-list" data-store="navigation" data-component="menu">
+    <ul class="js-nav-desktop-list nav-desktop-list d-flex justify-content-center w-100" data-store="navigation" data-component="menu">
         <span class="js-nav-desktop-list-arrow js-nav-desktop-list-arrow-left nav-desktop-list-arrow nav-desktop-list-arrow-left disable" style="display: none">
             <svg class="icon-inline icon-lg icon-flip-horizontal"><use xlink:href="#chevron"/></svg>
         </span>

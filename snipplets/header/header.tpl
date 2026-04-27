@@ -112,7 +112,7 @@
 
             {% if settings.logo_position_desktop == 'left' and not settings.search_big_desktop %}
                 {# Desktop nav next logo #}
-                <div class="js-desktop-nav-col desktop-nav-col transition-soft col {{ show_inline_desktop_hide_mobile_class }} align-items-center">
+                <div class="js-desktop-nav-col desktop-nav-col transition-soft col {{ show_inline_desktop_hide_mobile_class }} align-items-center justify-content-center">
                     {% snipplet "navigation/navigation.tpl" %}
                 </div>
             {% endif %}
@@ -157,9 +157,11 @@
 
                 {# Account desktop icon #}
 
+                {#
                 <span class="{{ show_inline_desktop_hide_mobile_class }}">
                     {% include "snipplets/header/header-utilities.tpl" with {use_account: true, icon_only: true} %}
                 </span>
+                #}
 
                 {# Cart icon #}
 

@@ -4691,7 +4691,7 @@ p {
 
 .section-featured-home .js-item-product:hover .item-overlay-name {
   transform: scale(1.1);
-  transform-origin: top left;
+  transform-origin: left;
 }
 
 .section-featured-home .item-overlay-bottom {
@@ -4700,7 +4700,7 @@ p {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  padding: 30px 20px;
+  padding: 25px;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
   opacity: 0;
   transform: translateY(20px);
@@ -4717,30 +4717,34 @@ p {
   font-size: 4rem;
   font-weight: 900;
   letter-spacing: -1px;
-  margin-bottom: -50px;
+  margin-bottom: 10px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-  align-self: flex-start;
-  text-align: left;
+  align-self: center;
+  text-align: center;
   width: 100%;
   line-height: 1;
 }
 
 .section-featured-home .item-overlay-bottom form,
-.section-featured-home .item-overlay-bottom .item-submit-container {
+.section-featured-home .item-overlay-bottom .item-submit-container,
+.section-featured-home .item-overlay-bottom .js-item-submit-container {
   width: 100%;
+  display: block;
 }
 
 .section-featured-home .btn-overlay-buy {
   background: transparent;
   border: 1px solid #fff;
   color: #fff !important;
-  padding: 35px 30px;
-  font-size: 2.5rem;
+  padding: 50px;
+  font-size: 2rem;
   font-weight: 811;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 100%;
-  margin-bottom: -200px;
+  width: 100% !important;
+  display: block !important;
+  margin-bottom: 0;
+  text-align: center;
 }
 
 .section-featured-home .btn-overlay-buy:hover {

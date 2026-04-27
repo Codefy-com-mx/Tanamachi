@@ -10,142 +10,176 @@
 
 {% set has_seal_logos = store.afip or ebit or settings.custom_seal_code or ("seal_img.jpg" | has_custom_image) %}
 {% set show_help = not has_products and not has_social_network %}
-<footer class="js-footer js-hide-footer-while-scrolling display-when-content-ready overflow-none {% if settings.footer_colors %}footer-colors{% endif %}" data-store="footer">
-	<div class="container text-center">
-		{% if has_footer_logo and template != 'password' %}
-			<div class="mb-4 pb-2">
-				<img src="{{ 'images/empty-placeholder.png' | static_url }}" data-src="{{ 'footer_logo.jpg' | static_url('large') }}" alt="{{ store.name }}" title="{{ store.name }}" class="footer-logo-img lazyload">
-			</div>
-		{% endif %}
-		{% if has_social_network %}
-			<div class="mb-4">
-				{% include "snipplets/social/social-links.tpl" %}
-			</div>
-		{% endif %}
-
-		{% if template != 'password' %}
-
-			{# Foot Nav #}
-			{% if has_footer_menu %}
-				<div class="mb-3">
-					{% include "snipplets/navigation/navigation-foot.tpl" %}
-				</div>
-			{% endif %}
-
-			{% if settings.news_show %}
-				<div class="mb-4">
-					{% include 'snipplets/newsletter.tpl' %}
-				</div>
-			{% endif %}
-		{% endif %}
-
-		{# Contact info #}
-		{% if has_footer_contact_info %}
-			<div class="mb-3">
-				{% include "snipplets/contact-links.tpl" with {footer: true} %}
-			</div>
-		{% endif %}
-
-		{% if template != 'password' %}
-
-			{# Logos Payments and Shipping #}
-			{% if has_shipping_payment_logos or has_languages %}
-				<div class="mb-4">
-
-					{% if has_payment_logos %}
-						<div class="footer-payments-shipping-logos d-inline-block align-middle">
-							{{ component('payment-shipping-logos', {'type' : 'payments'}) }}
-						</div>
+<footer class="js-footer js-hide-footer-while-scrolling display-when-content-ready overflow-none {% if settings.footer_colors %}footer-colors{% endif %} py-5" data-store="footer">
+	<div class="container py-lg-4">
+		<div class="row justify-content-center align-items-start">
+			
+			{# Column 1: Brand Info #}
+			<div class="col-md-2 mb-4 mb-md-0 text-left js-footer-accordion">
+				<h4 class="h6 mb-3 js-footer-accordion-toggle position-relative text-uppercase" style="font-family: var(--footer-font-col1); font-size: var(--footer-size-col1); cursor: pointer;">
+					{% if settings.footer_brand_info_title %}
+						{{ settings.footer_brand_info_title }}
+					{% else %}
+						&nbsp;
 					{% endif %}
-
-					{% if has_shipping_logos %}
-						<div class="footer-payments-shipping-logos d-inline-block align-middle">
-							{{ component('payment-shipping-logos', {'type' : 'shipping'}) }}
-						</div>
-					{% endif %}
-
+					<span class="d-md-none position-absolute footer-accordion-icon" style="right: 0px;"></span>
+				</h4>
+				<div class="footer-accordion-content">
+					<div class="font-small opacity-50 line-height-small">
+						{{ settings.footer_brand_info | nl2br }}
+					</div>
 				</div>
-			{% endif %}
+			</div>
 
-			{# Language selector #}
-			{% if has_languages %}
-				<a href="#" data-toggle="#languages" class="js-modal-open btn-link font-small">{{ "Idiomas y monedas" | translate }}</a>
-				{% embed "snipplets/modal.tpl" with{modal_id: 'languages', modal_class: 'bottom modal-centered-small', modal_position: 'center', modal_transition: 'slide', modal_header_title: true, modal_footer: false, modal_width: 'centered', modal_zindex_top: true} %}
-					{% block modal_head %}
-						{{ 'Idiomas y monedas' | translate }}
-					{% endblock %}
-					{% block modal_body %}
-						{% include "snipplets/navigation/navigation-lang.tpl" %}
-					{% endblock %}
-				{% endembed %}
-			{% endif %}
-
-			{# AFIP - EBIT - Custom Seal #}
-			{% if has_seal_logos %}
-				<div class="row text-center">
-					<div class="col p-3">
-						{% if store.afip or ebit %}
-							{% if store.afip %}
-								<div class="footer-logo afip seal-afip">
-									{{ store.afip | raw }}
-								</div>
-							{% endif %}
-							{% if ebit %}
-								<div class="footer-logo ebit seal-ebit">
-									{{ ebit }}
-								</div>
-							{% endif %}
+			{# Column 2: Menu 1 #}
+			{% if settings.footer_menu_show and settings.footer_menu %}
+				<div class="col-md-2 mb-4 mb-md-0 text-left js-footer-accordion">
+					<h4 class="h6 mb-3 js-footer-accordion-toggle position-relative text-uppercase" style="font-family: var(--footer-font-col2); font-size: var(--footer-size-col2); cursor: pointer;">
+						{% if settings.footer_menu_title %}
+							{{ settings.footer_menu_title }}
+						{% else %}
+							&nbsp;
 						{% endif %}
-						{% if "seal_img.jpg" | has_custom_image or settings.custom_seal_code %}
-							{% if "seal_img.jpg" | has_custom_image %}
-								<div class="footer-logo custom-seal">
-									{% if settings.seal_url != '' %}
-										<a href="{{ settings.seal_url | setting_url }}" target="_blank">
-									{% endif %}
-										<img src="{{ 'images/empty-placeholder.png' | static_url }}" data-src="{{ "seal_img.jpg" | static_url }}" class="custom-seal-img lazyload" alt="{{ 'Sello de' | translate }} {{ store.name }}"/>
-									{% if settings.seal_url != '' %}
-										</a>
-									{% endif %}
-								</div>
+						<span class="d-md-none position-absolute footer-accordion-icon" style="right: 0px;"></span>
+					</h4>
+					<div class="footer-accordion-content">
+						<ul class="list-unstyled font-small opacity-50">
+							{% for item in menus[settings.footer_menu] %}
+								<li class="mb-2">
+									<a href="{{ item.url }}" {% if item.url | is_external %}target="_blank"{% endif %} class="btn-link p-0 text-decoration-underline">{{ item.name }}</a>
+								</li>
+							{% endfor %}
+							{% if settings.footer_menu_secondary %}
+								{% for item in menus[settings.footer_menu_secondary] %}
+									<li class="mb-2 d-block d-md-none">
+										<a href="{{ item.url }}" {% if item.url | is_external %}target="_blank"{% endif %} class="btn-link p-0 text-decoration-underline">{{ item.name }}</a>
+									</li>
+								{% endfor %}
 							{% endif %}
-							{% if settings.custom_seal_code %}
-								<div class="custom-seal custom-seal-code">
-									{{ settings.custom_seal_code | raw }}
-								</div>
-							{% endif %}
-						{% endif %}
+						</ul>
 					</div>
 				</div>
 			{% endif %}
-		{% endif %}
 
-		<div class="my-2">
-			{#
-			La leyenda que aparece debajo de esta linea de código debe mantenerse
-			con las mismas palabras y con su apropiado link a Tienda Nube;
-			como especifican nuestros términos de uso: http://www.tiendanube.com/terminos-de-uso .
-			Si quieres puedes modificar el estilo y posición de la leyenda para que se adapte a
-			tu sitio. Pero debe mantenerse visible para los visitantes y con el link funcional.
-			Os créditos que aparece debaixo da linha de código deverá ser mantida com as mesmas
-			palavras e com seu link para Nuvem Shop; como especificam nossos Termos de Uso:
-			http://www.nuvemshop.com.br/termos-de-uso. Se você quiser poderá alterar o estilo
-			e a posição dos créditos para que ele se adque ao seu site. Porém você precisa
-			manter visivél e com um link funcionando.
-			#}
-			{{ new_powered_by_link }}
+			{# Column 3: Menu 2 #}
+			{% if settings.footer_menu_show and settings.footer_menu_secondary %}
+				<div class="col-md-2 mb-4 mb-md-0 text-left js-footer-accordion d-none d-md-block">
+					<h4 class="h6 mb-3 js-footer-accordion-toggle position-relative text-uppercase" style="font-family: var(--footer-font-col3); font-size: var(--footer-size-col3); cursor: pointer;">
+						{% if settings.footer_menu_secondary_title %}
+							{{ settings.footer_menu_secondary_title }}
+						{% else %}
+							&nbsp;
+						{% endif %}
+						<span class="d-md-none position-absolute footer-accordion-icon" style="right: 0px;"></span>
+					</h4>
+					<div class="footer-accordion-content">
+						<ul class="list-unstyled font-small opacity-50">
+							{% for item in menus[settings.footer_menu_secondary] %}
+								<li class="mb-2">
+									<a href="{{ item.url }}" {% if item.url | is_external %}target="_blank"{% endif %} class="btn-link p-0 text-decoration-underline">{{ item.name }}</a>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			{% endif %}
+
+			{# Column 4: Menu 3 #}
+			{% if settings.footer_menu_show and settings.footer_menu_tertiary %}
+				<div class="col-md-2 mb-4 mb-md-0 text-left js-footer-accordion">
+					<h4 class="h6 mb-3 js-footer-accordion-toggle position-relative text-uppercase" style="font-family: var(--footer-font-col4); font-size: var(--footer-size-col4); cursor: pointer;">
+						{% if settings.footer_menu_tertiary_title %}
+							{{ settings.footer_menu_tertiary_title }}
+						{% else %}
+							&nbsp;
+						{% endif %}
+						<span class="d-md-none position-absolute footer-accordion-icon" style="right: 0px;"></span>
+					</h4>
+					<div class="footer-accordion-content">
+						<ul class="list-unstyled font-small opacity-50">
+							{% for item in menus[settings.footer_menu_tertiary] %}
+								<li class="mb-2">
+									<a href="{{ item.url }}" {% if item.url | is_external %}target="_blank"{% endif %} class="btn-link p-0 text-decoration-underline">{{ item.name }}</a>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			{% endif %}
+
+			{# Column 5: Universe Info #}
+			<div class="col-md-2 mb-4 mb-md-0 text-left">
+				<h4 class="h6 mb-3 font-weight-bold opacity-50 text-uppercase" style="font-family: var(--footer-font-col5); font-size: var(--footer-size-col5);">
+					{% if settings.footer_universe_title %}
+						{{ settings.footer_universe_title }}
+					{% else %}
+						&nbsp;
+					{% endif %}
+				</h4>
+				<div class="font-small opacity-50 line-height-small d-block mt-3">
+					{{ settings.footer_universe_info | nl2br }}
+				</div>
+			</div>
+
+			{# Column 6: Logo #}
+			<div class="col-md-2 text-center text-md-right">
+				{% if has_footer_logo %}
+					<img src="{{ 'images/empty-placeholder.png' | static_url }}" data-src="{{ 'footer_logo.jpg' | static_url('large') }}" alt="{{ store.name }}" title="{{ store.name }}" class="footer-logo-img-large lazyload img-fluid">
+				{% endif %}
+			</div>
 		</div>
-		<div class="d-inline-block mr-md-2 font-smallest">
-			{{ "Copyright {1} - {2}. Todos los derechos reservados." | translate( (store.business_name ? store.business_name : store.name) ~ (store.business_id ? ' - ' ~ store.business_id : ''), "now" | date('Y') ) }}
+
+		<div class="row mt-5 pt-5 border-top-0">
+			<div class="col-12 font-smallest opacity-50">
+				<div class="row">
+					<div class="col-md-6 text-left">
+						<div class="d-inline-block mr-3">
+							{{ new_powered_by_link }}
+						</div>
+						<div class="d-inline-block">
+							{{ "Copyright {1} - {2}. Todos los derechos reservados." | translate( (store.business_name ? store.business_name : store.name) ~ (store.business_id ? ' - ' ~ store.business_id : ''), "now" | date('Y') ) }}
+						</div>
+					</div>
+					<div class="col-md-6 text-right">
+						{{ component('claim-info', {
+								container_classes: "d-inline-block",
+								divider_classes: "mx-1 d-none d-md-inline-block",
+								text_classes: {text_consumer_defense: 'd-inline-block mr-2'},
+								link_classes: {
+									link_consumer_defense: "btn-link font-smallest",
+									link_order_cancellation: "btn-link font-smallest d-inline-block ml-3",
+								},
+							}) 
+						}}
+					</div>
+				</div>
+			</div>
 		</div>
-		{{ component('claim-info', {
-				container_classes: "d-md-inline-block mt-md-0 mt-3 font-smallest",
-				divider_classes: "mx-1 d-none d-md-inline-block",
-				text_classes: {text_consumer_defense: 'd-inline-block mb-2'},
-				link_classes: {
-					link_consumer_defense: "btn-link font-smallest",
-					link_order_cancellation: "btn-link font-smallest d-md-inline-block d-block mb-2 w-100 w-md-auto",
-				},
-			}) 
-		}}
 	</div>
 </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var accordions = document.querySelectorAll('.js-footer-accordion');
+    accordions.forEach(function(acc) {
+        var toggle = acc.querySelector('.js-footer-accordion-toggle');
+        if (toggle) {
+            toggle.addEventListener('click', function() {
+                if (window.innerWidth < 768) {
+                    var isCurrentlyOpen = acc.classList.contains('is-open');
+                    
+                    // Cerrar todos
+                    accordions.forEach(function(otherAcc) {
+                        otherAcc.classList.remove('is-open');
+                    });
+
+                    // Si no estaba abierto, lo abrimos
+                    if (!isCurrentlyOpen) {
+                        acc.classList.add('is-open');
+                    }
+                }
+            });
+        }
+    });
+});
+</script>

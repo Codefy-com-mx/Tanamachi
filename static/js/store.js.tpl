@@ -2136,10 +2136,7 @@ DOMContentLoaded.addEventOrExecute(() => {
             selector.addClass("selected");
             var option_id = selector.attr('data-option');
             var parent = selector.closest(parentSelector);
-            var selected_option = parent.find('.js-variation-option option').filter(function (el) {
-                return el.value == option_id;
-            });
-            selected_option.prop('selected', true).trigger('change');
+            parent.find('.js-variation-option').val(option_id).trigger('change');
             parent.find('.js-insta-variation-label').html(option_id);
         }
 
