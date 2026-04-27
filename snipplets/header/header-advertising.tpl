@@ -12,7 +12,7 @@
 
 {% if settings.ad_bar and has_advertising_bar %}
     <section class="js-adbar section-adbar {% if settings.ad_bar_animate %}section-adbar-animated{% endif %}">
-        <div class="{% if animated_ad_bar %}js-adbar-animated adbar-animated{% else %}js-swiper-adbar swiper-container container text-center {% endif %}">
+        <div class="{% if animated_ad_bar %}js-adbar-animated adbar-animated{% else %}js-swiper-adbar swiper-container container-fluid px-3 px-md-4 text-center {% endif %}">
             <div class="{% if animated_ad_bar %}js-adbar-text-container{% else %}swiper-wrapper{% endif %} align-items-center">
                 {% if animated_ad_bar %}
                     {% if num_messages == 1 %}

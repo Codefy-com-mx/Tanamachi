@@ -8013,3 +8013,43 @@ p {
 }
 
 /* --- Overlay Styles Applied --- */
+/* Force header transparency at all times */
+.head-main,
+.head-main:hover,
+.head-main.head-transparent:hover,
+.head-main.head-transparent-on-section:hover,
+.head-main-scrolled,
+.head-main-scrolled:hover,
+.js-head-main {
+  background-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+/* Push content on non-home pages to avoid collision with absolute header */
+body:not(.template-home) {
+  padding-top: 150px !important;
+}
+
+@media (max-width: 767px) {
+  body:not(.template-home) {
+    padding-top: 100px !important;
+  }
+}
+
+/* Force dropdowns to be transparent */
+.desktop-dropdown,
+.desktop-dropdown-small,
+.nav-dropdown-content,
+.desktop-list-subitems,
+.nav-dropdown-content {
+  background-color: transparent !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}

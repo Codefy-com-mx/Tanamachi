@@ -43,7 +43,8 @@
 		</div>
 	</span>
 {% elseif use_search %}
-	<span class="utilities-container {% if settings.search_type_mobile == 'search_big' %}d-none{% endif %} {% if settings.search_big_desktop %}d-md-none{% else %}d-md-inline-block{% endif %}">
+	<span class="utilities-container d-flex align-items-center {% if settings.search_type_mobile == 'search_big' %}d-none{% endif %} {% if settings.search_big_desktop %}d-md-none{% else %}d-md-flex{% endif %}">
+		{% include 'snipplets/header/header-clock.tpl' %}
 		<a href="#" class="js-search-button js-modal-open js-fullscreen-modal-open btn btn-utility utilities-item {% if settings.logo_position_desktop == 'center' %}pl-md-0{% endif %}" data-modal-url="modal-fullscreen-search" data-toggle="#nav-search" aria-label="{{ 'Buscador' | translate }}">
 			<svg class="icon-inline align-bottom utilities-icon"><use xlink:href="#search"/></svg>
 		</a>

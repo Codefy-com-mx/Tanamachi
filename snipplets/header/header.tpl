@@ -81,7 +81,7 @@
     {% if settings.ad_bar %}
         {% snipplet "header/header-advertising.tpl" %}
     {% endif %}
-    <div class="js-head-logo-row head-logo-row position-relative container transition-soft{% if has_languages and settings.search_type_mobile == 'search_icon' %} head-logo-languages{% endif %}">
+    <div class="js-head-logo-row head-logo-row position-relative container-fluid px-3 px-md-4 transition-soft{% if has_languages and settings.search_type_mobile == 'search_icon' %} head-logo-languages{% endif %}">
         <div class="{% if not settings.head_fix_desktop %}js-nav-logo-bar{% endif %} row no-gutters align-items-center{% if header_left_with_big_search %} justify-md-content-end{% endif %}">
 
             {# Menu icon #}
@@ -187,7 +187,7 @@
 
     {% if settings.logo_position_desktop != 'left' or header_left_with_big_search %}
         {# Desktop nav below logo #}
-        <div class="container {{ show_block_desktop_hide_mobile_class }} {% if settings.logo_position_desktop == 'center' %}text-center{% endif %}">
+        <div class="container-fluid px-3 px-md-4 {{ show_block_desktop_hide_mobile_class }} {% if settings.logo_position_desktop == 'center' %}text-center{% endif %}">
             {% snipplet "navigation/navigation.tpl" %}
         </div>
     {% endif %}
