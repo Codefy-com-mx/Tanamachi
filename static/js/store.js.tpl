@@ -213,19 +213,52 @@ DOMContentLoaded.addEventOrExecute(() => {
             {# Clean quickshop modal #}
 
             jQueryNuvem("#quickshop-modal .js-item-product").removeClass("js-swiper-slide-visible js-item-slide");
-            jQueryNuvem("#quickshop-modal .js-quickshop-container").attr( { 'data-variants' : '' , 'data-quickshop-id': '' } );
-            jQueryNuvem("#quickshop-modal .js-item-product").attr('data-product-id', '');
+            jQueryNuvem("#quickshop-modal .js-quickshop-container").attr( { 'data-variants' : '' , 'data-quickshop-id': '' } ).removeData('variants').removeData('quickshop-id');
+            jQueryNuvem("#quickshop-modal .js-item-product").attr('data-product-id', '').removeData('product-id');
 
             {# Wait for modal to become invisible before removing form #}
             
             setTimeout(function(){
                 var $quickshop_form = jQueryNuvem("#quickshop-form").find('.js-product-form');
-                var $item_form_container = jQueryNuvem(".js-quickshop-opened").find(".js-item-variants");
+                var $item_form_container = jQueryNuvem(".js-my-opened").length > 0 
+                    ? jQueryNuvem(".js-my-opened").find(".js-item-variants") 
+                    : jQueryNuvem(".js-quickshop-opened").find(".js-item-variants");
                 
-                $quickshop_form.detach().appendTo($item_form_container);
+                if ($item_form_container.length > 0 && $quickshop_form.length > 0) {
+                    $quickshop_form.detach().appendTo($item_form_container);
+                } else if ($quickshop_form.length > 0) {
+                    $quickshop_form.detach();
+                }
+
                 jQueryNuvem(".js-quickshop-opened").removeClass("js-quickshop-opened");
+                jQueryNuvem(".js-my-opened").removeClass("js-my-opened");
                 jQueryNuvem("#quickshop-modal .js-quickshop-img").attr('srcset', '');
             },350);
+
+        };
+
+        {# Version sincronica: mueve el formulario inmediatamente, sin esperar animacion del modal #}
+        {# Se usa en el callback de exito del carrito para evitar conflictos entre Quick Shops consecutivos #}
+        restoreQuickshopFormSync = function(){
+
+            jQueryNuvem("#quickshop-modal .js-item-product").removeClass("js-swiper-slide-visible js-item-slide");
+            jQueryNuvem("#quickshop-modal .js-quickshop-container").attr( { 'data-variants' : '' , 'data-quickshop-id': '' } ).removeData('variants').removeData('quickshop-id');
+            jQueryNuvem("#quickshop-modal .js-item-product").attr('data-product-id', '').removeData('product-id');
+
+            var $quickshop_form = jQueryNuvem("#quickshop-form").find('.js-product-form');
+            var $item_form_container = jQueryNuvem(".js-my-opened").length > 0 
+                ? jQueryNuvem(".js-my-opened").find(".js-item-variants") 
+                : jQueryNuvem(".js-quickshop-opened").find(".js-item-variants");
+            
+            if ($item_form_container.length > 0 && $quickshop_form.length > 0) {
+                $quickshop_form.detach().appendTo($item_form_container);
+            } else if ($quickshop_form.length > 0) {
+                $quickshop_form.detach(); {# Si no encontramos el contenedor, al menos lo quitamos del modal #}
+            }
+
+            jQueryNuvem(".js-quickshop-opened").removeClass("js-quickshop-opened");
+            jQueryNuvem(".js-my-opened").removeClass("js-my-opened");
+            jQueryNuvem("#quickshop-modal .js-quickshop-img").attr('srcset', '');
 
         };
 
@@ -2107,6 +2140,22 @@ DOMContentLoaded.addEventOrExecute(() => {
         jQueryNuvem(document).on("click", ".js-quickshop-modal-open", function (e) {
             e.preventDefault();
             var $this = jQueryNuvem(this);
+
+            {# Pre-limpieza con seguimiento robusto: devolvemos form residual #}
+            var $leftover_form = jQueryNuvem("#quickshop-form").find('.js-product-form');
+            var $leftover_container = jQueryNuvem(".js-my-opened").length > 0 ? jQueryNuvem(".js-my-opened") : jQueryNuvem(".js-quickshop-opened");
+            if ($leftover_form.length > 0) {
+                if ($leftover_container.length > 0) {
+                    $leftover_form.detach().appendTo($leftover_container.find(".js-item-variants"));
+                } else {
+                    $leftover_form.detach();
+                }
+                $leftover_container.removeClass("js-quickshop-opened js-my-opened");
+            }
+
+            {# Marcamos el contenedor actual de forma explicita #}
+            $this.closest('.js-product-container').addClass("js-my-opened");
+
             if($this.hasClass("js-quickshop-slide")){
                 jQueryNuvem("#quickshop-modal .js-item-product").addClass("js-swiper-slide-visible js-item-slide");
             }
@@ -2119,6 +2168,7 @@ DOMContentLoaded.addEventOrExecute(() => {
             {% endif %}
 
             LS.fillQuickshop($this);
+
 
             {# Image dimensions #}
 
@@ -3005,16 +3055,10 @@ DOMContentLoaded.addEventOrExecute(() => {
 
             {# Hide real button and show button placeholder during event #}
 
-            {# Comentamos el hide para evitar que el botón desaparezca #}
-            {# $productButton.hide(); #}
-            {# Forzamos visibilidad absoluta para evitar ocultamientos automáticos del tema #}
-            $productButton.attr('style', 'display: block !important; opacity: 1 !important; visibility: visible !important;');
-            {# $quickshopBagIcon.hide(); #}
-            {# if (isQuickShop) {
-                $productButtonContainer.hide();
-            } #}
+            $productButton.hide();
+            $quickshopBagIcon.hide();
             if (isQuickShop) {
-                $productButtonContainer.attr('style', 'display: block !important; opacity: 1 !important; visibility: visible !important;');
+                $productButtonContainer.hide();
             }
             $productButtonPlaceholder.css('display' , 'block');
             $productButtonText.fadeOut();
@@ -3116,11 +3160,14 @@ DOMContentLoaded.addEventOrExecute(() => {
                         jQueryNuvem("#quickshop-modal").removeClass('modal-show');
                         jQueryNuvem(".js-modal-overlay[data-modal-id='#quickshop-modal']").hide();
                         jQueryNuvem("body").removeClass("overflow-none");
-                        restoreQuickshopForm();
+                        {# Restauracion sincronica: el formulario se mueve de inmediato para evitar #}
+                        {# que el siguiente Quick Shop encuentre el DOM en estado inconsistente #}
+                        restoreQuickshopFormSync();
                         if (window.innerWidth < 768) {
                             cleanURLHash();
                         }
                     }
+
 
                     let notificationWithRelatedProducts = false;
 

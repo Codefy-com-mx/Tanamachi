@@ -43,51 +43,30 @@
 
 {# Set related products classes #}
 
-{% set section_class = 'section-products-related position-relative ' %}
+{% set section_class = 'section-products-related section-featured-home position-relative ' %}
 {% set alternative_section_class = complementary_products ? 'pb-2 pb-md-4' %}
-{% set container_class = 'container px-0 px-md-4' %}
-{% set title_class = 'h3 section-title mb-4 text-center' %}
-{% set slider_container_class = 'swiper-container' %}
-{% set swiper_wrapper_class = 'swiper-wrapper' %}
-{% set slider_controls_container_class = 'text-center' %}
-{% set slider_control_class = 'icon-inline icon-lg' %}
-{% set slider_control_prev_class = 'swiper-button-prev' %}
-{% set slider_control_next_class = 'swiper-button-next' %}
-{% set control_next_svg_id = 'arrow-long' %}
-{% set control_prev_svg_id = 'arrow-long' %}
 
 {# Alternative products #}
 
 {% set alternative_data_component = source_alternative == 'default' ? 'related-products' : 'alternative-products' %}
 
 {% if alternative_products %}
-    {{ component(
-        'products-section',{
-            title: settings.products_related_title,
-            id: 'related-products',
-            data_component: alternative_data_component,
-            products_amount: related_products | length,
-            products_array: related_products,
-            product_template_path: 'snipplets/grid/item.tpl',
-            product_template_params: {'slide_item': true},
-            slider_controls_position: 'bottom',
-            slider_controls_container: true,
-            section_classes: {
-                section: 'js-related-products ' ~ section_class ~ alternative_section_class,
-                container: container_class,
-                title: title_class,
-                slider_container: 'js-swiper-related ' ~ slider_container_class,
-                slider_wrapper: swiper_wrapper_class,
-                slider_controls_container: slider_controls_container_class,
-                slider_control: slider_control_class,
-                slider_control_prev_container: 'js-swiper-related-prev ' ~ slider_control_prev_class,
-                slider_control_prev: 'icon-flip-horizontal',
-                slider_control_next_container: 'js-swiper-related-next ' ~ slider_control_next_class,
-            },
-            control_next_svg_id: control_next_svg_id,
-            control_prev_svg_id: control_prev_svg_id,
-        }) 
-    }}
+    <section class="js-related-products {{ section_class }} {{ alternative_section_class }}" data-store="related-products" data-component="{{ alternative_data_component }}">
+        <div class="js-products-related-container container-fluid px-0">
+            <div class="row no-gutters">
+                <div class="col-12 px-3">
+                    <h2 class="js-products-related-title h3 section-title mb-4 pb-2 text-center">{{ settings.products_related_title }}</h2>
+                </div>
+                <div class="col-12">
+                    <div class="js-products-related-grid row row-grid no-gutters" data-desktop-columns="3" data-mobile-columns="2">
+                        {% for product in related_products %}
+                            {% include 'snipplets/grid/item.tpl' with {'item_overlay': true, 'section_columns_desktop': 3, 'section_columns_mobile': 2} %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endif %}
 
 {# Complementary products #}
@@ -95,31 +74,20 @@
 {% set complementary_section_id = 'complementary-products' %}
 
 {% if complementary_products %}
-    {{ component(
-        'products-section',{
-            title: settings.products_complementary_title,
-            id: complementary_section_id,
-            data_component: complementary_section_id,
-            products_amount: complementary_product_list | length,
-            products_array: complementary_product_list,
-            product_template_path: 'snipplets/grid/item.tpl',
-            product_template_params: {'slide_item': true},
-            slider_controls_position: 'bottom',
-            slider_controls_container: true,
-            section_classes: {
-                section: 'js-complementary-products ' ~ section_class,
-                container: container_class,
-                title: title_class,
-                slider_container: 'js-swiper-complementary ' ~ slider_container_class,
-                slider_wrapper: swiper_wrapper_class,
-                slider_controls_container: slider_controls_container_class,
-                slider_control: slider_control_class,
-                slider_control_prev_container: 'js-swiper-complementary-prev ' ~ slider_control_prev_class,
-                slider_control_prev: 'icon-flip-horizontal',
-                slider_control_next_container: 'js-swiper-complementary-next ' ~ slider_control_next_class,
-            },
-            control_next_svg_id: control_next_svg_id,
-            control_prev_svg_id: control_prev_svg_id,
-        }) 
-    }}
+    <section class="js-complementary-products {{ section_class }}" data-store="complementary-products" data-component="{{ complementary_section_id }}">
+        <div class="js-products-complementary-container container-fluid px-0">
+            <div class="row no-gutters">
+                <div class="col-12 px-3">
+                    <h2 class="js-products-complementary-title h3 section-title mb-4 pb-2 text-center">{{ settings.products_complementary_title }}</h2>
+                </div>
+                <div class="col-12">
+                    <div class="js-products-complementary-grid row row-grid no-gutters" data-desktop-columns="3" data-mobile-columns="2">
+                        {% for product in complementary_product_list %}
+                            {% include 'snipplets/grid/item.tpl' with {'item_overlay': true, 'section_columns_desktop': 3, 'section_columns_mobile': 2} %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endif %}

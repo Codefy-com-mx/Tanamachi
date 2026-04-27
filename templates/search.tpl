@@ -23,7 +23,7 @@
 <section class="js-category-controls-prev category-controls-sticky-detector"></section>
 
 <section class="category-body overflow-none">
-	<div class="container {% if search_filter and products %}mt-4{% endif %} mb-5">
+	<div class="container-fluid px-0 {% if search_filter and products %}mt-4{% endif %} mb-5">
 		{% include 'snipplets/grid/product-list.tpl' %}
 	</div>
 </section>

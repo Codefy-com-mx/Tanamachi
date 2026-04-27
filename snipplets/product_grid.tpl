@@ -6,5 +6,5 @@
     {% if loop.index in [1, 2] %}
         {% set image_priority_high_value = true %}
     {% endif %}
-    {% include 'snipplets/grid/item.tpl' with {image_priority_high: image_priority_high_value} %}
+    {% include 'snipplets/grid/item.tpl' with {image_priority_high: image_priority_high_value, item_overlay: true} %}
 {% endfor %}

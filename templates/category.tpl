@@ -29,7 +29,7 @@
 <section class="js-category-controls-prev category-controls-sticky-detector"></section>
 
 <section class="category-body" data-store="category-grid-{{ category.id }}">
-	<div class="container mt-4 mb-5">
+	<div class="container-fluid px-0 mt-4 mb-5">
 		<div data-store="category-grid-{{ category.id }}">
 			{% include 'snipplets/grid/product-list.tpl' %}
 		</div>

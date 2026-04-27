@@ -4816,6 +4816,53 @@ p {
   }
 }
 
+/* Estilos estéticos para los elementos de compra en el Quick Shop */
+#quickshop-modal .btn-add-to-cart,
+.modal-body .btn-add-to-cart,
+.js-quickshop-container .btn-add-to-cart,
+#quickshop-modal .js-addtocart-placeholder,
+.modal-body .js-addtocart-placeholder {
+  background: #4a5e78 !important;
+  border: none !important;
+  color: #fff !important;
+  padding: 10px 10px !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  border-radius: 25px !important;
+  width: 100% !important;
+  height: auto !important;
+  line-height: 1.2 !important;
+  transition: all 0.3s ease !important;
+  margin: 10px 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Permitir que el JS maneje la visibilidad sin interferencias de display: block forzado */
+.js-addtocart-placeholder[style*="display: none"],
+.btn-add-to-cart[style*="display: none"] {
+  display: none !important;
+}
+
+/* Asegurar que el texto sea blanco en todos los estados */
+.js-addtocart-placeholder .js-addtocart-text,
+.js-addtocart-placeholder .js-addtocart-success,
+.js-addtocart-placeholder .js-addtocart-adding {
+  color: #fff !important;
+}
+
+
+#quickshop-modal .btn-add-to-cart:hover,
+.modal-body .btn-add-to-cart:hover,
+.js-addtocart-placeholder:hover {
+  background: #36485e !important;
+  opacity: 0.9 !important;
+}
+
+
+
 .section-featured-home .btn-view-more {
   display: inline-block;
   font-size: 1.2rem;
