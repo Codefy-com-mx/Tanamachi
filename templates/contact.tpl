@@ -1,4 +1,4 @@
-{% embed "snipplets/page-header.tpl" with {show_breadcrumbs: false, page_header_text_alignment: 'text-left', page_header_title_class: 'text-35px mb-0 font-weight-bold'} %}
+{% embed "snipplets/page-header.tpl" %}
 	{% if is_order_cancellation %}
 		{% set form_title = "Pedí la cancelación de tu última compra" | translate %}
 	{% else %}
@@ -12,9 +12,9 @@
 <section class="contact-page visible-when-content-ready mb-4">
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-md-8">
+			<div class="col-md-6">
 				{% if has_contact_info and not is_order_cancellation %}
-					<div class="mb-5 text-center">
+					<div class="text-center">
 						{% if store.contact_intro %}
 							<p class="mb-3">{{ store.contact_intro }}</p>
 						{% endif %}
@@ -22,14 +22,14 @@
 					</div>
 				{% endif %}
 				{% if is_order_cancellation %}
-					<div>
-						<div class="mb-4">
+					<div class="text-center">
+						<div class="text-center mb-4">
 							<p data-component="order-cancellation-disclaimer">{{ "Si te arrepentiste, podés pedir la cancelación enviando este formulario. Tenés como máximo hasta 10 días corridos desde que recibiste el producto." | translate }} </p>
 							<a class="btn-link" href="{{ status_page_url_regret }}"><strong>{{'Ver detalle de la compra >' | translate}}</strong></a>
 						</div>
 						{% if has_contact_info %}
 							<h5 class="mb-1 mt-4">{{ 'Si tenés problemas con otra compra, contactanos:' | translate }}</h5>
-		            		<div class="divider mt-0 ml-0"></div>
+		            		<div class="divider mt-0"></div>
 							{% if store.contact_intro %}
 								<p class="mb-4">{{ store.contact_intro }}</p>
 							{% endif %}
@@ -68,7 +68,7 @@
 					<p class="mb-3" data-component="order-cancellation-disclaimer">{{ "Si te arrepentiste de una compra, podés pedir la cancelación enviando este formulario <strong>con tu número de orden.</strong> Tenés como máximo hasta 10 días corridos desde que recibiste el producto." | translate }}</p>
 				{% endif %}
 				
-				{% embed "snipplets/forms/form.tpl" with{form_id: 'contact-form', form_custom_class: 'js-winnie-pooh-form', submit_custom_class: 'px-5', submit_name: 'contact', submit_text: 'Enviar' | translate, data_store: 'contact-form' }  %}
+				{% embed "snipplets/forms/form.tpl" with{form_id: 'contact-form', form_custom_class: 'js-winnie-pooh-form', form_action: '/winnie-pooh', submit_custom_class: 'btn-block', submit_name: 'contact', submit_text: 'Enviar' | translate, data_store: 'contact-form' }  %}
 					{% block form_body %}
 
 						{# Hidden inputs used to send attributes #}
@@ -85,20 +85,15 @@
 							<input type="hidden" name="type" value="contact" />
 						{% endif %}
 
-						<div class="form-row">
-							<div class="col-md-6">
-								{# Name input #}
+						{# Name input #}
 
-								{% embed "snipplets/forms/form-input.tpl" with{input_for: 'name', type_text: true, input_name: 'name', input_id: 'name', input_label_text: 'Nombre' | translate, input_placeholder: 'ej.: María Perez' | translate } %}
-								{% endembed %}
-							</div>
-							<div class="col-md-6">
-								{# Email input #}
+						{% embed "snipplets/forms/form-input.tpl" with{input_for: 'name', type_text: true, input_name: 'name', input_id: 'name', input_label_text: 'Nombre' | translate, input_placeholder: 'ej.: María Perez' | translate } %}
+						{% endembed %}
 
-								{% embed "snipplets/forms/form-input.tpl" with{input_for: 'email', type_email: true, input_name: 'email', input_id: 'email', input_label_text: 'Email' | translate, input_placeholder: 'ej.: tuemail@email.com' | translate } %}
-								{% endembed %}
-							</div>
-						</div>
+						{# Email input #}
+
+						{% embed "snipplets/forms/form-input.tpl" with{input_for: 'email', type_email: true, input_name: 'email', input_id: 'email', input_label_text: 'Email' | translate, input_placeholder: 'ej.: tuemail@email.com' | translate } %}
+						{% endembed %}
 
 						{% if not is_order_cancellation %}
 

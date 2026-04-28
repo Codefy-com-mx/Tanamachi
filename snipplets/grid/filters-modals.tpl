@@ -4,7 +4,7 @@
 {% set show_filters = products or has_filters_available %}
 
 {% if show_filters and (category_page or search_page_filters) %}
-	<section class="js-category-controls category-controls visible-when-content-ready {% if show_filter_button is defined and not show_filter_button %}d-none{% endif %}">
+	<section class="js-category-controls category-controls visible-when-content-ready">
 		<div class="container category-controls-container text-center">
 			{% if products %}
 				<a href="#" class="js-modal-open btn-link" data-toggle="#nav-filters" data-component="filter-button">
