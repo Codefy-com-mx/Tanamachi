@@ -3,17 +3,17 @@
 
     <div class="{% if settings.luxury_gallery %}container-fluid p-0{% else %}container mt-4 mt-md-0 mb-3 pt-md-1{% endif %} {% if description_content and settings.full_width_description %}mb-md-0{% endif %}">
         <div class="row no-gutters">
-            <div class="col-12 {% if settings.luxury_gallery %}col-md-6 luxury-info-col{% else %}col-md-5{% endif %} order-md-1" data-store="product-info-{{ product.id }}">
-                {% include 'snipplets/product/product-form.tpl' %}
-                {% if not settings.full_width_description and not settings.luxury_gallery %}
-                    {% include 'snipplets/product/product-description.tpl' %}
-                {% endif %}
-            </div>
-            <div class="col-12 {% if settings.luxury_gallery %}col-md-6 luxury-gallery-col{% else %}col-md-7{% endif %} pb-3 pr-md-2 order-md-2">
+            <div class="{% if settings.luxury_gallery %}col-md-6 luxury-gallery-col{% else %}col-md-7{% endif %} pb-3 pr-md-2">
                 {% if settings.luxury_gallery %}
                     {% include 'snipplets/product/product-image-luxury.tpl' %}
                 {% else %}
                     {% include 'snipplets/product/product-image.tpl' %}
+                {% endif %}
+            </div>
+            <div class="col {% if settings.luxury_gallery %}col-md-6 luxury-info-col{% endif %}" data-store="product-info-{{ product.id }}">
+                {% include 'snipplets/product/product-form.tpl' %}
+                {% if not settings.full_width_description and not settings.luxury_gallery %}
+                    {% include 'snipplets/product/product-description.tpl' %}
                 {% endif %}
             </div>
         </div>

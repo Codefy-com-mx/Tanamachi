@@ -4813,111 +4813,32 @@ p {
   .section-featured-home .btn-overlay-buy {
     padding: 10px 15px;
     font-size: 1rem;
-    margin: 10px auto !important;
-    width: calc(100% - 20px) !important;
-    display: block !important;
+    margin-bottom: 0px;
   }
 }
 
-/* Orden de columnas en PDP: Texto izq, Imágenes der en desktop */
-@media (min-width: 768px) {
-  #single-product .row.no-gutters {
-    display: flex !important;
-  }
-
-  #single-product .row.no-gutters>[data-store^="product-info"] {
-    order: 1 !important;
-  }
-
-  #single-product .row.no-gutters>[data-store^="product-image"],
-  #single-product .row.no-gutters>div:not([data-store^="product-info"]) {
-    order: 2 !important;
-  }
-}
-
-/* Estilo general para botones (PDP, Carrito, Checkout, etc.) */
-.btn-primary,
-.btn-add-to-cart,
-.js-addtocart,
-.js-prod-submit-form,
-.js-addtocart-placeholder,
-#go-to-checkout,
-.js-go-to-checkout,
-.btn-checkout,
-input[type="submit"].btn-primary {
-  background-color: #000 !important;
-  border: 1px solid #000 !important;
+/* Estilos estéticos para los elementos de compra en el Quick Shop */
+#quickshop-modal .btn-add-to-cart,
+.modal-body .btn-add-to-cart,
+.js-quickshop-container .btn-add-to-cart,
+#quickshop-modal .js-addtocart-placeholder,
+.modal-body .js-addtocart-placeholder {
+  background: #4a5e78 !important;
+  border: none !important;
   color: #fff !important;
-  padding: 12px 20px !important;
+  padding: 10px 10px !important;
   font-size: 1rem !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
   border-radius: 25px !important;
+  width: 100% !important;
+  height: auto !important;
+  line-height: 1.2 !important;
   transition: all 0.3s ease !important;
-  display: block;
-  width: 100%;
+  margin: 10px 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
   text-align: center;
-}
-
-/* EXCEPCIONES: Destacados, Relacionados y Colecciones */
-.section-featured-home .btn-primary,
-.section-featured-home .btn-add-to-cart,
-.section-featured-home .btn-overlay-buy,
-.section-products-related .btn-primary,
-.section-products-related .btn-add-to-cart,
-.template-collection .btn-primary,
-.template-collection .btn-add-to-cart {
-  background-color: transparent !important;
-  border: 1px solid #fff !important;
-  color: #fff !important;
-  padding: 40px 15px !important;
-  border-radius: 25 !important;
-  text-transform: none !important;
-}
-
-.section-featured-home .btn-overlay-buy:hover,
-.section-products-related .btn-primary:hover,
-.template-collection .btn-primary:hover {
-  background-color: #fff !important;
-  color: #000 !important;
-}
-
-/* Ajuste de tamaño para móvil solamente en secciones exceptuadas */
-@media (max-width: 767px) {
-
-  .section-featured-home .btn-primary,
-  .section-featured-home .btn-add-to-cart,
-  .section-featured-home .btn-overlay-buy,
-  .section-products-related .btn-primary,
-  .section-products-related .btn-add-to-cart,
-  .template-collection .btn-primary,
-  .template-collection .btn-add-to-cart {
-    padding: 10px 15px !important;
-  }
-}
-
-/* Quick Shop Modal */
-#quickshop-modal .btn-add-to-cart,
-.modal-body .btn-add-to-cart,
-.js-quickshop-container .btn-add-to-cart {
-  background: #000 !important;
-  border: none !important;
-  color: #fff !important;
-  border-radius: 25px !important;
-}
-
-/* Solución para sincronización de carrito vacío */
-.js-ajax-cart-list:not(:empty)+.js-empty-ajax-cart {
-  display: none !important;
-}
-
-/* Forzar visibilidad de totales y botón de compra cuando hay productos */
-.js-ajax-cart-list:not(:empty)~.cart-row .js-visible-on-cart-filled {
-  display: block !important;
-}
-
-.js-ajax-cart-list:not(:empty)~.cart-row .js-visible-on-cart-filled.row {
-  display: flex !important;
 }
 
 /* Permitir que el JS maneje la visibilidad sin interferencias de display: block forzado */
@@ -4939,35 +4860,6 @@ input[type="submit"].btn-primary {
 .js-addtocart-placeholder:hover {
   background: #36485e !important;
   opacity: 0.9 !important;
-}
-
-/* Estilo para botones de variantes (Talles, Colores, etc.) */
-.btn-variant {
-  border-radius: 25px !important;
-  background-color: #fff !important;
-  border: 1px solid #ddd !important;
-  color: #000 !important;
-  padding: 8px 15px !important;
-  min-width: 55px;
-  height: 45px;
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  margin-right: 8px;
-  margin-bottom: 8px;
-  transition: all 0.2s ease;
-  pointer-events: auto !important;
-}
-
-.btn-variant.selected {
-  background-color: #000 !important;
-  color: #fff !important;
-  border-color: #000 !important;
-}
-
-.btn-variant:hover:not(.selected) {
-  border-color: #000 !important;
 }
 
 
