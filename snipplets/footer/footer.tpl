@@ -133,13 +133,10 @@
 			<div class="col-12 font-smallest opacity-50">
 				<div class="row">
 					<div class="col-md-6 text-left">
-						<div class="mb-2">
+						<div class="d-inline-block mr-3">
 							{{ new_powered_by_link }}
 						</div>
-						<div class="mb-2">
-							<a href="https://www.codefy.com.mx/" target="_blank" class="btn-link font-smallest">Desarrollado por Codefy</a>
-						</div>
-						<div>
+						<div class="d-inline-block">
 							{{ "Copyright {1} - {2}. Todos los derechos reservados." | translate( (store.business_name ? store.business_name : store.name) ~ (store.business_id ? ' - ' ~ store.business_id : ''), "now" | date('Y') ) }}
 						</div>
 					</div>

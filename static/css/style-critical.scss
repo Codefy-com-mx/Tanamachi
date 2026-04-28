@@ -4786,14 +4786,12 @@ p {
     display: none !important;
   }
 
-  .section-featured-home .item-overlay-top {
-    padding: 15px;
-    /* Más arriba */
+  .section-featured-home .item-overlay {
+    padding: 0px;
   }
 
   .section-featured-home .item-overlay-name {
-    font-size: 0.95rem;
-    /* Más pequeño */
+    font-size: 1.1rem;
   }
 
   .section-featured-home .js-item-product:hover .item-overlay-name {
@@ -5362,15 +5360,12 @@ input[type="submit"].btn-primary {
 .js-banners-promotional-title,
 .js-banners-promotional-mobile-title {
   color: var(--banner-promotional-title-color) !important;
-  font-size: 12vw !important;
-  /* Tamaño fluido en móvil */
+  font-size: 5rem !important;
   font-weight: 800 !important;
-  line-height: 1 !important;
-  letter-spacing: -1px !important;
-  white-space: normal !important;
-  /* Permitir salto de línea para evitar que se corte */
+  line-height: 0.9 !important;
+  letter-spacing: -3px !important;
+  white-space: nowrap !important;
   font-family: 'Public Sans', sans-serif !important;
-  text-align: center;
 }
 
 @media (min-width: 768px) {
@@ -5415,8 +5410,7 @@ input[type="submit"].btn-primary {
 
 .textbanner-image {
   position: relative;
-  padding-top: 80%;
-  /* Más alto en móvil para que quepa el texto */
+  padding-top: 60%;
 
   @media (min-width: 768px) {
     padding-top: 0;
@@ -8218,53 +8212,6 @@ input[type="submit"].btn-primary {
   left: 0;
   width: 100%;
   z-index: 9999;
-}
-
-/* Estabilización del logo para evitar saltos al hacer scroll */
-.head-logo-row,
-.js-head-logo-row {
-  margin: 0 auto !important;
-  padding: 10px 50px !important;
-  /* Espacio lateral generoso en desktop */
-  transition: none !important;
-}
-
-@media (max-width: 767px) {
-
-  .head-logo-row,
-  .js-head-logo-row {
-    padding: 10px 20px !important;
-    /* Espacio lateral adecuado en móvil */
-  }
-}
-
-.logo-img,
-.logo-img-big,
-.logo-img-medium,
-.logo-img-small {
-  transition: none !important;
-  max-height: 120px !important;
-  /* Ajustado para que el logo sea grande y fijo */
-}
-
-@media (max-width: 767px) {
-
-  .logo-img,
-  .logo-img-big,
-  .logo-img-medium,
-  .logo-img-small {
-    max-height: 80px !important;
-    /* Tamaño móvil fijo */
-  }
-
-  /* Espaciado para iconos de móvil (Hamburguesa y Carrito) */
-  .head-logo-row .col-utility:first-child {
-    padding-left: 15px !important;
-  }
-
-  .head-logo-row .col-utility:last-child {
-    padding-right: 15px !important;
-  }
 }
 
 /* Push content on non-home pages to avoid collision with absolute header */
