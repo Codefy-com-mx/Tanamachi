@@ -14,18 +14,34 @@
 {% set category_banner = (category.images is not empty) or ("banner-products.jpg" | has_custom_image) %}
 
 <div class="container">
-	{% embed "snipplets/page-header.tpl" with {container: false} %}
-	    {% block page_header_text %}{{ category.name }}{% endblock page_header_text %}
-	{% endembed %}
+	<div class="d-flex flex-wrap align-items-baseline mb-2">
+		<div class="mr-3">
+			{% embed "snipplets/page-header.tpl" with {container: false, padding: false, show_breadcrumbs: false, page_header_text_alignment: 'text-left', page_header_title_class: 'text-35px mb-0 font-weight-bold'} %}
+				{% block page_header_text %}{{ category.name }}{% endblock page_header_text %}
+			{% endembed %}
+		</div>
+		<div class="mt-2">
+			{% if products %}
+				<a href="#" class="js-modal-open btn-link text-35px font-weight-bold" data-toggle="#nav-filters" data-component="filter-button">
+					{% if has_filters_available %}
+						{{ "Filtrar" | translate }}
+					{% else %}
+						{{ "Ordenar" | translate }}
+					{% endif %}
+				</a>
+			{% endif %}
+		</div>
+	</div>
 	{% if category_banner %}
 	    {% include 'snipplets/category-banner.tpl' %}
 	{% endif %}
 	{% if category.description %}
-		<p class="mt-2 mb-4 text-center">{{ category.description }}</p>
+		<p class="mt-2 mb-4 text-left">{{ category.description }}</p>
 	{% endif %}
 </div>
 
-{% include 'snipplets/grid/filters-modals.tpl' %}
+{# Modals for filters #}
+{% include 'snipplets/grid/filters-modals.tpl' with {show_filter_button: false} %}
 <section class="js-category-controls-prev category-controls-sticky-detector"></section>
 
 <section class="category-body" data-store="category-grid-{{ category.id }}">

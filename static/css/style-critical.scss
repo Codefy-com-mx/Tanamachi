@@ -4835,6 +4835,63 @@ p {
   }
 }
 
+/* Diseño moderno para el formulario de contacto */
+.contact-page .form-control {
+  border-radius: 25px !important;
+  border: 1px solid #e1e1e1 !important;
+  padding: 12px 20px !important;
+  height: auto !important;
+  background-color: #fafafa !important;
+  font-size: 1rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.contact-page .form-control:focus {
+  border-color: #000 !important;
+  background-color: #fff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+}
+
+.contact-page .form-label {
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 1px !important;
+  margin-left: 15px !important;
+  margin-bottom: 8px !important;
+  display: block !important;
+}
+
+/* Solución definitiva para el scroll lateral */
+html,
+body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  position: relative !important;
+}
+
+.container,
+.container-fluid {
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Utilidad para tamaño de texto específico de 35px */
+.text-35px {
+  font-size: 35px !important;
+  line-height: 1.2 !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+  max-width: 100% !important;
+}
+
+@media (max-width: 767px) {
+  .text-35px {
+    font-size: 28px !important;
+  }
+}
+
 /* Estilo general para botones (PDP, Carrito, Checkout, etc.) */
 .btn-primary,
 .btn-add-to-cart,
