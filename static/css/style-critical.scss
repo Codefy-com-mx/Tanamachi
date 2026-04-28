@@ -321,8 +321,7 @@ html {
 .col-12 {
   -ms-flex: 0 0 100%;
   flex: 0 0 100%;
-  max-width: 100%;
-  padding-bottom: 15px
+  max-width: 100%
 }
 
 .order-first {
@@ -4787,7 +4786,7 @@ p {
   }
 
   .section-featured-home .item-overlay {
-    padding: 0px;
+    padding: 10px;
   }
 
   .section-featured-home .item-overlay-name {
@@ -5389,24 +5388,6 @@ p {
   position: relative;
   max-height: 1200px;
   overflow: hidden;
-}
-
-/* Degradado sutil para visibilidad de títulos */
-.item-product .item-image::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.12) 0%, transparent 35%, transparent 65%, rgba(0, 0, 0, 0.12) 100%);
-  pointer-events: none;
-  z-index: 2;
-  transition: opacity .3s ease;
-}
-
-.item-product:hover .item-image::after {
-  opacity: 0;
 }
 
 .item-image img {
@@ -6269,6 +6250,7 @@ p {
   margin: 3rem !important
 }
 
+.mt-5,
 .my-5 {
   margin-top: 3rem !important
 }
@@ -8070,58 +8052,4 @@ body:not(.template-home) {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-}
-
-/* Global Typography Override: Public Sans */
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6,
-p,
-a,
-span,
-div,
-button,
-input,
-select,
-textarea,
-label,
-li {
-  font-family: 'Public Sans', sans-serif !important;
-}
-
-/* Mobile Menu Spacing */
-@media (max-width: 767px) {
-
-  #nav-hamburger .modal-body,
-  .modal-nav-hamburger .modal-body,
-  .modal-nav-hamburger .nav-primary,
-  .modal-nav-hamburger .nav-list {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    display: block !important;
-  }
-
-  .modal-nav-hamburger .nav-item {
-    padding: 10px 0 !important;
-    margin: 0 !important;
-    display: block !important;
-    width: 100% !important;
-  }
-
-  .modal-nav-hamburger .nav-list-link {
-    display: inline-block !important;
-    max-width: 100% !important;
-  }
 }
