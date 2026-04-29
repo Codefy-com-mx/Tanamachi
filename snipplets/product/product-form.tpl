@@ -20,117 +20,118 @@
     {% set is_subscription_only_product = product.isSubscribable() and product.isSubscriptionOnly() %}
 
     {# Product price #}
-
-    <div class="price-container text-center text-md-left {% if home_main_product %}mb-3{% endif %}" data-store="product-price-{{ product.id }}">
-        {% if not is_subscription_only_product %}
-            {# Standard prices for normal products #}
-            <div class="js-price-container mb-4 mb-md-3">
-                <span class="d-inline-block d-flex justify-content-center justify-content-md-start align-items-baseline">
-                    <div class="js-price-display" id="price_display" {% if not product.display_price %}style="display:none;"{% endif %} data-product-price="{{ product.price }}">{% if product.display_price %}{{ product.price | money }}{% endif %}</div>
-                    <div class="price-mxn ml-2" {% if not product.display_price %}style="display:none;"{% endif %}>MXN</div>
-                </span>
-                <span class="d-inline-block">
-                   <div id="compare_price_display" class="js-compare-price-display price-compare" {% if not product.compare_at_price or not product.display_price %}style="display:none;"{% else %} style="display:block;"{% endif %}>{% if product.compare_at_price and product.display_price %}{{ product.compare_at_price | money }}{% endif %}</div>
-                </span>
-                {{ component('price-discount-disclaimer', {
-                    container_classes: 'font-smallest opacity-60 mt-2 mb-2',
-                }) }}
-                {{ component('price-without-taxes', {
-                        container_classes: "mt-1 mb-2 font-smallest opacity-60",
-                    })
-                }}
-                {{ component('payment-discount-price', {
-                        visibility_condition: settings.payment_discount_price,
-                        location: 'product',
-                        container_classes: "text-accent font-small mt-2",
-                    })
-                }}
-            </div>
-        {% endif %}
-
-        {{ component('subscriptions/subscription-price', {
-            location: is_subscription_only_product ? 'product_detail',
-            subscription_classes: {
-                container: 'mb-3',
-                prices_container: 'd-flex justify-content-center justify-content-md-start align-items-center mb-1',
-                price_compare: 'price-compare',
-                price_with_subscription: 'order-first',
-                discount_container: 'text-accent font-small mt-2',
-                price_without_taxes_container: 'my-2 font-smallest opacity-60',
-            },
-        }) }}
-
-        {% set installments_info = product.installments_info_from_any_variant %}
-        {% set hasDiscount = product.maxPaymentDiscount.value > 0 %}
-        {% set show_payments_info = settings.product_detail_installments and product.show_installments and product.display_price and installments_info %}
-
-        {% if not home_main_product and (show_payments_info or hasDiscount) %}
-            <div {% if installments_info %}data-toggle="#installments-modal" data-modal-url="modal-fullscreen-payments"{% endif %} class="{% if installments_info %}js-modal-open js-fullscreen-modal-open{% endif %} js-product-payments-container mb-3" {% if not product.display_price or not (product.get_max_installments and product.get_max_installments(false)) %}style="display: none;"{% endif %}>
-        {% endif %}
-            {% if show_payments_info %}
-                {{ component('installments', {'location' : 'product_detail', container_classes: { installment: "mb-2 font-small"}}) }}
+    {% if not home_main_product %}
+        <div class="price-container text-center text-md-left {% if home_main_product %}mb-3{% endif %}" data-store="product-price-{{ product.id }}">
+            {% if not is_subscription_only_product %}
+                {# Standard prices for normal products #}
+                <div class="js-price-container mb-4 mb-md-3">
+                    <span class="d-inline-block d-flex justify-content-center justify-content-md-start align-items-baseline">
+                        <div class="js-price-display" id="price_display" {% if not product.display_price %}style="display:none;"{% endif %} data-product-price="{{ product.price }}">{% if product.display_price %}{{ product.price | money }}{% endif %}</div>
+                        <div class="price-mxn ml-2" {% if not product.display_price %}style="display:none;"{% endif %}>MXN</div>
+                    </span>
+                    <span class="d-inline-block">
+                    <div id="compare_price_display" class="js-compare-price-display price-compare" {% if not product.compare_at_price or not product.display_price %}style="display:none;"{% else %} style="display:block;"{% endif %}>{% if product.compare_at_price and product.display_price %}{{ product.compare_at_price | money }}{% endif %}</div>
+                    </span>
+                    {{ component('price-discount-disclaimer', {
+                        container_classes: 'font-smallest opacity-60 mt-2 mb-2',
+                    }) }}
+                    {{ component('price-without-taxes', {
+                            container_classes: "mt-1 mb-2 font-smallest opacity-60",
+                        })
+                    }}
+                    {{ component('payment-discount-price', {
+                            visibility_condition: settings.payment_discount_price,
+                            location: 'product',
+                            container_classes: "text-accent font-small mt-2",
+                        })
+                    }}
+                </div>
             {% endif %}
 
-            {% set hideDiscountContainer = not (hasDiscount and product.showMaxPaymentDiscount) %}
-            {% set hideDiscountDisclaimer = not product.showMaxPaymentDiscountNotCombinableDisclaimer %}
+            {{ component('subscriptions/subscription-price', {
+                location: is_subscription_only_product ? 'product_detail',
+                subscription_classes: {
+                    container: 'mb-3',
+                    prices_container: 'd-flex justify-content-center justify-content-md-start align-items-center mb-1',
+                    price_compare: 'price-compare',
+                    price_with_subscription: 'order-first',
+                    discount_container: 'text-accent font-small mt-2',
+                    price_without_taxes_container: 'my-2 font-smallest opacity-60',
+                },
+            }) }}
 
-            <div class="js-product-discount-container mb-2 font-small" {% if hideDiscountContainer %}style="display: none;"{% endif %}>
-                <span class="text-accent">{{ product.maxPaymentDiscount.value }}% {{'de descuento' | translate }}</span> {{'pagando con' | translate }} {{ product.maxPaymentDiscount.paymentProviderName }}
-                <div class="js-product-discount-disclaimer font-small opacity-60 mt-1" {% if hideDiscountDisclaimer %}style="display: none;"{% endif %}>
-                    {{ (product.showMaxPaymentDiscountCombinesWithSomeDiscounts
-                        ? "No acumulable con algunas promociones"
-                        : "No acumulable con otras promociones")
-                    | translate }}
-                </div>
-            </div>
-        {% if not home_main_product and (show_payments_info or hasDiscount) %}
-                <a id="btn-installments" class="btn-link no-underline font-small d-none" {% if not (product.get_max_installments and product.get_max_installments(false)) %}style="display: none;"{% endif %}>
-                  {% if not hasDiscount and not settings.product_detail_installments %}
-                    {{ "Ver medios de pago" | translate }}
-                  {% else %}
-                    {{ "Ver más detalles" | translate }}
-                  {% endif %}
-                </a>
-            </div>
-        {% endif %}
+            {% set installments_info = product.installments_info_from_any_variant %}
+            {% set hasDiscount = product.maxPaymentDiscount.value > 0 %}
+            {% set show_payments_info = settings.product_detail_installments and product.show_installments and product.display_price and installments_info %}
 
-        {# Product availability #}
-
-        {% set show_product_quantity = product.available and product.display_price %}
-
-        {# Free shipping minimum message #}
-        {% set has_free_shipping = cart.free_shipping.cart_has_free_shipping or cart.free_shipping.min_price_free_shipping.min_price %}
-        {% set has_product_free_shipping = product.free_shipping %}
-
-        {% if not product.is_non_shippable and show_product_quantity and (has_free_shipping or has_product_free_shipping) %}
-            <div class="js-free-shipping-minimum-message free-shipping-message font-small mt-2 mb-4">
-                <span class="text-accent">{{ "Envío gratis" | translate }}</span>
-                <span {% if has_product_free_shipping %}style="display: none;"{% else %}class="js-shipping-minimum-label"{% endif %}>
-                    {{ "superando los" | translate }} <span>{{ cart.free_shipping.min_price_free_shipping.min_price }}
-                </span>
-                </span>
-                {% if not has_product_free_shipping %}
-                    <div class="js-free-shipping-discount-not-combinable font-small opacity-60 mt-1">
-                        {{ "No acumulable con otras promociones" | translate }}
-                    </div>
+            {% if not home_main_product and (show_payments_info or hasDiscount) %}
+                <div {% if installments_info %}data-toggle="#installments-modal" data-modal-url="modal-fullscreen-payments"{% endif %} class="{% if installments_info %}js-modal-open js-fullscreen-modal-open{% endif %} js-product-payments-container mb-3" {% if not product.display_price or not (product.get_max_installments and product.get_max_installments(false)) %}style="display: none;"{% endif %}>
+            {% endif %}
+                {% if show_payments_info %}
+                    {{ component('installments', {'location' : 'product_detail', container_classes: { installment: "mb-2 font-small"}}) }}
                 {% endif %}
-            </div>
-        {% endif %}
-        
-        {# Product description #}
-        {% if not settings.full_width_description and not settings.luxury_gallery %}
-            <div class="product-description mb-4">
-                {% include 'snipplets/product/product-description.tpl' %}
-            </div>
-        {% endif %}
 
-        {# Product description for luxury mode #}
-        {% if settings.luxury_gallery %}
-            <div class="luxury-description mb-4">
-                {% include 'snipplets/product/product-description.tpl' %}
-            </div>
-        {% endif %}
-    </div>
+                {% set hideDiscountContainer = not (hasDiscount and product.showMaxPaymentDiscount) %}
+                {% set hideDiscountDisclaimer = not product.showMaxPaymentDiscountNotCombinableDisclaimer %}
+
+                <div class="js-product-discount-container mb-2 font-small" {% if hideDiscountContainer %}style="display: none;"{% endif %}>
+                    <span class="text-accent">{{ product.maxPaymentDiscount.value }}% {{'de descuento' | translate }}</span> {{'pagando con' | translate }} {{ product.maxPaymentDiscount.paymentProviderName }}
+                    <div class="js-product-discount-disclaimer font-small opacity-60 mt-1" {% if hideDiscountDisclaimer %}style="display: none;"{% endif %}>
+                        {{ (product.showMaxPaymentDiscountCombinesWithSomeDiscounts
+                            ? "No acumulable con algunas promociones"
+                            : "No acumulable con otras promociones")
+                        | translate }}
+                    </div>
+                </div>
+            {% if not home_main_product and (show_payments_info or hasDiscount) %}
+                    <a id="btn-installments" class="btn-link no-underline font-small d-none" {% if not (product.get_max_installments and product.get_max_installments(false)) %}style="display: none;"{% endif %}>
+                    {% if not hasDiscount and not settings.product_detail_installments %}
+                        {{ "Ver medios de pago" | translate }}
+                    {% else %}
+                        {{ "Ver más detalles" | translate }}
+                    {% endif %}
+                    </a>
+                </div>
+            {% endif %}
+
+            {# Product availability #}
+
+            {% set show_product_quantity = product.available and product.display_price %}
+
+            {# Free shipping minimum message #}
+            {% set has_free_shipping = cart.free_shipping.cart_has_free_shipping or cart.free_shipping.min_price_free_shipping.min_price %}
+            {% set has_product_free_shipping = product.free_shipping %}
+
+            {% if not product.is_non_shippable and show_product_quantity and (has_free_shipping or has_product_free_shipping) %}
+                <div class="js-free-shipping-minimum-message free-shipping-message font-small mt-2 mb-4">
+                    <span class="text-accent">{{ "Envío gratis" | translate }}</span>
+                    <span {% if has_product_free_shipping %}style="display: none;"{% else %}class="js-shipping-minimum-label"{% endif %}>
+                        {{ "superando los" | translate }} <span>{{ cart.free_shipping.min_price_free_shipping.min_price }}
+                    </span>
+                    </span>
+                    {% if not has_product_free_shipping %}
+                        <div class="js-free-shipping-discount-not-combinable font-small opacity-60 mt-1">
+                            {{ "No acumulable con otras promociones" | translate }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+            
+            {# Product description #}
+            {% if not settings.full_width_description and not settings.luxury_gallery %}
+                <div class="product-description mb-4">
+                    {% include 'snipplets/product/product-description.tpl' %}
+                </div>
+            {% endif %}
+
+            {# Product description for luxury mode #}
+            {% if settings.luxury_gallery %}
+                <div class="luxury-description mb-4">
+                    {% include 'snipplets/product/product-description.tpl' %}
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
 
     {{ component('promotions-details', {
         promotions_details_classes: {
@@ -157,6 +158,17 @@
         {% if template == "product" %}
             {% set show_size_guide = true %}
         {% endif %}
+        {% if home_main_product %}
+            <div class="price-container text-center text-md-left mb-4" data-store="product-price-{{ product.id }}">
+                <div class="js-price-container mb-2">
+                    <span class="d-inline-block d-flex justify-content-center justify-content-md-start align-items-baseline">
+                        <div class="js-price-display h2 font-weight-bold" id="price_display" data-product-price="{{ product.price }}">{{ product.price | money }}</div>
+                        <div class="price-mxn ml-2">MXN</div>
+                    </span>
+                </div>
+            </div>
+        {% endif %}
+
         {% if product.variations %}
             {% include "snipplets/product/product-variants.tpl" with {show_size_guide: show_size_guide} %}
         {% endif %}
