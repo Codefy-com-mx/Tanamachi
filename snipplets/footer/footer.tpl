@@ -132,12 +132,24 @@
 		<div class="row mt-5 pt-5 border-top-0">
 			<div class="col-12 font-smallest opacity-50">
 				<div class="row">
-					<div class="col-md-6 text-left">
-						<div class="d-inline-block mr-3">
-							{{ new_powered_by_link }}
-						</div>
-						<div class="d-inline-block">
-							{{ "Copyright {1} - {2}. Todos los derechos reservados." | translate( (store.business_name ? store.business_name : store.name) ~ (store.business_id ? ' - ' ~ store.business_id : ''), "now" | date('Y') ) }}
+					<div class="col-md-12 text-center text-md-left">
+						<div class="row align-items-center">
+							<div class="col-md-auto col-12 order-md-1 order-3 mt-3 mt-md-0">
+								<div class="font-smallest opacity-50">
+									{{ "Copyright {1} - {2}. Todos los derechos reservados." | translate( (store.business_name ? store.business_name : store.name) ~ (store.business_id ? ' - ' ~ store.business_id : ''), "now" | date('Y') ) }}
+								</div>
+							</div>
+							<div class="col-md-auto col-12 order-md-2 order-1 mb-2 mb-md-0">
+								<div class="d-inline-block align-middle">
+									{{ new_powered_by_link }}
+								</div>
+								<div class="d-none d-md-inline-block mx-2 opacity-50">|</div>
+							</div>
+							<div class="col-md-auto col-12 order-md-3 order-2">
+								<div class="d-inline-block align-middle font-smallest opacity-50">
+									Desarrollado por <a href="https://www.codefy.com.mx" target="_blank" class="btn-link font-weight-bold opacity-100" style="color: inherit; opacity: 1 !important;">Codefy</a>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="col-md-6 text-right">
