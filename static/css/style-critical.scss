@@ -8073,3 +8073,68 @@ p {
 }
 
 /* --- Overlay Styles Applied --- */
+
+/* --- Custom Redesign Styles --- */
+body,
+#main-container,
+.overflow-none {
+  overflow-x: hidden !important;
+}
+
+.page-header {
+  padding: 0 !important;
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
+  text-align: left !important;
+}
+
+.page-header-aside {
+  display: flex;
+  align-items: center;
+}
+
+.contact-form-container {
+  border: none;
+  background: #ffffff !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.form-control {
+  border: 1px solid #e1e1e1 !important;
+  border-radius: 4px !important;
+  padding: 12px 15px !important;
+  height: auto !important;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #000 !important;
+  box-shadow: none !important;
+}
+
+.form-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.contact-info .contact-link {
+  font-size: 1.1rem;
+  padding: 8px 15px;
+  display: inline-block;
+  color: #000;
+  text-decoration: none;
+}
+
+.font-large {
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+}
