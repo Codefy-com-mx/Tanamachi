@@ -4823,14 +4823,14 @@ p {
 .js-quickshop-container .btn-add-to-cart,
 #quickshop-modal .js-addtocart-placeholder,
 .modal-body .js-addtocart-placeholder {
-  background: #4a5e78 !important;
+  background: #000 !important;
   border: none !important;
   color: #fff !important;
-  padding: 10px 10px !important;
+  padding: 12px 20px !important;
   font-size: 1rem !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
-  border-radius: 25px !important;
+  border-radius: 50px !important;
   width: 100% !important;
   height: auto !important;
   line-height: 1.2 !important;
@@ -4858,8 +4858,8 @@ p {
 #quickshop-modal .btn-add-to-cart:hover,
 .modal-body .btn-add-to-cart:hover,
 .js-addtocart-placeholder:hover {
-  background: #36485e !important;
-  opacity: 0.9 !important;
+  background: #333 !important;
+  opacity: 1 !important;
 }
 
 
