@@ -310,7 +310,7 @@ h6,
   text-align: center;
   border: 0;
   cursor: pointer;
-  border-radius: 30px;
+  border-radius: 50px;
   font-size: var(--font-small);
   line-height: 18px;
   -webkit-appearance: none;
@@ -354,14 +354,19 @@ h6,
   }
 
   &-primary {
-    padding: 11px 15px;
-    background-color: var(--button-background);
-    color: var(--button-foreground);
-    fill: var(--button-foreground);
+    padding: 11px 30px;
+    background-color: #000;
+    color: #fff;
+    fill: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 
     &:hover,
     &:focus {
-      color: var(--button-foreground);
+      color: #fff;
+      background-color: #333;
+      opacity: 1;
     }
 
     &[disabled],
@@ -369,14 +374,16 @@ h6,
     &[disabled]:hover,
     &.disabled:hover,
     {
-    background-color: var(--button-background);
-    color: var(--button-foreground);
-    fill: var(--button-foreground);
+    background-color: #666;
+    color: #fff;
+    fill: #fff;
+    opacity: 0.6;
   }
 
   .form-spinner:before {
     @extend .icon-svg-mask;
     @include prefix(mask-image, var(--icon-btn-spinner), webkit ms moz o);
+    background-color: #fff;
   }
 }
 
@@ -397,7 +404,8 @@ h6,
 }
 
 &-big {
-  padding: 13px;
+  padding: 15px 35px;
+  font-size: var(--font-base);
 }
 
 &-medium {
@@ -455,20 +463,27 @@ h6,
 
 &-variant {
   display: inline-block;
-  font-family: Arial, Helvetica, sans-serif !important;
-  font-weight: 900 !important;
+  font-family: 'Public Sans', sans-serif !important;
+  font-weight: 700 !important;
   font-size: var(--font-small);
   line-height: 12px;
   min-width: 40px;
   min-height: 24px;
-  padding: 6px 12px;
+  padding: 10px 20px;
   margin: 0 8px 10px 0;
-  border: var(--border-solid) var(--main-foreground-opacity-30);
-  border-radius: 30px;
-  color: var(--main-foreground);
+  border: 1px solid #e1e1e1;
+  border-radius: 50px;
+  color: #000;
   text-transform: initial;
   vertical-align: top;
   text-align: center;
+  transition: all 0.3s ease;
+  background-color: #fff;
+
+  &:hover {
+    border-color: #000;
+    color: #000;
+  }
 
   &-content {
     display: block;
@@ -487,10 +502,10 @@ h6,
   }
 
   &.selected {
-    color: var(--main-background);
-    background-color: var(--main-foreground);
-    border-color: var(--main-foreground);
-    border: var(--border-solid) var(--main-foreground);
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+    border: 1px solid #000;
   }
 
   &-no-stock {
@@ -1552,7 +1567,7 @@ input[type=number] {
 .head-main {
   color: var(--header-foreground);
   fill: var(--header-foreground);
-  background-color: var(--header-background);
+  background-color: transparent;
 
   .btn-link {
     color: var(--header-foreground);
@@ -1999,7 +2014,7 @@ footer {
 
 /* Custom Product Page Typography */
 .js-product-name {
-  font-family: Arial, Helvetica, sans-serif !important;
+  font-family: 'Public Sans', sans-serif !important;
   font-weight: 900 !important;
   font-size: 42px !important;
   letter-spacing: -2px !important;
@@ -2009,7 +2024,7 @@ footer {
 
 .js-price-display,
 .price-mxn {
-  font-family: Arial, Helvetica, sans-serif !important;
+  font-family: 'Public Sans', sans-serif !important;
   font-weight: 900 !important;
   font-size: 38px !important;
   letter-spacing: -1.5px !important;
@@ -2017,7 +2032,7 @@ footer {
 }
 
 [data-store^="product-description"] .user-content {
-  font-family: Arial, Helvetica, sans-serif !important;
+  font-family: 'Public Sans', sans-serif !important;
   font-size: 14px !important;
   font-weight: 700 !important;
   line-height: 1.4 !important;

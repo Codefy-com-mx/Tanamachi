@@ -80,6 +80,38 @@ style-critical.scss
 ==============================================================================*/
 
 /*============================================================================
+  #Global Font Override — Public Sans
+==============================================================================*/
+
+body,
+input,
+textarea,
+select,
+button,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+p,
+a,
+span,
+li,
+td,
+th,
+label,
+div {
+  font-family: 'Public Sans', sans-serif !important;
+}
+
+/*============================================================================
   #External CSS libraries and plugins
 ==============================================================================*/
 
@@ -321,7 +353,8 @@ html {
 .col-12 {
   -ms-flex: 0 0 100%;
   flex: 0 0 100%;
-  max-width: 100%
+  max-width: 100%;
+  padding-bottom: 15px
 }
 
 .order-first {
@@ -4654,7 +4687,7 @@ p {
 }
 
 
-.section-featured-home .item-overlay {
+.item-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -4669,17 +4702,18 @@ p {
   pointer-events: none;
 }
 
-.section-featured-home .js-item-product:hover .item-overlay {
+.js-item-product:hover .item-overlay {
   background: rgba(0, 0, 0, 0.4);
   pointer-events: auto;
 }
 
-.section-featured-home .item-overlay-top {
+.item-overlay-top {
   text-align: left;
   padding: 25px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
-.section-featured-home .item-overlay-name {
+.item-overlay-name {
   font-size: 1.5rem;
   font-weight: 800;
   line-height: 1.2;
@@ -4689,12 +4723,12 @@ p {
   pointer-events: auto;
 }
 
-.section-featured-home .js-item-product:hover .item-overlay-name {
+.js-item-product:hover .item-overlay-name {
   transform: scale(1.1);
   transform-origin: left;
 }
 
-.section-featured-home .item-overlay-bottom {
+.item-overlay-bottom {
   height: 50%;
   display: flex;
   flex-direction: column;
@@ -4708,12 +4742,12 @@ p {
   pointer-events: auto;
 }
 
-.section-featured-home .js-item-product:hover .item-overlay-bottom {
+.js-item-product:hover .item-overlay-bottom {
   opacity: 1;
   transform: translateY(0);
 }
 
-.section-featured-home .item-overlay-price {
+.item-overlay-price {
   font-size: 4rem;
   font-weight: 900;
   letter-spacing: -1px;
@@ -4725,14 +4759,14 @@ p {
   line-height: 1;
 }
 
-.section-featured-home .item-overlay-bottom form,
-.section-featured-home .item-overlay-bottom .item-submit-container,
-.section-featured-home .item-overlay-bottom .js-item-submit-container {
+.item-overlay-bottom form,
+.item-overlay-bottom .item-submit-container,
+.item-overlay-bottom .js-item-submit-container {
   width: 100%;
   display: block;
 }
 
-.section-featured-home .btn-overlay-buy {
+.btn-overlay-buy {
   background: transparent;
   border: 1px solid #fff;
   color: #fff !important;
@@ -4747,12 +4781,12 @@ p {
   text-align: center;
 }
 
-.section-featured-home .btn-overlay-buy:hover {
+.btn-overlay-buy:hover {
   background: #fff;
   color: #000 !important;
 }
 
-.section-featured-home .item-overlay-link {
+.item-overlay-link {
   position: absolute;
   top: 0;
   left: 0;
@@ -4785,34 +4819,45 @@ p {
     display: none !important;
   }
 
-  .section-featured-home .item-overlay {
-    padding: 10px;
+  .item-overlay {
+    padding: 0;
   }
 
-  .section-featured-home .item-overlay-name {
-    font-size: 1.1rem;
+  .item-overlay-name {
+    font-size: 0.9rem;
   }
 
-  .section-featured-home .js-item-product:hover .item-overlay-name {
+  .item-overlay-top {
+    padding: 25px 15px 10px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+  }
+
+  .js-item-product:hover .item-overlay-name {
     transform: scale(1.05);
     /* Escala menor en movil */
   }
 
-  .section-featured-home .item-overlay-bottom {
-    padding: 15px 10px;
+  .item-overlay-bottom {
+    padding: 20px 15px 15px;
+    width: 100%;
     opacity: 1;
     transform: translateY(0);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
   }
 
-  .section-featured-home .item-overlay-price {
-    font-size: 1.8rem;
-    margin-bottom: 5px;
+  .item-overlay-price {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
   }
 
-  .section-featured-home .btn-overlay-buy {
-    padding: 10px 15px;
-    font-size: 1rem;
+  .btn-overlay-buy {
+    padding: 8px 12px;
+    font-size: 0.9rem;
     margin-bottom: 0px;
+    width: 90% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
   }
 }
 
@@ -4822,14 +4867,14 @@ p {
 .js-quickshop-container .btn-add-to-cart,
 #quickshop-modal .js-addtocart-placeholder,
 .modal-body .js-addtocart-placeholder {
-  background: #4a5e78 !important;
+  background: #000 !important;
   border: none !important;
   color: #fff !important;
-  padding: 10px 10px !important;
+  padding: 12px 20px !important;
   font-size: 1rem !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
-  border-radius: 25px !important;
+  border-radius: 50px !important;
   width: 100% !important;
   height: auto !important;
   line-height: 1.2 !important;
@@ -4857,8 +4902,8 @@ p {
 #quickshop-modal .btn-add-to-cart:hover,
 .modal-body .btn-add-to-cart:hover,
 .js-addtocart-placeholder:hover {
-  background: #36485e !important;
-  opacity: 0.9 !important;
+  background: #333 !important;
+  opacity: 1 !important;
 }
 
 
@@ -5194,19 +5239,24 @@ p {
 .js-banners-promotional-title,
 .js-banners-promotional-mobile-title {
   color: var(--banner-promotional-title-color) !important;
-  font-size: 5rem !important;
+  font-size: 2.2rem !important;
   font-weight: 800 !important;
-  line-height: 0.9 !important;
-  letter-spacing: -3px !important;
-  white-space: nowrap !important;
+  line-height: 1 !important;
+  letter-spacing: -1px !important;
+  white-space: normal !important;
   font-family: 'Public Sans', sans-serif !important;
+  text-align: center;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
 
   .js-banners-promotional .js-banner-title,
   .js-banners-promotional-title {
-    font-size: 8rem !important;
+    font-size: 7vw !important;
+    line-height: 1 !important;
+    letter-spacing: -3px !important;
+    white-space: nowrap !important;
   }
 }
 
@@ -5246,9 +5296,20 @@ p {
   position: relative;
   padding-top: 60%;
 
+  .js-banners-promotional-mobile &,
+  .js-banners-promotional & {
+    padding-top: 100%;
+    /* More height for mobile promo */
+  }
+
   @media (min-width: 768px) {
     padding-top: 0;
     height: 700px;
+
+    .js-banners-promotional-mobile &,
+    .js-banners-promotional & {
+      height: 600px;
+    }
   }
 }
 
@@ -6250,7 +6311,6 @@ p {
   margin: 3rem !important
 }
 
-.mt-5,
 .my-5 {
   margin-top: 3rem !important
 }

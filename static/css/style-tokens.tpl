@@ -136,8 +136,8 @@
 
   {# Font families #}
 
-  --heading-font: {{ settings.font_headings | raw }};
-  --body-font: {{ settings.font_rest | raw }};
+  --heading-font: 'Public Sans', sans-serif;
+  --body-font: 'Public Sans', sans-serif;
   --footer-font-col1: {{ settings.font_footer_col1 | raw }};
   --footer-font-col2: {{ settings.font_footer_col2 | raw }};
   --footer-font-col3: {{ settings.font_footer_col3 | raw }};

@@ -37,8 +37,8 @@ $label-foreground: {{ settings.label_foreground_color }};
 
 {# /* // Font */ #}
 
-$heading-font: {{ settings.font_headings | default('Golos Text') | raw }};
-$body-font: {{ settings.font_rest | default('Golos Text') | raw }};
+$heading-font: 'Public Sans', sans-serif;
+$body-font: 'Public Sans', sans-serif;
 
 {# /* // Box */ #}
 $box-border-color: rgba($foreground-color, .5);
@@ -175,7 +175,7 @@ $xl: 1200px;
   {#### Typography #}
 
   {# Headings #}
-  --heading-font: {{ settings.font_headings | default('Golos Text') | raw }};
+  --heading-font: 'Public Sans', sans-serif;
   --heading-font-weight: 400;
   --heading-text-transform: uppercase;
   --heading-letter-spacing: normal;
