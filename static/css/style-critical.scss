@@ -8134,8 +8134,8 @@ body,
 
 @media (max-width: 768px) {
   .page-header {
-    padding-top: 1.5rem !important;
-    padding-bottom: 1.5rem !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
   }
 }
 
@@ -8145,6 +8145,12 @@ body,
 .head-main:hover,
 .head-main.head-transparent:hover,
 .head-main.head-transparent-on-section:hover,
+html,
+body {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
 .head-main-scrolled,
 .head-main-scrolled:hover,
 .js-head-main {
@@ -8165,7 +8171,7 @@ body:not(.template-home) {
 
 @media (max-width: 767px) {
   body:not(.template-home) {
-    padding-top: 100px !important;
+    padding-top: 80px !important;
   }
 }
 

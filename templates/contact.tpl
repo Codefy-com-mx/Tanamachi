@@ -1,4 +1,4 @@
-<div class="container-fluid px-1">
+<div class="container-fluid px-3 px-md-4">
 	{% embed "snipplets/page-header.tpl" with {container: false, hide_breadcrumbs: true} %}
 		{% if is_order_cancellation %}
 			{% set form_title = "Pedí la cancelación de tu última compra" | translate %}
@@ -13,7 +13,7 @@
 {% set is_order_cancellation_without_id = params.order_cancellation_without_id == 'true' %}
 
 <section class="contact-page visible-when-content-ready mb-5">
-	<div class="container-fluid px-1">
+	<div class="container-fluid px-3 px-md-4">
 		<div class="row justify-content-center">
 			<div class="col-md-8 col-lg-6">
 				{% if has_contact_info and not is_order_cancellation %}
