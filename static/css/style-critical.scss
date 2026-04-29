@@ -8188,39 +8188,6 @@ body:not(.template-home) {
   box-shadow: none !important;
 }
 
-/* Corrección de alineación de flechas en menú móvil */
-.template-product .js-luxury-pagination {
-  position: relative !important;
-  bottom: 0 !important;
-  width: auto !important;
-  display: flex !important;
-  align-items: center;
-}
-
-/* Forzar alineación de flechas en el menú de navegación móvil */
-.nav-list-link.d-flex {
-  min-height: 48px;
-  /* Altura mínima para que el Flexbox tenga espacio */
-}
-
-.nav-list-arrow {
-  position: relative !important;
-  /* Quitar el absolute que lo desalinea */
-  top: auto !important;
-  right: auto !important;
-  height: auto !important;
-  padding: 0 !important;
-  /* Quitar padding que lo empuja */
-  display: flex !important;
-  align-items: center !important;
-  line-height: 1 !important;
-}
-
-.nav-list-arrow svg {
-  display: block !important;
-  margin: 0 !important;
-}
-
 /* Flechas móviles minimalistas abajo de la imagen */
 .template-product .custom-arrow-pdp {
   width: 30px !important;

@@ -8,10 +8,9 @@
 			{% if megamenu %}
 			<div class="nav-item-container">
 			{% endif %}
-				<a class="{% if hamburger %}js-toggle-menu-panel d-flex align-items-center justify-content-between{% endif %} nav-list-link position-relative {{ item.current ? 'selected' : '' }} {% if item.current and not subitem %}btn-active-pill{% endif %}" href="{% if megamenu and item.url %}{{ item.url }}{% else %}#{% endif %}">
-					<span>{{ item.name }}</span>
+				<a class="{% if hamburger %}js-toggle-menu-panel align-items-center{% endif %} nav-list-link position-relative {{ item.current ? 'selected' : '' }} {% if item.current and not subitem %}btn-active-pill{% endif %}" href="{% if megamenu and item.url %}{{ item.url }}{% else %}#{% endif %}">{{ item.name }}
 					{% if hamburger %}
-						<span class="nav-list-arrow">
+						<span class="nav-list-arrow ml-1">
 							<svg class="icon-inline icon-lg svg-icon-text"><use xlink:href="#arrow-long"/></svg>
 						</span>
 					{% endif %}
