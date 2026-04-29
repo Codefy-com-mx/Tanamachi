@@ -13,9 +13,9 @@
 
 {% set category_banner = (category.images is not empty) or ("banner-products.jpg" | has_custom_image) %}
 
-<div class="container-fluid px-3 px-md-4 overflow-none">
-	{% embed "snipplets/page-header.tpl" with {container: false, hide_breadcrumbs: true} %}
-	    {% block page_header_text %}{{ category.name }}{% endblock page_header_text %}
+<div class="container-fluid px-0 overflow-none">
+	{% embed "snipplets/page-header.tpl" with {container: false, hide_breadcrumbs: true, padding: false} %}
+	    {% block page_header_text %}<span class="ml-3 ml-md-4">{{ category.name }}</span>{% endblock page_header_text %}
 		{% block page_header_aside %}
 			{% include 'snipplets/grid/filters-modals.tpl' %}
 		{% endblock page_header_aside %}
@@ -31,7 +31,7 @@
 <section class="js-category-controls-prev category-controls-sticky-detector"></section>
 
 <section class="category-body" data-store="category-grid-{{ category.id }}">
-	<div class="container-fluid px-3 px-md-4 mt-4 mb-5">
+	<div class="container-fluid px-0 mt-1 mb-5">
 		<div data-store="category-grid-{{ category.id }}">
 			{% include 'snipplets/grid/product-list.tpl' %}
 		</div>

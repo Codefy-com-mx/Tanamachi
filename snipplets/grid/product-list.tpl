@@ -1,7 +1,7 @@
  {% set noFilterResult = "No tenemos resultados para tu búsqueda. Por favor, intentá con otros filtros." %}
 
  {% if products %}
-    <div class="js-product-table row row-grid section-featured-home">
+    <div class="js-product-table row no-gutters mx-0 row-grid section-featured-home">
         {% include 'snipplets/product_grid.tpl' %}
     </div>
     {% if settings.pagination == 'infinite' %}

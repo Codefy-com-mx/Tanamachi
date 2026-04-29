@@ -2043,7 +2043,7 @@ footer {
 .footer-logo-img-large {
   max-width: 100%;
   height: auto;
-  max-height: 120px;
+  max-height: 80px;
   object-fit: contain;
 }
 
@@ -2068,8 +2068,9 @@ footer {
 @media (max-width: 767px) {
   .js-footer-accordion {
     border-bottom: 1px solid var(--footer-foreground-opacity-30);
-    padding-bottom: 15px;
-    margin-bottom: 15px !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 0 !important;
   }
 
   .js-footer-accordion-toggle {

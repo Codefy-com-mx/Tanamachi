@@ -10,8 +10,8 @@
 
 {% set has_seal_logos = store.afip or ebit or settings.custom_seal_code or ("seal_img.jpg" | has_custom_image) %}
 {% set show_help = not has_products and not has_social_network %}
-<footer class="js-footer js-hide-footer-while-scrolling display-when-content-ready overflow-none {% if settings.footer_colors %}footer-colors{% endif %} py-5" data-store="footer">
-	<div class="container py-lg-4">
+<footer class="js-footer js-hide-footer-while-scrolling display-when-content-ready overflow-none {% if settings.footer_colors %}footer-colors{% endif %} pt-0 pb-0" data-store="footer">
+	<div class="container pt-0 pb-0">
 		<div class="row justify-content-center align-items-start">
 			
 			{# Column 1: Brand Info #}
@@ -129,21 +129,21 @@
 			</div>
 		</div>
 
-		<div class="row mt-5 pt-5 border-top-0">
+		<div class="row mt-0 pt-0 border-top-0">
 			<div class="col-12 font-smallest opacity-50">
 				<div class="row">
-					<div class="col-md-12 text-center text-md-left">
+					<div class="col-md-auto text-center text-md-left">
 						<div class="row align-items-center">
-							<div class="col-md-auto col-12 order-md-1 order-3 mt-3 mt-md-0">
+							<div class="col-md-auto col-12 order-md-1 order-3 mt-1 mt-md-0">
 								<div class="font-smallest opacity-50">
 									{{ "Copyright {1} - {2}. Todos los derechos reservados." | translate( (store.business_name ? store.business_name : store.name) ~ (store.business_id ? ' - ' ~ store.business_id : ''), "now" | date('Y') ) }}
 								</div>
 							</div>
-							<div class="col-md-auto col-12 order-md-2 order-1 mb-2 mb-md-0">
+							<div class="col-md-auto col-12 order-md-2 order-1 mb-1 mb-md-0">
 								<div class="d-inline-block align-middle">
 									{{ new_powered_by_link }}
 								</div>
-								<div class="d-none d-md-inline-block mx-2 opacity-50">|</div>
+								<div class="d-none d-md-inline-block mx-1 opacity-50">|</div>
 							</div>
 							<div class="col-md-auto col-12 order-md-3 order-2">
 								<div class="d-inline-block align-middle font-smallest opacity-50">
@@ -152,7 +152,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6 text-right">
+					<div class="col-md-auto text-right">
 						{{ component('claim-info', {
 								container_classes: "d-inline-block",
 								divider_classes: "mx-1 d-none d-md-inline-block",
