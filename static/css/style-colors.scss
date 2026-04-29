@@ -1552,7 +1552,7 @@ input[type=number] {
 .head-main {
   color: var(--header-foreground);
   fill: var(--header-foreground);
-  background-color: var(--header-background);
+  background-color: transparent;
 
   .btn-link {
     color: var(--header-foreground);
