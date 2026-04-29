@@ -17,7 +17,7 @@
 
 {# Modal Hamburger #}
 
-{% embed "snipplets/modal.tpl" with{modal_id: 'nav-hamburger',modal_class: 'nav-hamburger pb-0', modal_position: 'left', modal_transition: 'slide', modal_width: 'drawer', modal_mobile_full_screen: false, modal_header_class: 'js-toggle-menu-close', modal_body_class: 'nav-body', modal_footer_class: 'hamburger-footer mb-0 p-0',modal_header_title: false, modal_close_floating: true, modal_fixed_footer: true, modal_footer: true, desktop_overlay_only: modal_with_desktop_only_overlay_val} %}
+{% embed "snipplets/modal.tpl" with{modal_id: 'nav-hamburger',modal_class: 'nav-hamburger pb-0', modal_position: 'left', modal_transition: 'slide', modal_width: 'drawer', modal_mobile_full_screen: false, modal_header_class: 'js-toggle-menu-close', modal_body_class: 'nav-body px-1', modal_footer_class: 'hamburger-footer px-1 mb-0 p-0',modal_header_title: false, modal_close_floating: true, modal_fixed_footer: true, modal_footer: true, desktop_overlay_only: modal_with_desktop_only_overlay_val} %}
 	{% block modal_body %}
 		{% if settings.search_type_mobile == 'hidden' %}
 			<div class="d-block d-md-none position-relative">

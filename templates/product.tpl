@@ -24,11 +24,6 @@
             {% include 'snipplets/product/product-description.tpl' %}
         {% endif %}
 
-        {# Product share #}
-        
-        <div class="text-center d-md-none">
-            {% include 'snipplets/social/social-share.tpl' %}
-        </div>
     </div>
 </div>
 
