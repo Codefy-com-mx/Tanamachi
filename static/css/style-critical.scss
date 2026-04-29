@@ -5206,19 +5206,24 @@ p {
 .js-banners-promotional-title,
 .js-banners-promotional-mobile-title {
   color: var(--banner-promotional-title-color) !important;
-  font-size: 5rem !important;
+  font-size: 2.2rem !important;
   font-weight: 800 !important;
-  line-height: 0.9 !important;
-  letter-spacing: -3px !important;
-  white-space: nowrap !important;
+  line-height: 1 !important;
+  letter-spacing: -1px !important;
+  white-space: normal !important;
   font-family: 'Public Sans', sans-serif !important;
+  text-align: center;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
 
   .js-banners-promotional .js-banner-title,
   .js-banners-promotional-title {
-    font-size: 8rem !important;
+    font-size: 7vw !important;
+    line-height: 1 !important;
+    letter-spacing: -3px !important;
+    white-space: nowrap !important;
   }
 }
 
@@ -5258,9 +5263,20 @@ p {
   position: relative;
   padding-top: 60%;
 
+  .js-banners-promotional-mobile &,
+  .js-banners-promotional & {
+    padding-top: 100%;
+    /* More height for mobile promo */
+  }
+
   @media (min-width: 768px) {
     padding-top: 0;
     height: 700px;
+
+    .js-banners-promotional-mobile &,
+    .js-banners-promotional & {
+      height: 600px;
+    }
   }
 }
 
