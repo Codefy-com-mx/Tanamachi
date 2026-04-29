@@ -8182,6 +8182,69 @@ body:not(.template-home) {
   box-shadow: none !important;
 }
 
-.desktop-dropdown .container {
-  background-color: transparent !important;
+/* Flechas móviles minimalistas abajo de la imagen */
+.template-product .custom-arrow-pdp {
+  width: 30px !important;
+  height: 30px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  cursor: pointer;
+  z-index: 5;
+  margin-top: -15px !important;
+  /* Margen negativo para pegarlas a la imagen */
+}
+
+
+.template-product .custom-arrow-pdp svg {
+  width: 16px !important;
+  height: 16px !important;
+  fill: #000 !important;
+}
+
+/* Invertir flecha izquierda */
+.template-product .js-swiper-product-prev.custom-arrow-pdp svg {
+  transform: rotate(180deg);
+}
+
+/* Limpieza de cualquier rastro de botones flotantes */
+.template-product .swiper-button-next,
+.template-product .swiper-button-prev {
+  display: none !important;
+}
+
+/* Estilo para los puntitos de paginación abajo */
+.template-product .js-luxury-pagination {
+  position: relative !important;
+  bottom: 0 !important;
+  width: auto !important;
+  display: flex !important;
+  align-items: center;
+}
+
+.template-product .swiper-pagination-bullet {
+  background: #000 !important;
+  opacity: 0.2 !important;
+  width: 6px !important;
+  height: 6px !important;
+  margin: 0 4px !important;
+}
+
+.template-product .swiper-pagination-bullet-active {
+  opacity: 1 !important;
+}
+
+
+/* Ocultar controles inferiores originales solo en PDP */
+.template-product .product-detail-slider+.row.no-gutters {
+  display: none !important;
+}
+
+@media (min-width: 768px) {
+  .template-product .swiper-button-inside {
+    display: none !important;
+  }
 }

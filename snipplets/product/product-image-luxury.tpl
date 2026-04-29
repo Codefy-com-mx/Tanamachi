@@ -22,8 +22,17 @@
                     {% endfor %}
                 </div>
                 
-                {# Paginación para Mobile #}
-                <div class="luxury-pagination d-md-none js-luxury-pagination"></div>
+            </div>
+
+            {# Custom Mobile Controls - Below Image #}
+            <div class="d-flex d-md-none align-items-center justify-content-center mt-0">
+                <div class="js-swiper-product-prev custom-arrow-pdp mx-3">
+                    <svg class="icon-inline icon-lg svg-icon-text"><use xlink:href="#chevron"/></svg>
+                </div>
+                <div class="luxury-pagination js-luxury-pagination px-2"></div>
+                <div class="js-swiper-product-next custom-arrow-pdp mx-3">
+                    <svg class="icon-inline icon-lg svg-icon-text"><use xlink:href="#chevron"/></svg>
+                </div>
             </div>
         </div>
 

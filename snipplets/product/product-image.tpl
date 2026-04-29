@@ -78,6 +78,15 @@
 						{% include 'snipplets/product/product-video.tpl' with {video_id: 'yt'} %}
 					{% endif %}
 				</div>
+				{# Custom Mobile Arrows - Only for PDP #}
+				{% if not home_main_product %}
+					<div class="js-swiper-product-prev swiper-button-prev swiper-button-inside d-md-none">
+						<svg class="icon-inline icon-lg svg-icon-text"><use xlink:href="#chevron"/></svg>
+					</div>
+					<div class="js-swiper-product-next swiper-button-next swiper-button-inside d-md-none">
+						<svg class="icon-inline icon-lg svg-icon-text"><use xlink:href="#chevron"/></svg>
+					</div>
+				{% endif %}
 			</div>
 			{% if has_multiple_slides %}
 				<div class="row no-gutters my-3 text-center align-items-center {% if not home_main_product %}d-md-none{% endif %}">

@@ -3,7 +3,7 @@
 
     <div class="{% if settings.luxury_gallery %}container-fluid p-0{% else %}container mt-4 mt-md-0 mb-3 pt-md-1{% endif %} {% if description_content and settings.full_width_description %}mb-md-0{% endif %}">
         <div class="row no-gutters">
-            <div class="{% if settings.luxury_gallery %}col-md-6 luxury-gallery-col{% else %}col-md-7{% endif %} pb-3 pr-md-2">
+            <div class="{% if settings.luxury_gallery %}col-md-6 luxury-gallery-col{% else %}col-md-7{% endif %} pb-0 pb-md-3 pr-md-2">
                 {% if settings.luxury_gallery %}
                     {% include 'snipplets/product/product-image-luxury.tpl' %}
                 {% else %}

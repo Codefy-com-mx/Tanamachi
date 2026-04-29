@@ -2857,6 +2857,10 @@ DOMContentLoaded.addEventOrExecute(() => {
                     type: 'bullets',
                     clickable: true
                 },
+                navigation: {
+                    nextEl: '.js-swiper-product-next',
+                    prevEl: '.js-swiper-product-prev',
+                },
                 thumbs: {
                     swiper: luxuryThumbsSwiper,
                 },
