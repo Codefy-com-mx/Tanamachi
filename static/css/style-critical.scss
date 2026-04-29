@@ -4521,6 +4521,10 @@ p {
   white-space: normal;
 }
 
+.nav-dropdown.nav-main-item {
+  position: relative;
+}
+
 .nav-desktop-list>.nav-item {
   height: 100%;
   align-items: center;
@@ -4528,11 +4532,17 @@ p {
 }
 
 .desktop-dropdown {
-  position: fixed;
+  position: absolute;
   top: 100%;
-  left: 0;
-  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  min-width: 200px;
   overflow-y: auto;
+  z-index: 9999;
+  margin-top: 25px;
+  padding-bottom: 20px;
+  text-align: center;
 }
 
 .col-utility {
@@ -5269,6 +5279,7 @@ p {
 .section-banners-home,
 .section-modules-home {
   padding: 0 !important;
+  margin-bottom: 50px !important;
 }
 
 .section-banners-home+.section-banners-home {
@@ -8140,15 +8151,20 @@ body,
 }
 
 /* --- Overlay Styles Applied --- */
-/* Force header transparency at all times */
-.head-main,
-.head-main:hover,
-.head-main.head-transparent:hover,
-.head-main.head-transparent-on-section:hover,
+/* Prevent horizontal scroll on page */
 html,
 body {
   max-width: 100% !important;
   overflow-x: hidden !important;
+}
+
+/* Allow dropdown menus to overflow outside the header */
+.head-main,
+.head-main:hover,
+.head-main.head-transparent:hover,
+.head-main.head-transparent-on-section:hover {
+  max-width: 100% !important;
+  overflow: visible !important;
 }
 
 .head-main-scrolled,
@@ -8175,7 +8191,7 @@ body:not(.template-home) {
   }
 }
 
-/* Force dropdowns to be transparent */
+/* Desktop navigation dropdowns — transparent */
 .desktop-dropdown,
 .desktop-dropdown-small,
 .nav-dropdown-content,
@@ -8186,6 +8202,29 @@ body:not(.template-home) {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
+}
+
+/* Centered compact dropdown layout */
+.desktop-dropdown {
+  display: flex !important;
+  justify-content: center !important;
+  padding: 10px 0 !important;
+}
+
+.desktop-list-subitems {
+  column-count: 1 !important;
+  width: auto !important;
+  text-align: center !important;
+  display: flex !important;
+  gap: 30px;
+}
+
+.desktop-list-subitems .nav-item {
+  display: inline-block !important;
+}
+
+.desktop-list-subitems .nav-list-link {
+  white-space: nowrap;
 }
 
 /* Flechas móviles minimalistas abajo de la imagen */
