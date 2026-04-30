@@ -4859,15 +4859,16 @@ p {
   }
 
   .item-overlay-price {
-    font-size: 1.5rem;
-    margin-bottom: 8px;
+    font-size: 1.6rem !important;
+    margin-bottom: 5px;
+    line-height: 1;
   }
 
   .btn-overlay-buy {
-    padding: 8px 12px;
-    font-size: 0.9rem;
+    padding: 10px 5px !important;
+    font-size: 0.85rem !important;
     margin-bottom: 0px;
-    width: 90% !important;
+    width: 95% !important;
     margin-left: auto !important;
     margin-right: auto !important;
     display: block !important;

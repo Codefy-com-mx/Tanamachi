@@ -55,6 +55,9 @@
             {% if (settings.quick_shop or settings.product_color_variants) and not reduced_item %}
                 <div class="js-product-container js-quickshop-container{% if product.variations %} js-quickshop-has-variants{% endif %} position-relative" data-variants="{{ product.variants_object | json_encode }}" data-quickshop-id="quick{{ product.id }}">
             {% endif %}
+            {% set state = store.is_catalog ? 'catalog' : (product.available ? product.display_price ? 'cart' : 'contact' : 'nostock') %}
+            {% set texts = {'cart': "Agregar al carrito", 'contact': "Consultar precio", 'nostock': "Sin stock", 'catalog': "Consultar"} %}
+
             {% set product_url_with_selected_variant = has_filters ?  ( product.url | add_param('variant', product.selected_or_first_available_variant.id)) : product.url  %}
 
             {# Set how much viewport space the images will take to load correct image #}
@@ -133,16 +136,16 @@
                          <div class="item-overlay-price">{{ product.price | money }}</div>
                          {% if product.available and product.display_price %}
                             {% if product.variations %}
-                                <div class="js-item-submit-container item-submit-container position-relative">
-                                    <span data-toggle="#quickshop-modal" data-modal-url="modal-fullscreen-quickshop" class="js-quickshop-modal-open js-fullscreen-modal-open {% if slide_item %}js-quickshop-slide{% endif %} js-modal-open btn-overlay-buy" title="{{ 'Compra rápida de' | translate }} {{ product.name }}" aria-label="{{ 'Compra rápida de' | translate }} {{ product.name }}" data-component="product-list-item.add-to-cart" data-component-value="{{product.id}}">
-                                        {{ 'Agregar al carrito' | translate }}
+                                 <div class="js-item-submit-container item-submit-container position-relative">
+                                    <span data-toggle="#quickshop-modal" data-modal-url="modal-fullscreen-quickshop" class="js-quickshop-modal-open js-fullscreen-modal-open {% if slide_item %}js-quickshop-slide{% endif %} js-modal-open btn-overlay-buy {{ state }}" title="{{ 'Compra rápida de' | translate }} {{ product.name }}" aria-label="{{ 'Compra rápida de' | translate }} {{ product.name }}" data-component="product-list-item.add-to-cart" data-component-value="{{product.id}}">
+                                        {{ texts[state] | translate }}
                                     </span>
                                 </div>
                             {% else %}
                                 <form class="js-product-form" method="post" action="{{ store.cart_url }}">
                                     <input type="hidden" name="add_to_cart" value="{{product.id}}" />
                                     <div class="js-item-submit-container item-submit-container position-relative">
-                                        <input type="submit" class="js-addtocart js-prod-submit-form btn-overlay-buy" value="{{ 'Agregar al carrito' | translate }}" data-component="product-list-item.add-to-cart" data-component-value="{{ product.id }}"/>
+                                        <input type="submit" class="js-addtocart js-prod-submit-form btn-overlay-buy {{ state }}" value="{{ texts[state] | translate }}" data-component="product-list-item.add-to-cart" data-component-value="{{ product.id }}" {% if state == 'nostock' %}disabled{% endif %}/>
                                     </div>
                                 </form>
                             {% endif %}
@@ -160,18 +163,16 @@
                 and not reduced_item 
             %}
 
-                {# Hidden product form to update item image and variants: Also this is used for quickshop popup #}
+                        {# Hidden product form to update item image and variants: Also this is used for quickshop popup #}
 
-                <div class="js-item-variants hidden">
-                    <form class="js-product-form" method="post" action="{{ store.cart_url }}">
-                        <input type="hidden" name="add_to_cart" value="{{product.id}}" />
-                        {% if product.variations %}
-                            {% include "snipplets/product/product-variants.tpl" with {quickshop: true} %}
-                        {% endif %}
-                        {% set state = store.is_catalog ? 'catalog' : (product.available ? product.display_price ? 'cart' : 'contact' : 'nostock') %}
-                        {% set texts = {'cart': "Agregar al carrito", 'contact': "Consultar precio", 'nostock': "Sin stock", 'catalog': "Consultar"} %}
+                        <div class="js-item-variants hidden">
+                            <form class="js-product-form" method="post" action="{{ store.cart_url }}">
+                                <input type="hidden" name="add_to_cart" value="{{product.id}}" />
+                                {% if product.variations %}
+                                    {% include "snipplets/product/product-variants.tpl" with {quickshop: true} %}
+                                {% endif %}
 
-                        {# Add to cart CTA #}
+                                {# Add to cart CTA #}
 
                         {% set show_product_quantity = product.available and product.display_price %}
 
