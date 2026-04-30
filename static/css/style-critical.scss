@@ -8393,3 +8393,40 @@ body:not(.template-home) {
 .section-main-product-home .luxury-description {
   display: none !important;
 }
+
+/* Ajustes de tamaño y espaciado para títulos de Producto, Contacto y Categorías */
+.template-product .page-header .d-flex,
+.template-contact .page-header .d-flex,
+.template-category .page-header .d-flex,
+.template-search .page-header .d-flex {
+  padding-bottom: 15px !important;
+  align-items: baseline !important;
+  /* Alineación base para que el texto coincida */
+}
+
+.template-product .page-header h1,
+.template-contact .page-header h1,
+.template-category .page-header h1,
+.template-search .page-header h1 {
+  font-size: 40px !important;
+
+  font-weight: bold !important;
+  line-height: 1 !important;
+}
+
+/* El filtro debe ser 5px más chico que el título (55px - 5px = 50px) */
+.template-category .page-header .btn-link,
+.template-search .page-header .btn-link {
+  font-size: 30px !important;
+  text-decoration: underline !important;
+}
+
+/* Ajuste específico para móvil si es necesario */
+@media (max-width: 767px) {
+
+  .template-product .page-header h1,
+  .template-contact .page-header h1 {
+    font-size: calc(var(--font-h2) + 10px) !important;
+    /* Un poco más pequeño en móvil pero aún grande */
+  }
+}
