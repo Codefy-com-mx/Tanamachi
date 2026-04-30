@@ -8089,7 +8089,7 @@ p {
 body,
 #main-container,
 .overflow-none {
-  overflow-x: hidden !important;
+  overflow-x: clip !important;
 }
 
 .page-header {
@@ -8155,7 +8155,7 @@ body,
 html,
 body {
   max-width: 100% !important;
-  overflow-x: hidden !important;
+  overflow-x: clip !important;
 }
 
 /* Allow dropdown menus to overflow outside the header */

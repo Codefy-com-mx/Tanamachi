@@ -2960,11 +2960,11 @@ body:not(.is-using-mouse) .fancybox__container :focus {
 
 /* Luxury Gallery Structure */
 .luxury-gallery-container {
-  height: 100%;
+  min-height: 100%;
 
   .luxury-gallery-wrapper {
     display: flex;
-    height: 100%;
+    min-height: 100%;
     position: relative;
     background-color: #fff;
   }
@@ -3032,11 +3032,12 @@ body:not(.is-using-mouse) .fancybox__container :focus {
       /* Transformamos el Swiper en un stack vertical */
       .swiper-container {
         overflow: visible;
+        height: auto !important;
       }
 
       .swiper-wrapper {
-        display: block;
-        height: auto;
+        display: block !important;
+        height: auto !important;
         transform: none !important;
       }
 

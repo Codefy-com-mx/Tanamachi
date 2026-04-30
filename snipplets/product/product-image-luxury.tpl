@@ -5,11 +5,11 @@
         
         {# Imagen Principal #}
         <div class="luxury-main-image-col">
-            <div class="js-luxury-main-slider swiper-container product-detail-slider h-100">
-                <div class="swiper-wrapper h-100">
+            <div class="js-luxury-main-slider swiper-container product-detail-slider">
+                <div class="swiper-wrapper">
                     {% for media in product.media %}
-                        <div id="luxury-image-{{ loop.index0 }}" class="swiper-slide luxury-main-slide js-product-slide h-100" data-image="{{media.id}}" data-image-position="{{loop.index0}}">
-                            <a href="{{ media | product_image_url('original') }}" data-fancybox="product-gallery" class="luxury-main-link d-block h-100">
+                        <div id="luxury-image-{{ loop.index0 }}" class="swiper-slide luxury-main-slide js-product-slide" data-image="{{media.id}}" data-image-position="{{loop.index0}}">
+                            <a href="{{ media | product_image_url('original') }}" data-fancybox="product-gallery" class="luxury-main-link d-block">
                                 <img 
                                     src="{{ media | product_image_url('large') }}" 
                                     data-src="{{ media | product_image_url('original') }}"
