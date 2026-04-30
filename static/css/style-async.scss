@@ -1098,6 +1098,41 @@ button {
 footer {
   padding: 40px 0;
 
+  @media (max-width: 767px) {
+    padding-top: 10px !important;
+    padding-bottom: 5px !important;
+
+    &.section-footer-home {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    .row:last-child {
+      margin-bottom: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    /* Compactar créditos y logos finales en móvil */
+    .footer-logo-img-large {
+      margin-bottom: 5px !important;
+    }
+
+    .font-smallest,
+    .powered-by,
+    .developed-by {
+      margin-top: 5px !important;
+      margin-bottom: 5px !important;
+      line-height: 1.2 !important;
+    }
+
+    .col-12,
+    .col-md-auto {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      margin-bottom: 5px !important;
+    }
+  }
+
   &.section-footer-home {
     @extend %section-margin-invert;
   }
