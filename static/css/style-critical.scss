@@ -8388,3 +8388,8 @@ body:not(.template-home) {
 .cart-item-quantity {
   margin-left: auto;
 }
+
+/* Ocultar descripción duplicada debajo del precio solo en el Home Main Product */
+.section-main-product-home .luxury-description {
+  display: none !important;
+}
