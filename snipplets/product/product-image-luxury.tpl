@@ -25,7 +25,7 @@
             </div>
 
             {# Custom Mobile Controls - Below Image #}
-            <div class="d-flex d-md-none align-items-center justify-content-center mt-0">
+            <div class="d-flex d-md-none align-items-center justify-content-center mt-3">
                 <div class="js-swiper-product-prev custom-arrow-pdp mx-3">
                     <svg class="icon-inline icon-lg svg-icon-text"><use xlink:href="#chevron"/></svg>
                 </div>

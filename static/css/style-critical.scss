@@ -8228,7 +8228,7 @@ body:not(.template-home) {
 }
 
 /* Flechas móviles minimalistas abajo de la imagen */
-.template-product .custom-arrow-pdp {
+.js-luxury-gallery .custom-arrow-pdp {
   width: 30px !important;
   height: 30px !important;
   display: flex !important;
@@ -8239,30 +8239,28 @@ body:not(.template-home) {
   padding: 0 !important;
   cursor: pointer;
   z-index: 5;
-  margin-top: -15px !important;
-  /* Margen negativo para pegarlas a la imagen */
 }
 
 
-.template-product .custom-arrow-pdp svg {
+.js-luxury-gallery .custom-arrow-pdp svg {
   width: 16px !important;
   height: 16px !important;
   fill: #000 !important;
 }
 
 /* Invertir flecha izquierda */
-.template-product .js-swiper-product-prev.custom-arrow-pdp svg {
+.js-luxury-gallery .js-swiper-product-prev.custom-arrow-pdp svg {
   transform: rotate(180deg);
 }
 
 /* Limpieza de cualquier rastro de botones flotantes */
-.template-product .swiper-button-next,
-.template-product .swiper-button-prev {
+.js-luxury-gallery .swiper-button-next,
+.js-luxury-gallery .swiper-button-prev {
   display: none !important;
 }
 
 /* Estilo para los puntitos de paginación abajo */
-.template-product .js-luxury-pagination {
+.js-luxury-gallery .js-luxury-pagination {
   position: relative !important;
   bottom: 0 !important;
   width: auto !important;
@@ -8270,7 +8268,7 @@ body:not(.template-home) {
   align-items: center;
 }
 
-.template-product .swiper-pagination-bullet {
+.js-luxury-gallery .swiper-pagination-bullet {
   background: #000 !important;
   opacity: 0.2 !important;
   width: 6px !important;
@@ -8292,4 +8290,101 @@ body:not(.template-home) {
   .template-product .swiper-button-inside {
     display: none !important;
   }
+}
+
+/* Corrección estética del selector de cantidad (Carrito y Quickshop) */
+.cart-item-quantity,
+.js-product-quantity-container .js-quantity {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 4px !important;
+  overflow: hidden !important;
+  height: 38px !important;
+  width: 100px !important;
+  max-width: 100px !important;
+  margin-top: 5px;
+  background: transparent !important;
+  /* Asegurar fondo limpio */
+  box-shadow: none !important;
+}
+
+/* Forzar que el contenedor del input ocupe el centro */
+.cart-item-quantity .js-cart-quantity-container,
+.js-product-quantity-container .form-control-container {
+  flex: 1 !important;
+  height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  border: none !important;
+  /* Quitar bordes internos */
+}
+
+/* Resetear el input para que encaje perfectamente */
+.cart-item-quantity .js-cart-quantity-input,
+.js-product-quantity-container .js-quantity-input {
+  border: none !important;
+  height: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  text-align: center !important;
+  background: transparent !important;
+  font-size: 14px !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Estilizar botones de +/- para que sean cuadrados y centrados */
+.cart-item-quantity .js-cart-quantity-btn,
+.js-product-quantity-container .form-quantity-icon {
+  width: 32px !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  background: transparent !important;
+  /* Quitar el fondo gris */
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  transition: opacity 0.2s;
+}
+
+.cart-item-quantity .js-cart-quantity-btn:hover,
+.js-product-quantity-container .form-quantity-icon:hover {
+  background: transparent !important;
+  opacity: 0.5;
+}
+
+.cart-item-quantity .js-cart-quantity-btn svg,
+.js-product-quantity-container .form-quantity-icon svg {
+  width: 12px !important;
+  height: 12px !important;
+  fill: #000 !important;
+  margin: 0 !important;
+  /* Resetear cualquier margen heredado */
+  display: block !important;
+}
+
+/* Limpieza de bordes adicionales en el contenedor de quickshop */
+.js-product-quantity-container .form-quantity {
+  border: none !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Asegurar que el svg esté centrado dentro del span */
+.js-product-quantity-container .form-quantity-product svg {
+  margin-top: 0 !important;
+}
+
+/* Alineación específica para el carrito drawer */
+.cart-item-quantity {
+  margin-left: auto;
 }
