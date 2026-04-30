@@ -1099,37 +1099,68 @@ footer {
   padding: 40px 0;
 
   @media (max-width: 767px) {
-    padding-top: 10px !important;
-    padding-bottom: 5px !important;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+
+    .container {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    .row {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
 
     &.section-footer-home {
       margin-top: 0 !important;
       margin-bottom: 0 !important;
     }
 
-    .row:last-child {
-      margin-bottom: 0 !important;
+    /* Espaciado de 3px a 5px entre bloques */
+    .col-12,
+    .col-md-auto,
+    .col-md-2 {
+      padding-top: 0 !important;
       padding-bottom: 0 !important;
+      margin-bottom: 5px !important;
+      margin-top: 0 !important;
     }
 
-    /* Compactar créditos y logos finales en móvil */
+    h4,
+    .h6 {
+      margin-bottom: 3px !important;
+      margin-top: 0 !important;
+    }
+
+    .footer-accordion-content {
+      margin-bottom: 3px !important;
+    }
+
+    ul li {
+      margin-bottom: 2px !important;
+    }
+
+    /* Compactar créditos finales */
     .footer-logo-img-large {
-      margin-bottom: 5px !important;
+      margin-bottom: 3px !important;
+      max-height: 35px;
+      width: auto;
     }
 
     .font-smallest,
     .powered-by,
     .developed-by {
-      margin-top: 5px !important;
-      margin-bottom: 5px !important;
-      line-height: 1.2 !important;
+      margin-top: 1px !important;
+      margin-bottom: 1px !important;
+      line-height: 1.0 !important;
     }
 
-    .col-12,
-    .col-md-auto {
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
-      margin-bottom: 5px !important;
+    .border-top-0 {
+      margin-top: 3px !important;
+      padding-top: 3px !important;
     }
   }
 
@@ -1504,8 +1535,11 @@ footer {
   @extend %section-margin;
 }
 
-.btn-add-to-cart+.alert {
-  margin-top: 15px;
+.btn-add-to-cart+.alert,
+.js-addtocart+.alert,
+.js-prod-submit-form+.alert,
+.js-ajax-cart-error {
+  display: none !important;
 }
 
 /* // Image */

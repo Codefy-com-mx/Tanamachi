@@ -3380,13 +3380,45 @@ DOMContentLoaded.addEventOrExecute(() => {
     {# /* // Update amount wording */ #}
 
     document.addEventListener( 'cart.released', () => {
-        const cart_amount = jQueryNuvem(".js-cart-widget-amount").text();
+        const cart_amount_text = jQueryNuvem(".js-cart-widget-amount").first().text();
+        const cart_amount = parseInt(cart_amount_text) || 0;
+
+        if (cart_amount > 0) {
+            jQueryNuvem(".js-empty-ajax-cart").hide();
+        } else {
+            jQueryNuvem(".js-empty-ajax-cart").show();
+        }
+
+        {# Hide stock error on any successful update #}
+        jQueryNuvem("#error-ajax-stock").hide();
+
         if(cart_amount == 1) {
             jQueryNuvem(".js-amount-one-item").show();
             jQueryNuvem(".js-amount-many-items").hide();
         }else{
             jQueryNuvem(".js-amount-one-item").hide();
             jQueryNuvem(".js-amount-many-items").show();
+        }
+    });
+
+    {# /* // Intercept AJAX errors to show stock error only when applicable */ #}
+    jQueryNuvem(document).ajaxError(function(event, jqXHR, ajaxSettings, thrownError) {
+        if (ajaxSettings.url.indexOf('/cart/') !== -1) {
+            setTimeout(function(){
+                var response = {};
+                try {
+                    response = JSON.parse(jqXHR.responseText);
+                } catch (e) {}
+
+                if (response.error !== 'stock') {
+                    {# Hide generic error message injected by platform near buy buttons #}
+                    jQueryNuvem(".js-addtocart, .js-prod-submit-form, .btn-add-to-cart").next(".alert").remove();
+                    jQueryNuvem(".js-ajax-cart-error").remove();
+
+                    {# Hide theme stock error #}
+                    jQueryNuvem("#error-ajax-stock").hide();
+                }
+            }, 150);
         }
     });
 
