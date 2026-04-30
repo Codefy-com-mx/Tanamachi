@@ -4758,7 +4758,8 @@ p {
 }
 
 .item-overlay-price {
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  /* Escala suavemente según el ancho de pantalla */
   font-weight: 900;
   letter-spacing: -1px;
   margin-bottom: 10px;
@@ -4780,8 +4781,10 @@ p {
   background: transparent;
   border: 1px solid #fff;
   color: #fff !important;
-  padding: 50px;
-  font-size: 2rem;
+  padding: clamp(20px, 4vw, 40px);
+  /* Padding adaptable */
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  /* Tipografía adaptable */
   font-weight: 811;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -4869,6 +4872,79 @@ p {
     margin-right: auto !important;
     display: block !important;
   }
+
+  /* Compactar agresivamente el Quickshop en móviles */
+  #quickshop-modal .modal-body {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+
+  #quickshop-modal .js-product-container>.row>.col-md-6:last-child {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    /* Espacio controlado de 10px entre elementos */
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  #quickshop-modal .js-item-name {
+    margin-bottom: 0 !important;
+    font-size: 1rem !important;
+    line-height: 1.1 !important;
+  }
+
+  #quickshop-modal [data-store^="product-item-price"] {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  #quickshop-modal .js-price-display {
+    font-size: 1.6rem !important;
+    font-weight: 800 !important;
+    display: block !important;
+    margin-bottom: 0 !important;
+  }
+
+  #quickshop-modal .js-product-variants {
+    margin-bottom: 0 !important;
+  }
+
+  #quickshop-modal .js-product-variants-group {
+    margin-bottom: 0 !important;
+  }
+
+  #quickshop-modal .js-product-quantity-container {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  #quickshop-modal .buy-button-container {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  #quickshop-modal #quickshop-form {
+    margin-top: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  /* Centrar cantidad en el Quickshop cuando está apilado */
+  .js-product-quantity-container.col-12 .js-quantity {
+    justify-content: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Quitar el nudge vertical del botón de compra cuando está apilado */
+  #quickshop-modal .btn-add-to-cart,
+  .modal-body .btn-add-to-cart,
+  .js-quickshop-container .btn-add-to-cart {
+    transform: none !important;
+  }
 }
 
 /* Estilos estéticos para los elementos de compra en el Quick Shop */
@@ -4880,16 +4956,24 @@ p {
   background: #000 !important;
   border: none !important;
   color: #fff !important;
-  padding: 12px 20px !important;
-  font-size: 1rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 33px !important;
+  /* Altura reducida para coincidir visualmente */
+  padding: 0 20px !important;
+  font-size: 0.8rem !important;
+  /* Texto ligeramente más pequeño */
   font-weight: 700 !important;
   text-transform: uppercase !important;
+  white-space: nowrap !important;
   border-radius: 50px !important;
   width: 100% !important;
-  height: auto !important;
-  line-height: 1.2 !important;
+  line-height: 1 !important;
   transition: all 0.3s ease !important;
-  margin: 10px 0 !important;
+  margin: 0 !important;
+  transform: translateY(2px) !important;
+  /* Nudge hacia abajo para alinear con el blanco */
   box-shadow: none !important;
   cursor: pointer;
   text-align: center;

@@ -2,7 +2,7 @@
 
 {% set label_text = product.isSubscribable() ? 'Cantidad' | translate %}
 
-<div class="js-product-quantity-container col-4 pr-0 pr-md-3">
+<div class="js-product-quantity-container {{ container_classes | default('col-4 pr-0 pr-md-3') }}">
     {% embed "snipplets/forms/form-input.tpl" with{
     type_number: true, input_value: '1',
     input_name: 'quantity' ~ item.id, 

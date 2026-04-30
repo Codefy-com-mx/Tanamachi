@@ -6,7 +6,7 @@
                     {% if direct_add %}
                         <div class="btn-link">
                     {% endif %}
-                    {{ 'Comprar' | translate }}
+                    {{ 'Agregar al carrito' | translate }}
                     {% if direct_add %}
                         </div>
                     {% endif %}

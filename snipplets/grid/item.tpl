@@ -135,14 +135,14 @@
                             {% if product.variations %}
                                 <div class="js-item-submit-container item-submit-container position-relative">
                                     <span data-toggle="#quickshop-modal" data-modal-url="modal-fullscreen-quickshop" class="js-quickshop-modal-open js-fullscreen-modal-open {% if slide_item %}js-quickshop-slide{% endif %} js-modal-open btn-overlay-buy" title="{{ 'Compra rápida de' | translate }} {{ product.name }}" aria-label="{{ 'Compra rápida de' | translate }} {{ product.name }}" data-component="product-list-item.add-to-cart" data-component-value="{{product.id}}">
-                                        {{ 'Add to cart' | translate }}
+                                        {{ 'Agregar al carrito' | translate }}
                                     </span>
                                 </div>
                             {% else %}
                                 <form class="js-product-form" method="post" action="{{ store.cart_url }}">
                                     <input type="hidden" name="add_to_cart" value="{{product.id}}" />
                                     <div class="js-item-submit-container item-submit-container position-relative">
-                                        <input type="submit" class="js-addtocart js-prod-submit-form btn-overlay-buy" value="{{ 'Add to cart' | translate }}" data-component="product-list-item.add-to-cart" data-component-value="{{ product.id }}"/>
+                                        <input type="submit" class="js-addtocart js-prod-submit-form btn-overlay-buy" value="{{ 'Agregar al carrito' | translate }}" data-component="product-list-item.add-to-cart" data-component-value="{{ product.id }}"/>
                                     </div>
                                 </form>
                             {% endif %}
@@ -178,12 +178,12 @@
                         <div class="row">
 
                             {% if show_product_quantity %}
-                                {% include "snipplets/product/product-quantity.tpl" with {quickshop: true} %}
+                                {% include "snipplets/product/product-quantity.tpl" with {quickshop: true, container_classes: "col-12 col-md-4 mb-3 mb-md-0 pr-md-3"} %}
                             {% endif %}
 
-                            <div class="js-buy-button-container {% if show_product_quantity %}col-8 pl-md-0{% else %}col-12{% endif %} buy-button-container">
+                            <div class="js-buy-button-container {% if show_product_quantity %}col-12 col-md-8 pl-md-0{% else %}col-12{% endif %} buy-button-container">
 
-                                <input type="submit" class="js-addtocart js-prod-submit-form btn-add-to-cart btn btn-primary btn-big w-100 {{ state }}" value="{{ texts[state] | translate }}" {% if state == 'nostock' %}disabled{% endif %} />
+                                <input type="submit" class="js-addtocart js-prod-submit-form btn-add-to-cart btn btn-primary btn-big w-100 {{ state }}" value="{{ texts[state] | translate }}" {% if state == 'nostock' %}disabled{% endif %} data-store="product-buy-button" data-component="product.add-to-cart" />
 
                                 {# Fake add to cart CTA visible during add to cart event #}
 
@@ -252,7 +252,7 @@
                             {% set quickshop_button_classes = 'btn-link btn-small-quickshop' %}
 
                             {% set state = store.is_catalog ? 'catalog' : (product.available ? product.display_price ? 'cart' : 'contact' : 'nostock') %}
-                            {% set texts = {'cart': "Comprar", 'contact': "Consultar precio", 'nostock': "Sin stock", 'catalog': "Consultar"} %}
+                            {% set texts = {'cart': "Agregar al carrito", 'contact': "Consultar precio", 'nostock': "Sin stock", 'catalog': "Consultar"} %}
 
                             <div class="item-actions mt-2 pt-1">
 
@@ -282,7 +282,7 @@
                                         {# Open quickshop popup if has variants #}
 
                                         <span data-toggle="#quickshop-modal" data-modal-url="modal-fullscreen-quickshop" class="js-quickshop-modal-open js-fullscreen-modal-open {% if slide_item %}js-quickshop-slide{% endif %} js-modal-open btn-link" title="{{ 'Compra rápida de' | translate }} {{ product.name }}" aria-label="{{ 'Compra rápida de' | translate }} {{ product.name }}" data-component="product-list-item.add-to-cart" data-component-value="{{product.id}}">
-                                            <span class="js-open-quickshop-wording">{{ 'Comprar' | translate }}</span>
+                                            <span class="js-open-quickshop-wording">{{ 'Agregar al carrito' | translate }}</span>
                                             <svg class="js-open-quickshop-icon icon-inline ml-1"><use xlink:href="#bag-small"/></svg>
                                         </span>
                                     {% else %}
