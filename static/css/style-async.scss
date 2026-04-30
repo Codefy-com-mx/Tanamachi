@@ -1537,9 +1537,8 @@ footer {
 
 .btn-add-to-cart+.alert,
 .js-addtocart+.alert,
-.js-prod-submit-form+.alert,
-.js-ajax-cart-error {
-  display: none !important;
+.js-prod-submit-form+.alert {
+  margin-top: 15px;
 }
 
 /* // Image */

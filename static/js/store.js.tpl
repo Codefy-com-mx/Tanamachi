@@ -3411,10 +3411,14 @@ DOMContentLoaded.addEventOrExecute(() => {
                 } catch (e) {}
 
                 if (response.error !== 'stock') {
-                    {# Hide generic error message injected by platform near buy buttons #}
-                    jQueryNuvem(".js-addtocart, .js-prod-submit-form, .btn-add-to-cart").next(".alert").remove();
-                    jQueryNuvem(".js-ajax-cart-error").remove();
-
+                    {# Only hide/remove if it's the generic platform error message #}
+                    jQueryNuvem(".js-addtocart, .js-prod-submit-form, .btn-add-to-cart").next(".alert-danger, .alert-warning").each(function() {
+                        var $alert = jQueryNuvem(this);
+                        if ($alert.text().indexOf("Ocurrió un error") !== -1) {
+                            $alert.remove();
+                        }
+                    });
+                    
                     {# Hide theme stock error #}
                     jQueryNuvem("#error-ajax-stock").hide();
                 }

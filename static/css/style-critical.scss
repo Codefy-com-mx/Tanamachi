@@ -4758,11 +4758,11 @@ p {
 }
 
 .item-overlay-price {
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  /* Escala suavemente según el ancho de pantalla */
+  font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+  /* Escala más suave */
   font-weight: 900;
   letter-spacing: -1px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   align-self: center;
   text-align: center;
@@ -4781,17 +4781,22 @@ p {
   background: transparent;
   border: 1px solid #fff;
   color: #fff !important;
-  padding: clamp(20px, 4vw, 40px);
-  /* Padding adaptable */
-  font-size: clamp(1.2rem, 3vw, 2rem);
-  /* Tipografía adaptable */
+  padding: 10px 8px;
+  /* Padding más compacto */
+  font-size: clamp(0.85rem, 2.5vw, 1.2rem);
+  /* Tipografía más pequeña para evitar recortes */
   font-weight: 811;
   cursor: pointer;
   transition: all 0.3s ease;
   width: 100% !important;
   display: block !important;
+  margin-top: 10px;
+  /* Separación del precio */
   margin-bottom: 0;
   text-align: center;
+  white-space: normal;
+  /* Permitir que el texto largo baje de línea */
+  line-height: 1.2;
 }
 
 .btn-overlay-buy:hover {
@@ -4872,6 +4877,8 @@ p {
     margin-left: auto !important;
     margin-right: auto !important;
     display: block !important;
+    white-space: normal;
+    line-height: 1.2;
   }
 
   /* Compactar agresivamente el Quickshop en móviles */
